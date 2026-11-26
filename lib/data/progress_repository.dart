@@ -11,6 +11,10 @@ abstract class ProgressRepository {
   Future<void> saveProgress(Progress progress);
   Future<AppSettings> loadSettings();
   Future<void> saveSettings(AppSettings settings);
+
+  /// First-launch rule: the Benefits page is shown until this is set.
+  Future<bool> loadIntroSeen();
+  Future<void> saveIntroSeen(bool seen);
 }
 
 /// Test/preview fake.
@@ -21,6 +25,7 @@ class InMemoryProgressRepository implements ProgressRepository {
 
   Progress _progress;
   AppSettings _settings;
+  bool _introSeen = false;
 
   @override
   Future<Progress> loadProgress() async => _progress;
@@ -30,6 +35,10 @@ class InMemoryProgressRepository implements ProgressRepository {
   Future<AppSettings> loadSettings() async => _settings;
   @override
   Future<void> saveSettings(AppSettings settings) async => _settings = settings;
+  @override
+  Future<bool> loadIntroSeen() async => _introSeen;
+  @override
+  Future<void> saveIntroSeen(bool seen) async => _introSeen = seen;
 }
 
 /// `shared_preferences` implementation: one JSON string per object. Corrupt
@@ -39,6 +48,7 @@ class PrefsProgressRepository implements ProgressRepository {
 
   static const progressKey = 'kebrit.progress.v1';
   static const settingsKey = 'kebrit.settings.v1';
+  static const introKey = 'kebrit.intro.v1';
 
   final SharedPreferences _prefs;
 
@@ -76,5 +86,13 @@ class PrefsProgressRepository implements ProgressRepository {
   @override
   Future<void> saveSettings(AppSettings settings) async {
     await _prefs.setString(settingsKey, jsonEncode(settings.toJson()));
+  }
+
+  @override
+  Future<bool> loadIntroSeen() async => _prefs.getBool(introKey) ?? false;
+
+  @override
+  Future<void> saveIntroSeen(bool seen) async {
+    await _prefs.setBool(introKey, seen);
   }
 }
