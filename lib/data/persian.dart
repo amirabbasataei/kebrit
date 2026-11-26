@@ -1,14 +1,16 @@
 /// Persian digit helpers (port of the design's `fa`).
 const _digits = '۰۱۲۳۴۵۶۷۸۹';
 
-String fa(int n) => n
-    .toString()
+/// Replaces every ASCII digit in [s] with its Persian form.
+String faDigits(String s) => s
     .split('')
     .map((c) {
       final i = c.codeUnitAt(0) - 0x30;
-      return i >= 0 && i <= 9 ? _digits[i] : c;
+      return c.length == 1 && i >= 0 && i <= 9 ? _digits[i] : c;
     })
     .join();
+
+String fa(int n) => faDigits(n.toString());
 
 /// `m:ss` in Persian digits, e.g. 102 s → «۱:۴۲». Negative durations clamp
 /// to zero; minutes are not capped at 59.

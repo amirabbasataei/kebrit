@@ -55,10 +55,12 @@ abstract final class Kc {
     colors: [flame, flameDeep],
   );
 
-  /// CSS `linear-gradient(165deg, a, b)` for wall tops.
+  /// CSS `linear-gradient(165deg, a, b)` on a square box. The gradient line
+  /// reaches the corners, so the ends are (∓0.317, ∓1.183) in alignment units
+  /// (see `cssLinear` in `ui/kit/css.dart`).
   static LinearGradient wallTop(int shade) => LinearGradient(
-        begin: const Alignment(-0.26, -0.97),
-        end: const Alignment(0.26, 0.97),
+        begin: const Alignment(-0.317, -1.183),
+        end: const Alignment(0.317, 1.183),
         colors: wallTops[shade % 3],
       );
 

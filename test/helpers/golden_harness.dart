@@ -26,10 +26,9 @@ Future<void> pumpScreen(
       textDirection: TextDirection.rtl,
       child: Localizations(
         locale: const Locale('fa'),
-        delegates: const [
-          DefaultWidgetsLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
+        // Only the Global delegate: listing DefaultWidgetsLocalizations (en)
+        // first would make `Localizations` override the outer RTL with LTR.
+        delegates: const [GlobalWidgetsLocalizations.delegate],
         child: MediaQuery(
           data: MediaQueryData(size: size, devicePixelRatio: dpr),
           child: KebritTheme(
