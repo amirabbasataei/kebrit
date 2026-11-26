@@ -1,0 +1,277 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Caught.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "Game over · caught",
+      "w": 1280,
+      "x": 1360,
+      "y": 2120
+    },
+    "Diorama.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "B · Moonlit Diorama",
+      "w": 1280,
+      "x": 1360,
+      "y": 0
+    },
+    "LevelComplete.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "Level complete",
+      "w": 1280,
+      "x": 2720,
+      "y": 1200
+    },
+    "LevelSelect.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "Level select",
+      "w": 1280,
+      "x": 1405,
+      "y": 1019
+    },
+    "Main.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "A · Ember & Stone",
+      "w": 1280,
+      "x": 0,
+      "y": 0
+    },
+    "OutOfMatches.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "Game over · out of matches",
+      "w": 1280,
+      "x": 2720,
+      "y": 2120
+    },
+    "Pause.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "Pause",
+      "w": 1280,
+      "x": 0,
+      "y": 2120
+    },
+    "Pixel.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "C · Pixel Crypt",
+      "w": 1280,
+      "x": 2720,
+      "y": 0
+    },
+    "Title.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "Title / main menu",
+      "w": 1280,
+      "x": 0,
+      "y": 1200
+    },
+    "Transition.dc.html": {
+      "h": 800,
+      "is_interactive": true,
+      "title": "Next-level transition (animated)",
+      "w": 1280,
+      "x": 4080,
+      "y": 1200
+    },
+    "MTitle.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 0,
+      "y": 0,
+      "title": "1 · Title",
+      "is_interactive": true
+    },
+    "MTutorial.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 470,
+      "y": 0,
+      "title": "2 · Tutorial",
+      "is_interactive": true
+    },
+    "MLevels.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 940,
+      "y": 0,
+      "title": "3 · Level select",
+      "is_interactive": true
+    },
+    "MGame.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 1410,
+      "y": 0,
+      "title": "4 · Gameplay (drag to move)",
+      "is_interactive": true
+    },
+    "MPause.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 1880,
+      "y": 0,
+      "title": "5 · Pause",
+      "is_interactive": true
+    },
+    "MComplete.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 2350,
+      "y": 0,
+      "title": "6 · Level complete",
+      "is_interactive": true
+    },
+    "MTransition.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 2820,
+      "y": 0,
+      "title": "7 · Next-level transition",
+      "is_interactive": true
+    },
+    "MCaught.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 3290,
+      "y": 0,
+      "title": "8 · Game over · caught",
+      "is_interactive": true
+    },
+    "MNoMatches.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": 3760,
+      "y": 0,
+      "title": "9 · Game over · out of matches",
+      "is_interactive": true
+    },
+    "MSplash.dc.html": {
+      "page": "mobile",
+      "h": 844,
+      "w": 390,
+      "x": -470,
+      "y": 0,
+      "title": "0 · Splash",
+      "is_interactive": true
+    },
+    "MBenefits.dc.html": {
+      "page": "mobile",
+      "h": 1960,
+      "w": 390,
+      "x": -470,
+      "y": 1200,
+      "title": "0b · چرا کبریت؟ (first launch)",
+      "is_interactive": true
+    },
+    "Roadmap.dc.html": {
+      "page": "mobile",
+      "h": 1040,
+      "w": 1280,
+      "x": 0,
+      "y": 1200,
+      "title": "نقشه‌ی راه توسعه"
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-26T07:35:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas",
+    "page": "mobile"
+  },
+  "noteOrder": [
+    "title",
+    "screens",
+    "mobileTitle",
+    "plan"
+  ],
+  "notes": {
+    "screens": {
+      "kind": "title1",
+      "maxW": 5360,
+      "text": "Ember & Stone — game screens",
+      "w": 240,
+      "x": 0,
+      "y": 940
+    },
+    "title": {
+      "kind": "title1",
+      "maxW": 4000,
+      "text": "Maze gameplay screen — three visual directions",
+      "w": 240,
+      "x": 0,
+      "y": -260
+    },
+    "mobileTitle": {
+      "page": "mobile",
+      "kind": "title1",
+      "maxW": 4620,
+      "text": "کبریت · mobile (Persian, RTL)",
+      "x": -470,
+      "y": -260
+    },
+    "plan": {
+      "page": "mobile",
+      "kind": "title1",
+      "maxW": 1750,
+      "text": "اهداف و نقشه‌ی راه",
+      "x": -470,
+      "y": 940
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Diorama.dc.html",
+    "Pixel.dc.html",
+    "Title.dc.html",
+    "LevelSelect.dc.html",
+    "LevelComplete.dc.html",
+    "Transition.dc.html",
+    "Pause.dc.html",
+    "Caught.dc.html",
+    "OutOfMatches.dc.html",
+    "MSplash.dc.html",
+    "MBenefits.dc.html",
+    "MTitle.dc.html",
+    "MTutorial.dc.html",
+    "MLevels.dc.html",
+    "MGame.dc.html",
+    "MPause.dc.html",
+    "MComplete.dc.html",
+    "MTransition.dc.html",
+    "MCaught.dc.html",
+    "MNoMatches.dc.html",
+    "Roadmap.dc.html"
+  ],
+  "pages": [
+    {
+      "id": "desktop",
+      "name": "Desktop (first pass)"
+    },
+    {
+      "id": "mobile",
+      "name": "Mobile"
+    }
+  ],
+  "title": "Maze Gameplay — Visual Styles"
+}

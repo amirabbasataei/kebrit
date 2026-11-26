@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>کبریت — نقشه‌ی راه توسعه</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@500;600;700&amp;family=Lalezar&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div dir="rtl" style="width: 1280px; height: 1040px; box-sizing: border-box; padding: 56px 64px; background: radial-gradient(ellipse at 80% 0%, #2a1d14 0%, #0d0907 60%); font-family: 'Vazirmatn', sans-serif; color: #efe3d0; display: flex; flex-direction: column; gap: 32px">
+
+<div style="display: flex; justify-content: space-between; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Lalezar', sans-serif; font-size: 22px; color: #ffb45a">کبریت</div>
+<h1 style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 42px; font-weight: 700; line-height: 1.5; color: #f6ead6">نقشه‌ی راه توسعه</h1>
+<div style="font-size: 15px; color: #bfa688">پیشنهاد اولیه · حدود ۵ ماه تا انتشار نسخه‌ی ۱.۰ · موبایل (اندروید و iOS)</div>
+</div>
+<div style="display: flex; gap: 10px; align-items: center; padding: 10px 16px; border-radius: 999px; background: rgba(255,170,80,.1); box-shadow: inset 0 0 0 1px rgba(255,170,80,.25); font-size: 14px; color: #ffd9a8">
+<div style="width: 8px; height: 8px; border-radius: 50%; background: #ff8a2b; box-shadow: 0 0 8px #ff8a2b"></div>
+وضعیت فعلی: طراحی صفحه‌ها
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 4px; height: 10px">
+<div style="flex: 3 1 0; border-radius: 5px; background: #ff8a2b; box-shadow: 0 0 12px rgba(255,140,40,.6)"></div>
+<div style="flex: 6 1 0; border-radius: 5px; background: #d9702a"></div>
+<div style="flex: 8 1 0; border-radius: 5px; background: #a85a2a"></div>
+<div style="flex: 4 1 0; border-radius: 5px; background: #7a4628"></div>
+<div style="flex: 3 1 0; border-radius: 5px; background: repeating-linear-gradient(90deg, #4d3424 0 8px, transparent 8px 14px)"></div>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 12px; color: #a48d72"><span>هفته‌ی ۱</span><span>هفته‌ی ۹</span><span>هفته‌ی ۱۷</span><span>هفته‌ی ۲۱ · انتشار</span><span>ادامه‌دار</span></div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; flex-grow: 1">
+<sc-for list="{{phases}}" as="p" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 22px 20px; border-radius: 18px; background: linear-gradient(170deg, #221a14, #130e0a); box-shadow: {{p.ring}}">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<div style="font-family: 'Lalezar', sans-serif; font-size: 36px; line-height: 1; color: {{p.color}}">{{p.num}}</div>
+<div style="padding: 4px 10px; border-radius: 999px; background: rgba(239,227,208,.07); font-size: 12px; color: #d8c4a6">{{p.time}}</div>
+</div>
+<div style="font-family: 'Noto Naskh Arabic', serif; font-size: 21px; font-weight: 700; line-height: 1.5; color: #f6ead6">{{p.name}}</div>
+<div style="display: flex; flex-direction: column; gap: 10px; flex-grow: 1">
+<sc-for list="{{p.items}}" as="t" hint-placeholder-count="4">
+<div style="display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.75; color: #cdb89c">
+<div style="flex-shrink: 0; margin-top: 8px; width: 5px; height: 7px; border-radius: 50% 50% 45% 45%; background: {{p.color}}"></div>
+<span>{{t}}</span>
+</div>
+</sc-for>
+</div>
+<div style="padding-top: 12px; border-top: 1px solid rgba(239,227,208,.1); display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 11px; color: #8f7a64">خروجی</div>
+<div style="font-size: 14px; font-weight: 600; color: #f3e6d2">{{p.out}}</div>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 20px 22px; border-radius: 16px; background: rgba(239,227,208,.04); box-shadow: inset 0 0 0 1px rgba(239,227,208,.08)">
+<div style="font-size: 15px; font-weight: 700; color: #ffb45a">{{c.title}}</div>
+<sc-for list="{{c.items}}" as="t" hint-placeholder-count="3">
+<div style="font-size: 13px; line-height: 1.7; color: #cdb89c">{{t}}</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1040}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const colors = ['#ff8a2b', '#e37a2c', '#c4682c', '#a0592c', '#8a6a52'];
+    const P = [
+      ['۰', 'پیش‌تولید', '۳ هفته', ['سند طراحی بازی و قواعد نور و شکارچی', 'انتخاب موتور: Unity یا Godot', 'نمونه‌ی ساده‌ی حرکت با کشیدن روی گوشی', 'تثبیت سبک بصری «اخگر و سنگ»'], 'نمونه‌ی لمسی روی گوشی'],
+      ['۱', 'نمونه‌ی بازی‌پذیر', '۶ هفته', ['نور پویا و سوختن کبریت', 'هوش شکارچی: تعقیب منبع نور', 'فصل اول: ۵ مرحله + آموزش', 'آزمون با ۱۵ تا ۲۰ بازیکن'], 'نسخه‌ی آزمایشی داخلی'],
+      ['۲', 'تولید محتوا', '۸ هفته', ['۱۵ مرحله در ۳ فصل', 'شکارچی‌های گشت‌زن و شنونده', 'صداگذاری و موسیقی واکنشی', 'اخگرها، ذخیره‌ی پیشرفت، تنظیمات'], 'نسخه‌ی کامل (آلفا)'],
+      ['۳', 'آماده‌سازی انتشار', '۴ هفته', ['بهینه‌سازی برای گوشی‌های میان‌رده', 'دسترس‌پذیری: کاهش سوسو، حالت چپ‌دست', 'بتای بسته و رفع اشکال', 'صفحه‌ی فروشگاه: کافه‌بازار، مایکت، Google Play'], 'انتشار نسخه‌ی ۱.۰'],
+      ['۴', 'پس از انتشار', 'ادامه‌دار', ['چالش روزانه با نقشه‌ی تازه', 'فصل‌های جدید هر چند ماه', 'دستاوردها و جدول امتیاز', 'سازنده‌ی مرحله برای بازیکنان'], 'رشد و ماندگاری بازیکن']
+    ];
+    const phases = P.map(([num, name, time, items, out], i) => ({
+      num, name, time, items, out, color: colors[i],
+      ring: i === 0 ? 'inset 0 0 0 1px rgba(255,170,80,.45), 0 0 30px rgba(255,140,40,.12)' : 'inset 0 0 0 1px rgba(239,227,208,.08)'
+    }));
+    const cards = [
+      { title: 'تیم پیشنهادی', items: ['۱ برنامه‌نویس بازی (تمام‌وقت)', '۱ طراح هنری و رابط کاربری', 'طراح مرحله (پاره‌وقت) · صداگذار (قراردادی)'] },
+      { title: 'مدل درآمد', items: ['فصل اول رایگان', 'خرید یک‌باره‌ی فصل‌های بعدی', 'تبلیغ اختیاری برای کبریت اضافه — بدون تبلیغ اجباری'] },
+      { title: 'شاخص‌های موفقیت (هدف)', items: ['تکمیل آموزش: بالای ۸۵٪', 'بازگشت روز اول: بالای ۴۰٪', 'امتیاز فروشگاه: ۴٫۵ به بالا'] }
+    ];
+    return { phases, cards };
+  }
+}
+</script>
+</body>
+</html>

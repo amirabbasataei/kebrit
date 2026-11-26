@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>کبریت — آموزش</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@500;600;700&amp;family=Lalezar&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bfa688;text-decoration:none}a:hover{color:#ffd27a}
+button:focus-visible,a:focus-visible{outline:2px solid #ffd27a;outline-offset:3px}
+@keyframes finger{0%,10%{transform:translate(0,0);opacity:0}18%{opacity:1}60%,80%{transform:translate(70px,0);opacity:1}92%,100%{transform:translate(70px,0);opacity:0}}
+@keyframes knob{0%,18%{transform:translate(0,0)}40%,80%{transform:translate(26px,0)}92%,100%{transform:translate(0,0)}}
+@keyframes ring{0%,12%{opacity:0}18%,82%{opacity:1}92%,100%{opacity:0}}
+@keyframes walkr{0%,30%{transform:translateX(0)}80%,100%{transform:translateX(120px)}}
+@keyframes tap{0%,20%{transform:scale(1)}26%{transform:scale(.86)}32%,100%{transform:scale(1)}}
+@keyframes tapdot{0%,18%{opacity:0;transform:scale(.4)}24%{opacity:1;transform:scale(1)}36%,100%{opacity:0;transform:scale(1.6)}}
+@keyframes litup{0%,26%{opacity:0}34%,78%{opacity:1}100%{opacity:0}}
+@keyframes unlit{0%,26%{opacity:1}34%,78%{opacity:0}100%{opacity:1}}
+.unlit{animation-name:unlit}
+@keyframes flm{0%,26%{opacity:0;transform:scale(.3)}32%,78%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.4)}}
+@keyframes chase{0%,20%{transform:translateX(0)}70%,100%{transform:translateX(-110px)}}
+@keyframes litc{0%,15%{opacity:0}20%,70%{opacity:1}80%,100%{opacity:0}}
+@keyframes eyes{0%,15%{background:#5a2a1e;box-shadow:none}20%,70%{background:#ff4a2a;box-shadow:0 0 7px 2px rgba(255,80,40,.8)}80%,100%{background:#5a2a1e;box-shadow:none}}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.75}}
+.a4{animation-duration:4s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+.finger{animation-name:finger}.knob{animation-name:knob}.ring{animation-name:ring}.walkr{animation-name:walkr}
+.tap{animation-name:tap}.tapdot{animation-name:tapdot}.litup{animation-name:litup}.flm{animation-name:flm;transform-origin:50% 100%}
+.chase{animation-name:chase}.litc{animation-name:litc}.eyes{animation-name:eyes}
+.breathe{animation:breathe 3s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.a4{animation:none}}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 35%, #1e1611 0%, #0a0706 75%); font-family: 'Vazirmatn', sans-serif; color: #efe3d0">
+
+<div style="position: absolute; left: 24px; right: 24px; top: 56px; display: flex; justify-content: space-between; align-items: center">
+<div style="font-size: 11px; color: #bfa688">راه زنده ماندن · {{num}} از ۴</div>
+<a href="MGame.dc.html" style="min-height: 44px; display: flex; align-items: center; font-size: 14px; font-weight: 500">رد شدن</a>
+</div>
+
+<div style="position: absolute; left: 24px; top: 116px; width: 342px; height: 380px; overflow: hidden; background-color: #2a211b; background-image: linear-gradient(rgba(0,0,0,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.3) 1px, transparent 1px); background-size: 20px 20px; box-shadow: 0 24px 50px rgba(0,0,0,.6), inset 0 0 0 1px rgba(239,227,208,.08)">
+
+<sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; left: 0; right: 0; top: 112px; height: 40px; background: linear-gradient(165deg, #6e5a48, #55453a)"></div>
+<div style="position: absolute; left: 0; right: 0; top: 152px; height: 12px; background: #2e231b"></div>
+<div style="position: absolute; left: 0; right: 0; top: 236px; height: 40px; background: linear-gradient(165deg, #6e5a48, #55453a)"></div>
+<div style="position: absolute; left: 0; right: 0; top: 276px; height: 12px; background: #2e231b"></div>
+<div class="a4 walkr" style="position: absolute; left: 90px; top: 178px; width: 24px; height: 36px">
+<div style="position: absolute; left: 2px; bottom: 0; width: 20px; height: 6px; border-radius: 50%; background: rgba(0,0,0,.5)"></div>
+<div style="position: absolute; left: 4px; bottom: 2px; width: 16px; height: 21px; border-radius: 8px 8px 5px 5px; background: linear-gradient(#9a8268, #6b5744)"></div>
+<div style="position: absolute; left: 5px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: #7a6550; box-shadow: inset 0 -4px 0 #3a2c20"></div>
+</div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(circle at 160px 200px, rgba(0,0,0,0) 80px, rgba(6,4,3,.75) 220px)"></div>
+<div class="a4 ring" style="position: absolute; left: 110px; top: 300px; width: 64px; height: 64px; margin-top: -32px; border-radius: 50%; border: 2px solid rgba(255,210,150,.4); background: rgba(255,210,150,.06)">
+<div class="a4 knob" style="position: absolute; left: 16px; top: 16px; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,210,150,.4)"></div>
+</div>
+<div class="a4 finger" style="position: absolute; left: 128px; top: 286px; width: 40px; height: 48px">
+<svg aria-hidden="true" width="40" height="48" viewBox="0 0 16 20" fill="#efe3d0" stroke="#1a120d" stroke-width=".8" stroke-linejoin="round"><path d="M6 9V3a1.5 1.5 0 0 1 3 0v5V6.5a1.5 1.5 0 0 1 3 0V10v0a1.5 1.5 0 0 1 3 0v3.5c0 2.5-1 4.5-3.5 4.5S7 16 6 14L2.4 9.9a1.5 1.5 0 0 1 2.1-2.1z"></path></svg>
+</div>
+</sc-if>
+
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 40px; top: 60px; width: 40px; height: 52px; background: linear-gradient(165deg, #6e5a48, #55453a); box-shadow: 0 12px 0 #2e231b"></div>
+<div style="position: absolute; left: 80px; top: 60px; width: 40px; height: 52px; background: linear-gradient(165deg, #655243, #4d3f35); box-shadow: 0 12px 0 #2e231b"></div>
+<div style="position: absolute; left: 220px; top: 140px; width: 40px; height: 92px; background: linear-gradient(165deg, #74604d, #5a493c); box-shadow: 0 12px 0 #2e231b"></div>
+<div style="position: absolute; left: 60px; top: 220px; width: 120px; height: 40px; background: linear-gradient(165deg, #6e5a48, #55453a); box-shadow: 0 12px 0 #2e231b"></div>
+<div style="position: absolute; left: 150px; top: 140px; width: 24px; height: 36px">
+<div style="position: absolute; left: 4px; bottom: 2px; width: 16px; height: 21px; border-radius: 8px 8px 5px 5px; background: linear-gradient(#9a8268, #6b5744)"></div>
+<div style="position: absolute; left: 5px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: #7a6550; box-shadow: inset 0 -4px 0 #3a2c20"></div>
+<div class="a4 flm" style="position: absolute; left: 17px; top: -1px; width: 8px; height: 12px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: radial-gradient(circle at 50% 70%, #fff6c2, #ffb347 45%, #ff7417); box-shadow: 0 0 14px 6px rgba(255,150,50,.55)"></div>
+</div>
+<div class="a4 unlit" aria-hidden="true" style="position: absolute; inset: 0; background: rgba(6,4,3,.96)"></div>
+<div class="a4 litup" aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(circle at 162px 160px, rgba(255,160,70,.15) 0, rgba(6,4,3,0) 60px, rgba(6,4,3,.6) 260px)"></div>
+<div class="a4 tap" style="position: absolute; right: 20px; bottom: 20px; width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(#ffb45a, #ff8a2b); padding: 4px; box-sizing: border-box">
+<div style="width: 64px; height: 64px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #3a2a1e, #1a120d); display: flex; align-items: center; justify-content: center">
+<div style="position: relative; width: 10px; height: 28px">
+<div style="position: absolute; left: 3px; top: 10px; width: 4px; height: 18px; background: #e0c393"></div>
+<div style="position: absolute; left: 1px; top: 4px; width: 8px; height: 9px; border-radius: 50% 50% 45% 45%; background: #c8402e"></div>
+</div>
+</div>
+</div>
+<div class="a4 tapdot" aria-hidden="true" style="position: absolute; right: 34px; bottom: 34px; width: 44px; height: 44px; border-radius: 50%; border: 2px solid rgba(255,230,190,.8)"></div>
+</sc-if>
+
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0; right: 0; top: 130px; height: 40px; background: linear-gradient(165deg, #6e5a48, #55453a)"></div>
+<div style="position: absolute; left: 0; right: 0; top: 170px; height: 12px; background: #2e231b"></div>
+<div style="position: absolute; left: 0; right: 0; top: 262px; height: 40px; background: linear-gradient(165deg, #655243, #4d3f35)"></div>
+<div style="position: absolute; left: 0; right: 0; top: 302px; height: 12px; background: #2e231b"></div>
+<div style="position: absolute; left: 70px; top: 196px; width: 24px; height: 36px">
+<div style="position: absolute; left: 4px; bottom: 2px; width: 16px; height: 21px; border-radius: 8px 8px 5px 5px; background: linear-gradient(#9a8268, #6b5744)"></div>
+<div style="position: absolute; left: 5px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: #7a6550; box-shadow: inset 0 -4px 0 #3a2c20"></div>
+<div class="a4 litc" style="position: absolute; left: 17px; top: -1px; width: 8px; height: 12px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: radial-gradient(circle at 50% 70%, #fff6c2, #ffb347 45%, #ff7417); box-shadow: 0 0 14px 6px rgba(255,150,50,.55)"></div>
+</div>
+<div class="a4 chase" style="position: absolute; left: 270px; top: 192px; width: 26px; height: 40px">
+<div style="position: absolute; left: 2px; bottom: 2px; width: 22px; height: 34px; border-radius: 11px 11px 4px 4px; background: linear-gradient(#30251f, #110c09); box-shadow: inset 0 1px 0 rgba(255,210,170,.14)"></div>
+<div class="a4 eyes" style="position: absolute; left: 7px; top: 12px; width: 4px; height: 3px; border-radius: 2px; background: #5a2a1e"></div>
+<div class="a4 eyes" style="position: absolute; left: 15px; top: 12px; width: 4px; height: 3px; border-radius: 2px; background: #5a2a1e"></div>
+</div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(6,4,3,.6)"></div>
+<div class="a4 litc" aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(circle at 86px 210px, rgba(255,160,70,.25), rgba(255,160,70,0) 240px)"></div>
+</sc-if>
+
+<sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0; right: 0; top: 0; height: 200px; background-color: #3a2d24; background-image: linear-gradient(rgba(0,0,0,.5) 2px, transparent 2px), linear-gradient(90deg, rgba(0,0,0,.4) 2px, transparent 2px); background-size: 100% 40px, 80px 40px"></div>
+<div style="position: absolute; left: 121px; top: 60px; width: 100px; height: 140px; border-radius: 50px 50px 0 0; background: #120d0a; box-shadow: 0 0 0 8px #4d3d30"></div>
+<div class="breathe" style="position: absolute; left: 129px; top: 68px; width: 84px; height: 132px; border-radius: 42px 42px 0 0; background: radial-gradient(ellipse at 50% 85%, #fffaf0 0%, #ffe3ac 30%, #ffb15a 65%, #d9691c 100%); box-shadow: 0 0 60px 20px rgba(255,160,70,.35)"></div>
+<div class="breathe" style="position: absolute; left: 61px; top: 200px; width: 220px; height: 180px; clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%); background: linear-gradient(rgba(255,190,110,.35), rgba(255,170,90,0) 90%)"></div>
+<div style="position: absolute; left: 40px; top: 300px; width: 40px; height: 24px">
+<div style="position: absolute; left: 2px; top: 6px; width: 26px; height: 3px; background: #d9b98a; transform: rotate(-12deg)"></div>
+<div style="position: absolute; left: 4px; top: 11px; width: 26px; height: 3px; background: #cfae7c; transform: rotate(8deg)"></div>
+<div style="position: absolute; left: 24px; top: 2px; width: 6px; height: 6px; border-radius: 50%; background: #c8402e"></div>
+<div style="position: absolute; left: 26px; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: #b8392a"></div>
+</div>
+<div style="position: absolute; left: 36px; top: 330px; font-size: 11px; color: #e0c393">+۲ کبریت</div>
+</sc-if>
+</div>
+
+<div style="position: absolute; left: 24px; right: 24px; top: 524px; display: flex; flex-direction: column; gap: 12px">
+<h1 style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 36px; font-weight: 600; line-height: 1.5; color: #f3e6d2">{{title}}</h1>
+<div style="font-size: 15px; line-height: 1.5; color: #cdb89c">{{body}}</div>
+</div>
+
+<div style="position: absolute; left: 24px; right: 24px; bottom: 40px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; gap: 8px; justify-content: center">
+<sc-for list="{{dots}}" as="d" hint-placeholder-count="4">
+<div style="width: {{d.w}}px; height: 6px; border-radius: 3px; background: {{d.bg}}"></div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 12px">
+<button type="button" onClick="{{back}}" disabled="{{first}}" style="flex: 0 0 auto; height: 52px; padding: 0 20px; border-radius: 26px; border: 1px solid rgba(239,227,208,.24); background: transparent; color: {{backColor}}; font-family: 'Vazirmatn', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer">قبلی</button>
+<sc-if value="{{notLast}}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{next}}" style="flex: 1 1 auto; height: 52px; border-radius: 26px; border: none; background: linear-gradient(#ffb45a, #ff8a2b); color: #1c0e05; font-family: 'Vazirmatn', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer">بعدی</button>
+</sc-if>
+<sc-if value="{{last}}" hint-placeholder-val="{{ false }}">
+<a href="MGame.dc.html" style="flex: 1 1 auto; height: 52px; border-radius: 26px; background: linear-gradient(#ffb45a, #ff8a2b); color: #1c0e05; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center">ورود به اولین اتاق</a>
+</sc-if>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  fa(n) { return String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]); }
+  static STEPS = [
+    ['برای حرکت، بکش', 'انگشتت را هر جای صفحه بگذار و به سمتی که می‌خواهی بروی بکش. نگه داری، به راه رفتن ادامه می‌دهی. نه دکمه‌ای لازم است، نه دسته‌ای که دنبالش بگردی.'],
+    ['کبریت بزن تا ببینی', 'اتاق‌ها کاملاً تاریک‌اند. روی کبریت بزن تا همه‌جا چند ثانیه روشن شود — بعد خاموش می‌شود. کبریت‌ها محدودند، پس لحظه‌هایت را خوب انتخاب کن.'],
+    ['شکارچی‌ها دنبال نور می‌آیند', 'شکارچی‌ها در تاریکی بی‌حرکت می‌ایستند. همین که کبریت بزنی، به سمت شعله‌ات راه می‌افتند. بگذار خاموش شود تا بایستند.'],
+    ['در را پیدا کن', 'هر اتاق فقط یک راه خروج دارد و نور از زیر درش بیرون می‌زند. بسته‌های کبریت اضافه در بن‌بست‌ها پنهان‌اند.']
+  ];
+  state = { step: 0 };
+  renderVals() {
+    const s = this.state.step, S = Component.STEPS;
+    return {
+      num: this.fa(s + 1), title: S[s][0], body: S[s][1],
+      s1: s === 0, s2: s === 1, s3: s === 2, s4: s === 3,
+      dots: S.map((_, i) => ({ w: i === s ? 22 : 6, bg: i === s ? '#ff8a2b' : 'rgba(239,227,208,.22)' })),
+      first: s === 0, backColor: s === 0 ? 'rgba(239,227,208,.35)' : '#efe3d0',
+      notLast: s < 3, last: s === 3,
+      next: () => this.setState({ step: Math.min(3, s + 1) }),
+      back: () => this.setState({ step: Math.max(0, s - 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

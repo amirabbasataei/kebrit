@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>کبریت — رفتن به مرحله‌ی بعد</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@500;600;700&amp;family=Lalezar&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#bfa688;text-decoration:none}a:hover{color:#ffd27a}
+a:focus-visible{outline:2px solid #ffd27a;outline-offset:4px}
+.t{animation-duration:9s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+@keyframes door{0%,5%{transform:scaleX(1)}16%,100%{transform:scaleX(.08)}}
+@keyframes doorlight{0%,5%{opacity:.35}16%,100%{opacity:1}}
+@keyframes walk{0%,13%{transform:translateY(0) scale(1);opacity:1}30%{transform:translateY(-318px) scale(.42);opacity:1}33%,100%{transform:translateY(-318px) scale(.42);opacity:0}}
+@keyframes bob{0%,100%{margin-top:0}50%{margin-top:-4px}}
+@keyframes flood{0%,25%{opacity:0}34%,40%{opacity:1}47%,100%{opacity:0}}
+@keyframes black{0%,38%{opacity:0}45%,93%{opacity:1}100%{opacity:0}}
+@keyframes lvl{0%,46%{opacity:0;transform:translateY(10px)}52%,84%{opacity:1;transform:translateY(0)}90%,100%{opacity:0;transform:translateY(0)}}
+@keyframes ttl{0%,50%{opacity:0;transform:translateY(14px)}57%,84%{opacity:1;transform:translateY(0)}90%,100%{opacity:0;transform:translateY(0)}}
+@keyframes meta{0%,56%{opacity:0}62%,84%{opacity:1}90%,100%{opacity:0}}
+@keyframes strike{0%,65%{opacity:0;transform:scale(.2)}67%{opacity:1;transform:scale(1.7)}71%,86%{opacity:1;transform:scale(1)}90%,100%{opacity:0;transform:scale(.6)}}
+@keyframes glow{0%,65%{opacity:0}68%{opacity:1}72%,85%{opacity:.75}91%,100%{opacity:0}}
+@keyframes spark1{0%,65%{opacity:0;transform:translate(0,0)}66%{opacity:1}71%,100%{opacity:0;transform:translate(-46px,-30px)}}
+@keyframes spark2{0%,65%{opacity:0;transform:translate(0,0)}66%{opacity:1}71%,100%{opacity:0;transform:translate(40px,-40px)}}
+@keyframes spark3{0%,65%{opacity:0;transform:translate(0,0)}66%{opacity:1}72%,100%{opacity:0;transform:translate(10px,-58px)}}
+@keyframes flicker{0%,100%{transform:scale(1,1) rotate(-3deg)}50%{transform:scale(1.07,1.15) rotate(3deg)}}
+@keyframes stick{0%,65%{opacity:0}67%,86%{opacity:1}90%,100%{opacity:0}}
+.door{animation-name:door;transform-origin:0 50%}
+.doorlight{animation-name:doorlight}
+.walk{animation-name:walk;transform-origin:50% 100%}
+.bob{animation:bob .45s infinite}
+.flood{animation-name:flood}
+.black{animation-name:black}
+.lvl{animation-name:lvl}
+.ttl{animation-name:ttl}
+.meta{animation-name:meta}
+.strike{animation-name:strike;transform-origin:50% 100%}
+.glow{animation-name:glow}
+.s1{animation-name:spark1}.s2{animation-name:spark2}.s3{animation-name:spark3}
+.stick{animation-name:stick}
+.flicker{animation:flicker .4s infinite;transform-origin:50% 100%}
+@media (prefers-reduced-motion: reduce){.bob,.flicker{animation:none}}
+</style>
+</helmet>
+<div dir="rtl" style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #0a0706; font-family: 'Vazirmatn', sans-serif; color: #efe3d0">
+
+<div aria-hidden="true" style="position: absolute; inset: 0; z-index: 1; background-color: #241b15; background-image: linear-gradient(rgba(0,0,0,.55) 3px, transparent 3px), linear-gradient(90deg, rgba(0,0,0,.45) 3px, transparent 3px), linear-gradient(#2e241c, #17110d); background-size: 100% 48px, 96px 48px, 100% 100%">
+<div style="position: absolute; left: 0; right: 0; top: 410px; bottom: 0; background-color: #1e1712; background-image: linear-gradient(rgba(0,0,0,.35) 2px, transparent 2px); background-size: 100% 40px"></div>
+<div class="t doorlight" style="position: absolute; left: 0; top: 410px; width: 390px; height: 434px; clip-path: polygon(32% 0, 68% 0, 100% 100%, 0 100%); background: linear-gradient(rgba(255,190,110,.4), rgba(255,170,90,0) 90%)"></div>
+<div style="position: absolute; left: 113px; top: 168px; width: 164px; height: 242px; border-radius: 82px 82px 0 0; background: #120d0a; box-shadow: 0 0 0 14px #4d3d30, 0 0 0 16px #2a2019"></div>
+<div class="t doorlight" style="position: absolute; left: 125px; top: 180px; width: 140px; height: 230px; border-radius: 70px 70px 0 0; background: radial-gradient(ellipse at 50% 85%, #fffaf0 0%, #ffe3ac 30%, #ffb15a 65%, #d9691c 100%); box-shadow: 0 0 110px 36px rgba(255,160,70,.35)"></div>
+<div style="position: absolute; left: 125px; top: 180px; width: 140px; height: 230px; border-radius: 70px 70px 0 0; overflow: hidden">
+<div class="t door" style="position: absolute; inset: 0; background-color: #5a3a22; background-image: repeating-linear-gradient(90deg, rgba(0,0,0,.35) 0 2px, transparent 2px 40px), linear-gradient(90deg, #6b4529, #4a2f1b)">
+<div style="position: absolute; right: 16px; top: 130px; width: 10px; height: 10px; border-radius: 50%; background: #c9a25f"></div>
+</div>
+</div>
+<div class="t walk" style="position: absolute; left: 165px; top: 640px; width: 60px; height: 88px">
+<div class="bob" style="position: absolute; inset: 0">
+<div style="position: absolute; left: 4px; bottom: 0; width: 52px; height: 14px; border-radius: 50%; background: rgba(0,0,0,.5)"></div>
+<div style="position: absolute; left: 10px; bottom: 6px; width: 40px; height: 52px; border-radius: 20px 20px 10px 10px; background: linear-gradient(#9a8268, #6b5744)"></div>
+<div style="position: absolute; left: 14px; top: 12px; width: 32px; height: 32px; border-radius: 50%; background: #7a6550; box-shadow: inset 0 10px 0 #3a2c20"></div>
+<div style="position: absolute; left: 48px; top: 26px; width: 5px; height: 26px; background: #e0c393; transform: rotate(14deg)"></div>
+<div class="flicker" style="position: absolute; left: 44px; top: 4px; width: 16px; height: 24px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: radial-gradient(circle at 50% 70%, #fff6c2, #ffb347 45%, #ff7417); box-shadow: 0 0 22px 8px rgba(255,150,50,.5)"></div>
+</div>
+</div>
+</div>
+
+<div class="t flood" aria-hidden="true" style="position: absolute; inset: 0; z-index: 2; background: radial-gradient(circle at 195px 300px, #fffdf6 0%, #ffe9c2 45%, #ffc27a 100%)"></div>
+<div class="t black" aria-hidden="true" style="position: absolute; inset: 0; z-index: 3; background: #0a0706"></div>
+
+<div class="t glow" aria-hidden="true" style="position: absolute; inset: 0; z-index: 4; background: radial-gradient(circle at 195px 560px, rgba(255,150,60,.3) 0, rgba(255,150,60,0) 300px)"></div>
+
+<div style="position: absolute; left: 24px; right: 24px; top: 230px; z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+<div class="t lvl" style="font-size: 11px; color: #bfa688">فصل دوم · مرحله‌ی ۸</div>
+<div class="t ttl" style="font-family: 'Noto Naskh Arabic', serif; font-size: 64px; font-weight: 600; line-height: 1.5; color: #f6ead6">استخوان‌دان</div>
+<div class="t meta" style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px; font-family: 'Noto Naskh Arabic', serif; font-size: 20px; color: #d8c4a6">
+<span>۵ کبریت · ۳ شکارچی</span><span>آن‌ها شنیدن را یاد گرفته‌اند.</span>
+</div>
+</div>
+
+<div aria-hidden="true" style="position: absolute; left: 175px; top: 500px; width: 40px; height: 140px; z-index: 5">
+<div class="t stick" style="position: absolute; left: 17px; top: 48px; width: 6px; height: 90px; background: linear-gradient(90deg, #e9cd9c, #c9a874)"></div>
+<div class="t stick" style="position: absolute; left: 13px; top: 38px; width: 14px; height: 16px; border-radius: 50% 50% 45% 45%; background: #3a120c"></div>
+<div class="t strike" style="position: absolute; left: 8px; top: -4px; width: 24px; height: 48px">
+<div class="flicker" style="position: absolute; inset: 0; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: radial-gradient(circle at 50% 74%, #fffbe0 0%, #ffe08a 25%, #ffa13d 55%, rgba(255,100,20,.9) 85%); box-shadow: 0 0 40px 16px rgba(255,150,50,.5)"></div>
+</div>
+<div class="t s1" style="position: absolute; left: 18px; top: 36px; width: 3px; height: 3px; background: #ffd27a"></div>
+<div class="t s2" style="position: absolute; left: 20px; top: 36px; width: 3px; height: 3px; background: #ffb45a"></div>
+<div class="t s3" style="position: absolute; left: 19px; top: 34px; width: 2px; height: 2px; background: #fff1b8"></div>
+</div>
+
+<a href="MGame.dc.html" style="position: absolute; left: 24px; bottom: 40px; z-index: 6; height: 44px; padding: 0 18px; border-radius: 6px; border: 1px solid rgba(239,227,208,.22); font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px">رد شدن<svg aria-hidden="true" width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"></path></svg></a>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  fa(n) { return String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]); }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>کبریت — بازی</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@500;600;700&amp;family=Lalezar&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#efe3d0;text-decoration:none}a:hover{color:#ffd27a}
+@keyframes flick{0%,100%{opacity:1}18%{opacity:.72}40%{opacity:.95}63%{opacity:.68}82%{opacity:.9}}
+@keyframes flame{from{transform:scale(1,1) rotate(-4deg)}to{transform:scale(1.08,1.18) rotate(4deg)}}
+.flick{animation:flick 1.3s infinite}
+.flame{animation:flame .35s infinite alternate;transform-origin:50% 100%}
+button:focus-visible,a:focus-visible{outline:2px solid #ffd27a;outline-offset:3px}
+</style>
+</helmet>
+<div dir="rtl" onPointerDown="{{down}}" onPointerMove="{{move}}" onPointerUp="{{up}}" onPointerCancel="{{up}}" style="width: 390px; height: 844px; position: relative; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; background: radial-gradient(ellipse at 50% 50%, #1c140f 0%, #0a0706 75%); font-family: 'Vazirmatn', sans-serif; color: #efe3d0">
+
+<div style="position: absolute; left: 15px; top: 150px; width: 360px; height: 520px; z-index: 1; background-color: #2a211b; background-image: linear-gradient(rgba(0,0,0,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.3) 1px, transparent 1px); background-size: 20px 20px; box-shadow: 0 30px 60px rgba(0,0,0,.7)">
+<sc-for list="{{walls}}" as="w" hint-placeholder-count="60">
+<div style="position: absolute; left: {{w.x}}px; top: {{w.front}}px; width: 40px; height: 12px; z-index: {{w.z}}; background-color: #2e231b; background-image: linear-gradient(rgba(255,210,160,.12) 1px, transparent 1px), repeating-linear-gradient(90deg, transparent 0 19px, rgba(0,0,0,.45) 19px 20px); box-shadow: 0 6px 9px rgba(0,0,0,.5)"></div>
+<div style="position: absolute; left: {{w.x}}px; top: {{w.top}}px; width: 40px; height: 40px; z-index: {{w.z}}; background: {{w.bg}}; box-shadow: inset 0 1px 0 rgba(255,225,190,.18), inset 0 -2px 0 rgba(0,0,0,.25)"></div>
+</sc-for>
+
+<div style="position: absolute; left: 170px; top: -4px; width: 20px; height: 44px; z-index: 7; border-radius: 10px 10px 2px 2px; background: linear-gradient(#ffe6ad, #ff9c3e 65%, #d4661b); box-shadow: 0 0 0 3px #3b2c21, 0 0 22px rgba(255,160,70,.7)"></div>
+<div style="position: absolute; left: 145px; top: 38px; width: 70px; height: 50px; z-index: 2; border-radius: 50%; background: radial-gradient(ellipse at 50% 0%, rgba(255,170,80,.5), rgba(255,170,80,0) 70%)"></div>
+
+<sc-if value="{{showPickup}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; left: 49px; top: 296px; width: 24px; height: 14px; z-index: 2">
+<div style="position: absolute; left: 2px; top: 3px; width: 18px; height: 3px; background: #d9b98a; transform: rotate(-12deg)"></div>
+<div style="position: absolute; left: 4px; top: 7px; width: 18px; height: 3px; background: #cfae7c; transform: rotate(8deg)"></div>
+<div style="position: absolute; left: 17px; top: 0; width: 5px; height: 5px; border-radius: 50%; background: #c8402e"></div>
+<div style="position: absolute; left: 19px; top: 6px; width: 5px; height: 5px; border-radius: 50%; background: #b8392a"></div>
+</div>
+</sc-if>
+
+<div style="position: absolute; left: {{pl.x}}px; top: {{pl.y}}px; width: 24px; height: 36px; z-index: {{pl.z}}; transition: left .15s linear, top .15s linear">
+<div style="position: absolute; left: 2px; bottom: 0; width: 20px; height: 6px; border-radius: 50%; background: rgba(0,0,0,.5)"></div>
+<div style="position: absolute; left: 4px; bottom: 2px; width: 16px; height: 21px; border-radius: 8px 8px 5px 5px; background: linear-gradient(#9a8268, #6b5744)"></div>
+<div style="position: absolute; left: 5px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: #7a6550; box-shadow: inset 0 -4px 0 #3a2c20"></div>
+<div style="position: absolute; left: 19px; top: 10px; width: 3px; height: 12px; background: #e0c393; transform: rotate(14deg)"></div>
+<sc-if value="{{lit}}" hint-placeholder-val="{{ true }}">
+<div class="flame" style="position: absolute; left: 17px; top: -1px; width: 8px; height: 12px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: radial-gradient(circle at 50% 70%, #fff6c2, #ffb347 45%, #ff7417); box-shadow: 0 0 14px 6px rgba(255,150,50,.55)"></div>
+</sc-if>
+</div>
+
+<sc-for list="{{hunters}}" as="h" hint-placeholder-count="2">
+<div style="position: absolute; left: {{h.x}}px; top: {{h.y}}px; width: 26px; height: 40px; z-index: {{h.z}}; transition: left .5s ease, top .5s ease">
+<div style="position: absolute; left: 1px; bottom: 0; width: 24px; height: 7px; border-radius: 50%; background: rgba(0,0,0,.55)"></div>
+<div style="position: absolute; left: 2px; bottom: 2px; width: 22px; height: 34px; border-radius: 11px 11px 4px 4px; background: linear-gradient(#30251f, #110c09); box-shadow: inset 0 1px 0 rgba(255,210,170,.14)"></div>
+<div style="position: absolute; left: 7px; top: 12px; width: 4px; height: 3px; border-radius: 2px; background: {{h.eye}}; box-shadow: {{h.glow}}"></div>
+<div style="position: absolute; left: 15px; top: 12px; width: 4px; height: 3px; border-radius: 2px; background: {{h.eye}}; box-shadow: {{h.glow}}"></div>
+<sc-if value="{{h.alert}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; left: 5px; top: -16px; width: 16px; height: 16px; border-radius: 50%; background: #ff5a2e; color: #1a0b05; font-size: 11px; font-weight: 700; line-height: 16px; text-align: center">!</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+
+<div aria-hidden="true" style="position: absolute; inset: 0; z-index: 2; pointer-events: none; background: {{overlay}}"></div>
+<sc-if value="{{lit}}" hint-placeholder-val="{{ true }}">
+<div class="flick" aria-hidden="true" style="position: absolute; inset: 0; z-index: 2; pointer-events: none; background: {{warm}}"></div>
+</sc-if>
+<div aria-hidden="true" style="position: absolute; left: 145px; top: 100px; width: 100px; height: 100px; z-index: 3; pointer-events: none; border-radius: 50%; background: radial-gradient(circle, rgba(255,170,80,.55), rgba(255,170,80,0) 65%); opacity: {{doorGlow}}"></div>
+
+<div style="position: absolute; left: 16px; right: 16px; top: 52px; z-index: 4; display: flex; justify-content: space-between; align-items: center">
+<a href="MPause.dc.html" onPointerDown="{{stop}}" aria-label="توقف" style="width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(239,227,208,.22); display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="14" height="16" viewBox="0 0 14 16" fill="#efe3d0"><rect x="1" y="1" width="4" height="14" rx="1"></rect><rect x="9" y="1" width="4" height="14" rx="1"></rect></svg>
+</a>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 2px">
+<div style="font-size: 11px; color: #bfa688">مرحله‌ی ۷</div>
+<div style="font-family: 'Noto Naskh Arabic', serif; font-size: 22px; font-weight: 600; line-height: 1.5; color: #f3e6d2">سرداب زیرین</div>
+</div>
+<div style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: flex-end; gap: 6px" role="img" aria-label="{{matchAria}}">
+<div style="width: 5px; height: 20px; background: linear-gradient(#c8402e 0 6px, #e0c393 6px)"></div>
+<div style="font-family: 'Noto Naskh Arabic', serif; font-size: 24px; font-weight: 600; line-height: 1">{{matches}}</div>
+</div>
+</div>
+<div style="position: absolute; left: 24px; right: 24px; top: 112px; z-index: 4; height: 3px; border-radius: 2px; background: rgba(255,230,200,.1); overflow: hidden">
+<div style="height: 3px; width: {{burnPct}}%; background: linear-gradient(90deg, #ff6a12, #ffd27a); box-shadow: 0 0 10px rgba(255,150,50,.7)"></div>
+</div>
+
+<div style="position: absolute; left: 24px; bottom: 52px; width: 210px; z-index: 4; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 10px; align-items: center; font-size: 12px; color: #bfa688">
+<svg aria-hidden="true" width="16" height="20" viewBox="0 0 16 20" fill="none" stroke="#bfa688" stroke-width="1.5" stroke-linecap="round"><path d="M6 9V3a1.5 1.5 0 0 1 3 0v5"></path><path d="M9 8V6.5a1.5 1.5 0 0 1 3 0V10"></path><path d="M6 9 4.5 7.8a1.5 1.5 0 0 0-2.1 2.1L6 14c1 1.5 2.5 4 5 4 2.5 0 3.5-2 3.5-4.5V10a1.5 1.5 0 0 0-3 0"></path></svg>
+هر جای صفحه را بکش تا حرکت کنی
+</div>
+<div style="font-family: 'Noto Naskh Arabic', serif; font-size: 18px; color: #d8c4a6; line-height: 1.3">{{hint}}</div>
+</div>
+
+<button type="button" onPointerDown="{{stop}}" onClick="{{strike}}" disabled="{{noStrike}}" aria-label="{{strikeAria}}" style="position: absolute; right: 22px; bottom: 40px; z-index: 4; width: 92px; height: 92px; border-radius: 50%; border: none; padding: 5px; cursor: pointer; background: {{ring}}; touch-action: none">
+<div style="width: 82px; height: 82px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #3a2a1e, #1a120d); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-shadow: inset 0 1px 0 rgba(255,220,170,.15)">
+<div style="position: relative; width: 10px; height: 30px">
+<div style="position: absolute; left: 3px; top: 10px; width: 4px; height: 20px; background: #e0c393"></div>
+<div style="position: absolute; left: 1px; top: 4px; width: 8px; height: 9px; border-radius: 50% 50% 45% 45%; background: #c8402e"></div>
+<sc-if value="{{lit}}" hint-placeholder-val="{{ false }}">
+<div class="flame" style="position: absolute; left: 0; top: -8px; width: 10px; height: 14px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: radial-gradient(circle at 50% 70%, #fff6c2, #ffb347 45%, #ff7417); box-shadow: 0 0 12px 4px rgba(255,150,50,.5)"></div>
+</sc-if>
+</div>
+<div style="font-size: 11px; font-weight: 600; color: #efe3d0">{{strikeLabel}}</div>
+</div>
+</button>
+
+<sc-if value="{{dragging}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; left: {{joy.rx}}px; top: {{joy.ry}}px; width: 80px; height: 80px; z-index: 5; pointer-events: none; border-radius: 50%; border: 2px solid rgba(255,210,150,.35); background: rgba(255,210,150,.06)"></div>
+<div aria-hidden="true" style="position: absolute; left: {{joy.kx}}px; top: {{joy.ky}}px; width: 36px; height: 36px; z-index: 5; pointer-events: none; border-radius: 50%; background: rgba(255,210,150,.35); box-shadow: 0 0 16px rgba(255,170,80,.4)"></div>
+</sc-if>
+
+<sc-if value="{{escaped}}" hint-placeholder-val="{{ false }}">
+<div onPointerDown="{{stop}}" style="position: absolute; inset: 0; z-index: 6; background: radial-gradient(circle at 195px 150px, rgba(255,200,130,.55), rgba(10,7,6,.92) 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 0 32px; text-align: center">
+<div style="font-size: 12px; color: #ffe2b0">مرحله‌ی ۷</div>
+<div style="font-family: 'Noto Naskh Arabic', serif; font-size: 44px; font-weight: 600; line-height: 1.5; color: #fbf0de">در را پیدا کردی.</div>
+<a href="MComplete.dc.html" style="height: 52px; padding: 0 32px; border-radius: 26px; background: linear-gradient(#ffb45a, #ff8a2b); color: #1c0e05; font-size: 15px; font-weight: 600; display: flex; align-items: center">ادامه</a>
+</div>
+</sc-if>
+<sc-if value="{{caught}}" hint-placeholder-val="{{ false }}">
+<div onPointerDown="{{stop}}" style="position: absolute; inset: 0; z-index: 6; background: radial-gradient(circle at 50% 45%, rgba(120,20,10,.6), rgba(7,4,4,.95) 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 0 32px; text-align: center">
+<div style="font-size: 12px; color: #ff7a5a">گیر افتادی</div>
+<div style="font-family: 'Noto Naskh Arabic', serif; font-size: 44px; font-weight: 600; line-height: 1.5; color: #f6e2d6">شکارچی به تو رسید.</div>
+<a href="MCaught.dc.html" style="height: 52px; padding: 0 32px; border-radius: 26px; background: linear-gradient(#ffb45a, #ff8a2b); color: #1c0e05; font-size: 15px; font-weight: 600; display: flex; align-items: center">ادامه</a>
+</div>
+</sc-if>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<a href="MNoMatches.dc.html" onPointerDown="{{stop}}" style="position: absolute; right: 24px; top: 128px; z-index: 4; font-size: 13px; color: #ffb45a; text-decoration: underline">کبریت تمام شد — تسلیم می‌شوی؟</a>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"lightOnLoad":{"editor":"boolean","default":true},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  fa(n) { return String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]); }
+  static MAP = [
+    "####E####",
+    "#.......#",
+    "#.#.#.#.#",
+    "#.#...#.#",
+    "#.###.#.#",
+    "#...#...#",
+    "###.#.###",
+    "#...#...#",
+    "#.###.#.#",
+    "#.#...#.#",
+    "#.#.###.#",
+    "#.......#",
+    "#########"
+  ];
+  static START = { px: 1, py: 11, hunters: [[7, 4], [3, 9]] };
+  state = { init: false };
+  componentWillUnmount() { clearInterval(this.t); clearInterval(this.mv); }
+  eff() {
+    if (this.state.init) return this.state;
+    const on = this.props.lightOnLoad ?? true;
+    return { init: false, px: 1, py: 11, hunters: Component.START.hunters, lit: on, burn: on ? 72 : 0, matches: on ? 5 : 6, picked: false, result: null, drag: null };
+  }
+  begin() {
+    if (this.state.init) return;
+    const e = this.eff();
+    this.state = Object.assign({}, this.state, e, { init: true });
+    this.setState(Object.assign({}, e, { init: true }));
+    if (e.lit) this.ensureTimer();
+  }
+  wall(x, y) { const M = Component.MAP; return y < 0 || y >= M.length || x < 0 || x >= M[0].length || M[y][x] === '#'; }
+  ensureTimer() {
+    if (this.t) return;
+    this.n = 0;
+    this.t = setInterval(() => {
+      const s = this.state;
+      if (s.result || !s.lit) { clearInterval(this.t); this.t = null; return; }
+      this.n++;
+      const b = s.burn - 1.25;
+      if (b <= 0) { clearInterval(this.t); this.t = null; this.setState({ burn: 0, lit: false }); return; }
+      if (this.n % 9 === 0) this.moveHunters(b); else this.setState({ burn: b });
+    }, 100);
+  }
+  moveHunters(b) {
+    const s = this.state, M = Component.MAP;
+    const dist = {}, q = [[s.px, s.py]]; dist[s.px + ',' + s.py] = 0;
+    while (q.length) {
+      const [x, y] = q.shift(), d = dist[x + ',' + y];
+      [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([dx, dy]) => {
+        const nx = x + dx, ny = y + dy, k = nx + ',' + ny;
+        if (!this.wall(nx, ny) && M[ny][nx] !== 'E' && dist[k] === undefined) { dist[k] = d + 1; q.push([nx, ny]); }
+      });
+    }
+    let caught = false;
+    const hunters = s.hunters.map(([x, y]) => {
+      const d = dist[x + ',' + y];
+      if (d === undefined || d === 0) return [x, y];
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const k = (x + dx) + ',' + (y + dy);
+        if (dist[k] === d - 1) { if (d - 1 === 0) caught = true; return [x + dx, y + dy]; }
+      }
+      return [x, y];
+    });
+    this.setState({ hunters, burn: b, result: caught ? 'caught' : null });
+    if (caught) this.stopAll();
+  }
+  stopAll() { clearInterval(this.t); this.t = null; clearInterval(this.mv); this.mv = null; }
+  step(dir) {
+    const s = this.state;
+    if (s.result) return;
+    const [dx, dy] = { l: [-1, 0], r: [1, 0], u: [0, -1], d: [0, 1] }[dir];
+    const nx = s.px + dx, ny = s.py + dy;
+    if (this.wall(nx, ny)) return;
+    const M = Component.MAP;
+    if (M[ny][nx] === 'E') { this.setState({ px: nx, py: ny, result: 'escaped' }); this.stopAll(); return; }
+    const patch = { px: nx, py: ny };
+    if (!s.picked && nx === 1 && ny === 7) { patch.picked = true; patch.matches = s.matches + 2; }
+    if (s.hunters.some(([hx, hy]) => hx === nx && hy === ny)) { patch.result = 'caught'; this.stopAll(); }
+    this.setState(patch);
+  }
+  local(ev) {
+    const r = ev.currentTarget.getBoundingClientRect();
+    return [(ev.clientX - r.left) * 390 / r.width, (ev.clientY - r.top) * 844 / r.height];
+  }
+  down(ev) {
+    this.begin();
+    if (this.state.result) return;
+    const [x, y] = this.local(ev);
+    try { ev.currentTarget.setPointerCapture(ev.pointerId); } catch (err) {}
+    this.ox = x; this.oy = y; this.dir = null;
+    this.setState({ drag: { ox: x, oy: y, kx: 0, ky: 0 } });
+    clearInterval(this.mv);
+    this.mv = setInterval(() => { if (this.dir) this.step(this.dir); }, 170);
+  }
+  move(ev) {
+    if (!this.state.drag) return;
+    const [x, y] = this.local(ev);
+    let dx = x - this.ox, dy = y - this.oy;
+    const m = Math.hypot(dx, dy), max = 30;
+    const kx = m > max ? dx / m * max : dx, ky = m > max ? dy / m * max : dy;
+    let dir = null;
+    if (m > 16) dir = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'r' : 'l') : (dy > 0 ? 'd' : 'u');
+    if (dir && dir !== this.dir) { this.dir = dir; this.step(dir); } else this.dir = dir;
+    this.setState({ drag: { ox: this.ox, oy: this.oy, kx, ky } });
+  }
+  up() { clearInterval(this.mv); this.mv = null; this.dir = null; if (this.state.drag) this.setState({ drag: null }); }
+  strike() {
+    this.begin();
+    const s = this.state;
+    if (s.result || (s.lit && this.t) || s.matches <= 0) { if (s.lit && !this.t) this.ensureTimer(); return; }
+    this.setState({ lit: true, burn: 100, matches: s.matches - 1 });
+    this.state = Object.assign({}, this.state, { lit: true, burn: 100 });
+    this.ensureTimer();
+  }
+  renderVals() {
+    const e = this.eff();
+    const M = Component.MAP, C = 40, H = 12, MX = 15, MY = 150;
+    const shades = ['linear-gradient(165deg, #6e5a48, #55453a)', 'linear-gradient(165deg, #655243, #4d3f35)', 'linear-gradient(165deg, #74604d, #5a493c)'];
+    const walls = [];
+    for (let r = 0; r < M.length; r++) for (let c = 0; c < M[r].length; c++) {
+      const ch = M[r][c];
+      if (ch === '#' || ch === 'E') walls.push({ x: c * C, top: r * C - H, front: r * C + C - H, z: r * 10 + 5, bg: shades[(r * 7 + c * 3) % 3] });
+    }
+    const hunters = e.hunters.map(([c, r]) => ({
+      x: c * C + C / 2 - 13, y: r * C + C / 2 - 34, z: r * 10 + 6, alert: e.lit,
+      eye: e.lit ? '#ff4a2a' : '#5a2a1e', glow: e.lit ? '0 0 7px 2px rgba(255,80,40,.8)' : 'none'
+    }));
+    const pl = { x: e.px * C + C / 2 - 12, y: e.py * C + C / 2 - 30, z: e.py * 10 + 6 };
+    const cx = MX + e.px * C + C / 2, cy = MY + e.py * C + C / 2 - 12;
+    let overlay;
+    if (e.lit) {
+      const R = 200 + 6.5 * e.burn;
+      overlay = `radial-gradient(circle at ${cx}px ${cy}px, rgba(255,170,90,.10) 0px, rgba(0,0,0,0) ${R * 0.3}px, rgba(8,5,3,.55) ${R * 0.72}px, rgba(6,4,3,.95) ${R}px)`;
+    } else {
+      overlay = `radial-gradient(circle at ${cx}px ${cy}px, rgba(6,4,3,.45) 0px, rgba(6,4,3,.985) 48px)`;
+    }
+    const warm = `radial-gradient(circle at ${cx}px ${cy}px, rgba(255,150,60,.16), rgba(255,150,60,0) ${180 + 3 * e.burn}px)`;
+    const d = e.drag;
+    const joy = d ? { rx: d.ox - 40, ry: d.oy - 40, kx: d.ox + d.kx - 18, ky: d.oy + d.ky - 18 } : { rx: 0, ry: 0, kx: 0, ky: 0 };
+    const deg = Math.round(e.burn * 3.6);
+    const canStrike = !e.result && e.matches > 0 && !(e.lit && e.init);
+    let hint;
+    if (!e.init) hint = 'روی کبریت بزن تا اتاق روشن شود. شکارچی‌ها هم نورش را می‌بینند.';
+    else if (e.lit) hint = 'شعله‌ات را دیدند. از حرکت نایست.';
+    else if (e.matches > 0) hint = 'در تاریکی راهت را پیدا کن، یا کبریت دیگری بزن.';
+    else hint = 'کبریتی نمانده. به حافظه‌ات اعتماد کن.';
+    return {
+      walls, hunters, pl, overlay, warm, joy, lit: e.lit,
+      showPickup: !e.picked,
+      dragging: !!d,
+      escaped: e.result === 'escaped', caught: e.result === 'caught',
+      empty: e.init && !e.lit && e.matches === 0 && !e.result,
+      matches: this.fa(e.matches), matchAria: `${this.fa(e.matches)} کبریت باقی مانده`,
+      burnPct: e.burn, doorGlow: e.lit ? 0.25 : 0.8, hint,
+      ring: e.lit ? `conic-gradient(#ffb45a ${deg}deg, rgba(239,227,208,.14) 0deg)` : (e.matches > 0 ? 'linear-gradient(#ffb45a, #ff8a2b)' : 'rgba(239,227,208,.14)'),
+      strikeLabel: e.lit ? `${this.fa(Math.ceil(e.burn / 100 * 8))} ثانیه` : 'روشن کن',
+      strikeAria: e.lit ? 'کبریت در حال سوختن' : 'کبریت بزن',
+      noStrike: !canStrike && e.init,
+      down: (ev) => this.down(ev), move: (ev) => this.move(ev), up: () => this.up(),
+      stop: (ev) => ev.stopPropagation(),
+      strike: () => this.strike()
+    };
+  }
+}
+</script>
+</body>
+</html>
