@@ -11,6 +11,7 @@ import '../../../theme/tokens.dart';
 import '../../kit/css.dart';
 import '../../kit/match_icon.dart';
 import '../../kit/svg_path.dart';
+import 'pointer_claim.dart';
 
 /// Hint under the board, by state (MGame `hint`).
 String hintFor(GameState s, {required bool started}) {
@@ -42,7 +43,7 @@ class GameTopBar extends StatelessWidget {
             label: 'توقف',
             excludeSemantics: true,
             onTap: onPause,
-            child: GestureDetector(
+            child: PointerClaim(child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: onPause,
               child: Container(
@@ -55,7 +56,7 @@ class GameTopBar extends StatelessWidget {
                 ),
                 child: const CustomPaint(size: Size(14, 16), painter: _PausePainter()),
               ),
-            ),
+            )),
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -251,7 +252,7 @@ class GiveUpLink extends StatelessWidget {
           excludeSemantics: true,
           label: 'کبریت تمام شد — تسلیم می‌شوی؟',
           onTap: onTap,
-          child: GestureDetector(
+          child: PointerClaim(child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: onTap,
             child: const Padding(
@@ -267,7 +268,7 @@ class GiveUpLink extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          )),
         ),
       );
 }

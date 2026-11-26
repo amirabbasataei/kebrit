@@ -11,6 +11,7 @@ import '../../../theme/text_styles.dart';
 import '../../../theme/tokens.dart';
 import '../../kit/css.dart';
 import '../../kit/match_icon.dart';
+import 'pointer_claim.dart';
 
 class StrikeButton extends StatelessWidget {
   const StrikeButton({
@@ -54,7 +55,7 @@ class StrikeButton extends StatelessWidget {
         excludeSemantics: true,
         label: s.lit ? 'کبریت در حال سوختن' : 'کبریت بزن',
         onTap: enabled ? onStrike : null,
-        child: GestureDetector(
+        child: PointerClaim(child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: enabled ? onStrike : null,
           child: CustomPaint(
@@ -89,7 +90,7 @@ class StrikeButton extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        )),
       ),
     );
   }
