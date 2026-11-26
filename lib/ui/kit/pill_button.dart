@@ -136,7 +136,10 @@ class _PillButtonState extends State<PillButton> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         label,
-        if (widget.icon != null) ...[SizedBox(width: widget.iconGap), widget.icon!],
+        if (widget.icon != null) ...[
+          SizedBox(width: widget.iconGap),
+          widget.icon!,
+        ],
       ],
     );
 
@@ -161,7 +164,10 @@ class _PillButtonState extends State<PillButton> {
       case PillVariant.outline:
         final base = widget.fillColor;
         final fill = _pressed
-            ? Color.alphaBlend(rgba(255, 210, 150, .06), base ?? const Color(0x00000000))
+            ? Color.alphaBlend(
+                rgba(255, 210, 150, .06),
+                base ?? const Color(0x00000000),
+              )
             : base;
         deco = BoxDecoration(
           borderRadius: radius,
@@ -250,9 +256,9 @@ class ChevronIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        size: Size.square(size),
-        painter: _ChevronPainter(color, strokeWidth, pointsRight),
-      );
+    size: Size.square(size),
+    painter: _ChevronPainter(color, strokeWidth, pointsRight),
+  );
 }
 
 class _ChevronPainter extends CustomPainter {
@@ -311,5 +317,6 @@ class _FocusRingPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_FocusRingPainter o) => o.show != show || o.radius != radius;
+  bool shouldRepaint(_FocusRingPainter o) =>
+      o.show != show || o.radius != radius;
 }

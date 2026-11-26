@@ -72,7 +72,10 @@ class TitleScreen extends StatelessWidget {
                 left: 186,
                 top: 190,
                 child: ExcludeSemantics(
-                  child: MatchStick(phase: flickerPhase, reduceFlicker: reduceFlicker),
+                  child: MatchStick(
+                    phase: flickerPhase,
+                    reduceFlicker: reduceFlicker,
+                  ),
                 ),
               ),
               Positioned(

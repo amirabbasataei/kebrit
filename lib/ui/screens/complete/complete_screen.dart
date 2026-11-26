@@ -78,25 +78,28 @@ class CompleteScreen extends StatelessWidget {
     );
 
     Widget stat(String label, String value, {bool middle = false}) => Expanded(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              border: middle
-                  ? Border(left: BorderSide(color: _line), right: BorderSide(color: _line))
-                  : null,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(label, style: KText.caption),
-                  const SizedBox(height: 6),
-                  Text(value, style: valueStyle),
-                ],
-              ),
-            ),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: middle
+              ? Border(
+                  left: BorderSide(color: _line),
+                  right: BorderSide(color: _line),
+                )
+              : null,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(label, style: KText.caption),
+              const SizedBox(height: 6),
+              Text(value, style: valueStyle),
+            ],
           ),
-        );
+        ),
+      ),
+    );
 
     return LoopClock(
       time: time,
@@ -126,7 +129,10 @@ class CompleteScreen extends StatelessWidget {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [rgba(255, 190, 110, .32), rgba(255, 170, 90, 0)],
+                        colors: [
+                          rgba(255, 190, 110, .32),
+                          rgba(255, 170, 90, 0),
+                        ],
                         stops: const [0, .85],
                       ),
                     ),
@@ -166,7 +172,9 @@ class CompleteScreen extends StatelessWidget {
                 children: [
                   Text(
                     'مرحله‌ی ${fa(level.id)} · ${level.name}',
-                    style: KText.caption.copyWith(color: const Color(0xFFE8C79A)),
+                    style: KText.caption.copyWith(
+                      color: const Color(0xFFE8C79A),
+                    ),
                   ),
                   const SizedBox(height: 10),
                   const Text(
@@ -178,7 +186,9 @@ class CompleteScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       height: 1.5,
                       color: Kc.headingBright,
-                      shadows: [Shadow(color: Color(0x4DFFA046), blurRadius: 30)],
+                      shadows: [
+                        Shadow(color: Color(0x4DFFA046), blurRadius: 30),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -197,14 +207,23 @@ class CompleteScreen extends StatelessWidget {
               top: 498,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  border: Border(top: BorderSide(color: _line), bottom: BorderSide(color: _line)),
+                  border: Border(
+                    top: BorderSide(color: _line),
+                    bottom: BorderSide(color: _line),
+                  ),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    stat('کبریت مانده', '${fa(stats.matchesLeft)} از ${fa(stats.startMatches)}'),
+                    stat(
+                      'کبریت مانده',
+                      '${fa(stats.matchesLeft)} از ${fa(stats.startMatches)}',
+                    ),
                     stat('زمان', faTime(stats.elapsed), middle: true),
-                    stat('گریز', '${fa(stats.hunters)} از ${fa(stats.hunters)}'),
+                    stat(
+                      'گریز',
+                      '${fa(stats.hunters)} از ${fa(stats.hunters)}',
+                    ),
                   ],
                 ),
               ),
@@ -280,11 +299,11 @@ class CompleteScreen extends StatelessWidget {
 class _Vignette extends StatelessWidget {
   @override
   Widget build(BuildContext context) => IgnorePointer(
-        child: CustomPaint(
-          painter: _VignettePainter(),
-          child: const SizedBox.expand(),
-        ),
-      );
+    child: CustomPaint(
+      painter: _VignettePainter(),
+      child: const SizedBox.expand(),
+    ),
+  );
 }
 
 class _VignettePainter extends CustomPainter {
@@ -315,16 +334,22 @@ class _DoorFramePainter extends CustomPainter {
   const _DoorFramePainter();
 
   RRect _arch(Rect r, double radius) => RRect.fromRectAndCorners(
-        r,
-        topLeft: Radius.circular(radius),
-        topRight: Radius.circular(radius),
-      );
+    r,
+    topLeft: Radius.circular(radius),
+    topRight: Radius.circular(radius),
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
     final r = Offset.zero & size;
-    canvas.drawRRect(_arch(r.inflate(12), 92), Paint()..color = const Color(0xFF2A2019));
-    canvas.drawRRect(_arch(r.inflate(10), 90), Paint()..color = const Color(0xFF4D3D30));
+    canvas.drawRRect(
+      _arch(r.inflate(12), 92),
+      Paint()..color = const Color(0xFF2A2019),
+    );
+    canvas.drawRRect(
+      _arch(r.inflate(10), 90),
+      Paint()..color = const Color(0xFF4D3D30),
+    );
     canvas.drawRRect(_arch(r, 80), Paint()..color = const Color(0xFF120D0A));
   }
 
@@ -344,7 +369,11 @@ class _DoorGlowPainter extends CustomPainter {
       topLeft: const Radius.circular(70),
       topRight: const Radius.circular(70),
     );
-    paintCssShadow(canvas, shape, CssShadow(0, 0, 80, 30, rgba(255, 160, 70, .35)));
+    paintCssShadow(
+      canvas,
+      shape,
+      CssShadow(0, 0, 80, 30, rgba(255, 160, 70, .35)),
+    );
     final g = cssEllipseFarthestCorner(
       box: size,
       center: Offset(size.width * .5, size.height * .85),

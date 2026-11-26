@@ -119,7 +119,8 @@ class GameScreenView extends StatelessWidget {
                 reduceFlicker: reduce,
               ),
               if (showGiveUp) GiveUpLink(onTap: onGiveUp),
-              if (drag != null) Positioned.fill(child: JoystickOverlay(drag: drag!)),
+              if (drag != null)
+                Positioned.fill(child: JoystickOverlay(drag: drag!)),
               if (s.result == GameResult.escaped)
                 ResultOverlay(
                   kind: ResultKind.escaped,

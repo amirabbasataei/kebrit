@@ -20,8 +20,8 @@ abstract class ProgressRepository {
 /// Test/preview fake.
 class InMemoryProgressRepository implements ProgressRepository {
   InMemoryProgressRepository({Progress? progress, AppSettings? settings})
-      : _progress = progress ?? Progress(),
-        _settings = settings ?? const AppSettings();
+    : _progress = progress ?? Progress(),
+      _settings = settings ?? const AppSettings();
 
   Progress _progress;
   AppSettings _settings;

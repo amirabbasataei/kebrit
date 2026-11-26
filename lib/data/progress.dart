@@ -1,4 +1,4 @@
-﻿import 'levels.dart';
+import 'levels.dart';
 
 enum LevelStatus { done, current, locked }
 
@@ -19,7 +19,7 @@ int emberRule({required int startMatches, required int matchesStruck}) {
 /// Immutable player progress. Level 1 is unlocked on a fresh install.
 class Progress {
   Progress({this.currentLevel = 1, Map<int, int> embers = const {}})
-      : embers = Map.unmodifiable(embers);
+    : embers = Map.unmodifiable(embers);
 
   /// The "continue" pointer: the furthest unlocked level (1..15).
   final int currentLevel;
@@ -58,9 +58,9 @@ class Progress {
   }
 
   Map<String, Object> toJson() => {
-        'currentLevel': currentLevel,
-        'embers': {for (final e in embers.entries) '${e.key}': e.value},
-      };
+    'currentLevel': currentLevel,
+    'embers': {for (final e in embers.entries) '${e.key}': e.value},
+  };
 
   /// Tolerant: bad values are dropped or clamped.
   factory Progress.fromJson(Map<String, Object?> j) {

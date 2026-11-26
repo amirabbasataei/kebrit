@@ -36,7 +36,8 @@ class StrikeButton extends StatelessWidget {
   final bool reduceFlicker;
 
   /// MGame `canStrike`: playing, has matches and no flame yet.
-  bool get canStrike => state.isPlaying && state.matches > 0 && !(state.lit && started);
+  bool get canStrike =>
+      state.isPlaying && state.matches > 0 && !(state.lit && started);
 
   @override
   Widget build(BuildContext context) {
@@ -55,42 +56,44 @@ class StrikeButton extends StatelessWidget {
         excludeSemantics: true,
         label: s.lit ? 'کبریت در حال سوختن' : 'کبریت بزن',
         onTap: enabled ? onStrike : null,
-        child: PointerClaim(child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: enabled ? onStrike : null,
-          child: CustomPaint(
-            painter: _RingPainter(_ring(s)),
-            child: Padding(
-              padding: const EdgeInsets.all(5),
-              child: DecoratedBox(
-                decoration: const BoxDecoration(shape: BoxShape.circle),
-                child: CustomPaint(
-                  painter: const _FacePainter(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      MatchStrikeIcon(
-                        lit: s.lit,
-                        phase: flickerPhase,
-                        reduceFlicker: reduceFlicker ? true : null,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        label,
-                        style: const TextStyle(
-                          fontFamily: KFonts.ui,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: Kc.text,
+        child: PointerClaim(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: enabled ? onStrike : null,
+            child: CustomPaint(
+              painter: _RingPainter(_ring(s)),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(shape: BoxShape.circle),
+                  child: CustomPaint(
+                    painter: const _FacePainter(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MatchStrikeIcon(
+                          lit: s.lit,
+                          phase: flickerPhase,
+                          reduceFlicker: reduceFlicker ? true : null,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          label,
+                          style: const TextStyle(
+                            fontFamily: KFonts.ui,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: Kc.text,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        )),
+        ),
       ),
     );
   }

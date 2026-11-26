@@ -29,12 +29,12 @@ import 'ui/screens/tutorial/tutorial_screen.dart';
 enum PauseAction { resume, restart, tutorial, levels }
 
 Route<T> fadeRoute<T>(WidgetBuilder builder) => PageRouteBuilder<T>(
-      pageBuilder: (c, _, _) => builder(c),
-      transitionDuration: const Duration(milliseconds: 250),
-      reverseTransitionDuration: const Duration(milliseconds: 250),
-      transitionsBuilder: (_, a, _, child) =>
-          FadeTransition(opacity: a, child: child),
-    );
+  pageBuilder: (c, _, _) => builder(c),
+  transitionDuration: const Duration(milliseconds: 250),
+  reverseTransitionDuration: const Duration(milliseconds: 250),
+  transitionsBuilder: (_, a, _, child) =>
+      FadeTransition(opacity: a, child: child),
+);
 
 abstract final class AppFlow {
   /// Home route of the app.
@@ -61,7 +61,8 @@ abstract final class AppFlow {
 
   static void toTitle(BuildContext context) => _reset(context, [_title]);
 
-  static void toLevels(BuildContext context) => _reset(context, [_title, _levels]);
+  static void toLevels(BuildContext context) =>
+      _reset(context, [_title, _levels]);
 
   static void toTutorial(BuildContext context) =>
       _reset(context, [_title, _tutorial]);
@@ -99,8 +100,7 @@ abstract final class AppFlow {
         onContinue: () => toGame(context, scope.app.progress.currentLevel),
         onTutorial: () => Navigator.of(context)
             .push(fadeRoute<void>((c) => _tutorialPage(c, fromTitle: true))),
-        onLevels: () =>
-            Navigator.of(context).push(fadeRoute<void>(_levels)),
+        onLevels: () => Navigator.of(context).push(fadeRoute<void>(_levels)),
         onSettings: () => _settingsFromTitle(context),
       ),
     );
@@ -190,7 +190,9 @@ abstract final class AppFlow {
         listenable: app,
         builder: (c, _) => CompleteScreen(
           stats: stats,
-          embers: app.progress.bestEmbers(id) == 0 ? embers : app.progress.bestEmbers(id),
+          embers: app.progress.bestEmbers(id) == 0
+              ? embers
+              : app.progress.bestEmbers(id),
           reduceFlicker: app.settings.reduceFlicker,
           onNext: () => _replace(
             c,
@@ -249,11 +251,11 @@ class _GamePageState extends State<_GamePage> {
   bool _pausing = false;
 
   GameController _controller(AppScope scope) => _c ??= GameController(
-        widget.level,
-        haptics: scope.haptics,
-        settings: scope.app.settings,
-        timerFactory: scope.timerFactory,
-      );
+    widget.level,
+    haptics: scope.haptics,
+    settings: scope.app.settings,
+    timerFactory: scope.timerFactory,
+  );
 
   @override
   void dispose() {
@@ -266,9 +268,11 @@ class _GamePageState extends State<_GamePage> {
     _pausing = true;
     final c = _c!;
     if (c.started && c.state.isPlaying) c.pause();
-    final action = await Navigator.of(context).push<PauseAction>(fadeRoute(
-      (ctx) => AppFlow.pauseRoute(ctx, level: widget.level, state: c.state),
-    ));
+    final action = await Navigator.of(context).push<PauseAction>(
+      fadeRoute(
+        (ctx) => AppFlow.pauseRoute(ctx, level: widget.level, state: c.state),
+      ),
+    );
     _pausing = false;
     if (!mounted) return;
     switch (action) {

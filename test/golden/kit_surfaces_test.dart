@@ -18,8 +18,9 @@ void noop() {}
 void main() {
   setUpAll(loadAppFonts);
 
-  testWidgets('kit backgrounds: stone (title), stone (complete), vignettes',
-      (tester) async {
+  testWidgets('kit backgrounds: stone (title), stone (complete), vignettes', (
+    tester,
+  ) async {
     await pumpScreen(
       tester,
       Column(
@@ -34,8 +35,9 @@ void main() {
     await expectGolden(null, 'kit_backgrounds');
   });
 
-  testWidgets('kit sheet with toggle rows (MPause) and Persian digits',
-      (tester) async {
+  testWidgets('kit sheet with toggle rows (MPause) and Persian digits', (
+    tester,
+  ) async {
     await pumpScreen(
       tester,
       Stack(
@@ -55,38 +57,45 @@ void main() {
                     child: Text('تنظیمات', style: KText.caption),
                   ),
                   ToggleRow(
-                      label: 'صدا',
-                      description: 'صدای قدم‌ها، کبریت و نفس شکارچی‌ها',
-                      value: true,
-                      onChanged: (_) {}),
+                    label: 'صدا',
+                    description: 'صدای قدم‌ها، کبریت و نفس شکارچی‌ها',
+                    value: true,
+                    onChanged: (_) {},
+                  ),
                   const SizedBox(height: 2),
                   ToggleRow(
-                      label: 'لرزش گوشی',
-                      description: 'لرزشی کوتاه وقتی شکارچی راه می‌افتد',
-                      value: true,
-                      onChanged: (_) {}),
+                    label: 'لرزش گوشی',
+                    description: 'لرزشی کوتاه وقتی شکارچی راه می‌افتد',
+                    value: true,
+                    onChanged: (_) {},
+                  ),
                   const SizedBox(height: 2),
                   ToggleRow(
-                      label: 'کاهش سوسو',
-                      description: 'نور ثابت به‌جای شعله‌ی لرزان',
-                      value: false,
-                      onChanged: (_) {}),
+                    label: 'کاهش سوسو',
+                    description: 'نور ثابت به‌جای شعله‌ی لرزان',
+                    value: false,
+                    onChanged: (_) {},
+                  ),
                   const SizedBox(height: 2),
                   ToggleRow(
-                      label: 'دکمه‌ی کبریت در سمت چپ',
-                      description: 'برای بازی با دست چپ',
-                      value: false,
-                      onChanged: (_) {}),
+                    label: 'دکمه‌ی کبریت در سمت چپ',
+                    description: 'برای بازی با دست چپ',
+                    value: false,
+                    onChanged: (_) {},
+                  ),
                   const SizedBox(height: 20),
                   const PillButton(
-                      label: 'ادامه',
-                      height: 56,
-                      glowAlpha: .3,
-                      onPressed: noop),
+                    label: 'ادامه',
+                    height: 56,
+                    glowAlpha: .3,
+                    onPressed: noop,
+                  ),
                   const SizedBox(height: 16),
                   const Center(
-                    child: FaText('مرحله‌ی 7 · 14 از 45 اخگر',
-                        style: KText.body),
+                    child: FaText(
+                      'مرحله‌ی 7 · 14 از 45 اخگر',
+                      style: KText.body,
+                    ),
                   ),
                   Center(child: FaText.number(1402, style: KText.h2Serif)),
                 ],

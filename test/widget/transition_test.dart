@@ -9,7 +9,10 @@ void main() {
   setUpAll(loadAppFonts);
 
   testWidgets('forLevel builds the card texts for level 8', (tester) async {
-    await pumpScreen(tester, TransitionScreen.forLevel(Levels.byId(8), time: 6));
+    await pumpScreen(
+      tester,
+      TransitionScreen.forLevel(Levels.byId(8), time: 6),
+    );
     expect(find.text('فصل دوم · مرحله‌ی ۸'), findsOneWidget);
     expect(find.text(Levels.byId(8).name), findsOneWidget);
     expect(find.text('۵ کبریت · ۳ شکارچی'), findsOneWidget);

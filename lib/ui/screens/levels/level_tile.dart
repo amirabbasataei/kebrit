@@ -63,10 +63,10 @@ class LevelTile extends StatelessWidget {
   static const width = 58.0, height = 64.0, topHeight = 54.0;
 
   static String statusLabel(LevelStatus s) => switch (s) {
-        LevelStatus.done => 'گذرانده‌شده',
-        LevelStatus.current => 'مرحله‌ی فعلی',
-        LevelStatus.locked => 'قفل',
-      };
+    LevelStatus.done => 'گذرانده‌شده',
+    LevelStatus.current => 'مرحله‌ی فعلی',
+    LevelStatus.locked => 'قفل',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -121,9 +121,7 @@ class LevelTile extends StatelessWidget {
                         child: CustomPaint(painter: _LockPainter()),
                       )
                     else
-                      EmberRow(
-                        count: status == LevelStatus.done ? embers : 0,
-                      ),
+                      EmberRow(count: status == LevelStatus.done ? embers : 0),
                   ],
                 ),
               ),
@@ -177,16 +175,16 @@ class _TilePainter extends CustomPainter {
     final colors = locked
         ? const [Color(0xFF2C231C), Color(0xFF221A15)]
         : current
-            ? const [Color(0xFF8A6C50), Color(0xFF6B523D)]
-            : const [Color(0xFF6E5A48), Color(0xFF55453A)];
+        ? const [Color(0xFF8A6C50), Color(0xFF6B523D)]
+        : const [Color(0xFF6E5A48), Color(0xFF55453A)];
     final gradient = cssLinear(deg: 165, box: top.size, colors: colors);
 
     // Outer glow is a shadow of the top face painted after the front face.
     final glow = current
         ? pulseShadow(pulse)
         : hasRing
-            ? CssShadow(0, 0, 18, 0, rgba(255, 170, 80, .35))
-            : null;
+        ? CssShadow(0, 0, 18, 0, rgba(255, 170, 80, .35))
+        : null;
     if (glow != null) {
       // Front face first, then glow, then the top face (CSS sibling order).
       paintStoneWall(canvas, top, style.copyWith(topHighlight: 0), gradient);
@@ -234,8 +232,11 @@ class _LockPainter extends CustomPainter {
     final shackle = Path()
       ..moveTo(4, 7)
       ..lineTo(4, 5)
-      ..arcToPoint(const Offset(10, 5),
-          radius: const Radius.circular(3), clockwise: true)
+      ..arcToPoint(
+        const Offset(10, 5),
+        radius: const Radius.circular(3),
+        clockwise: true,
+      )
       ..lineTo(10, 7);
     canvas.drawPath(shackle, p);
     canvas.restore();

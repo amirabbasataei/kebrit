@@ -7,16 +7,24 @@ import '../../helpers/golden_harness.dart';
 double _knobLeft(WidgetTester tester) =>
     tester.widget<AnimatedPositioned>(find.byType(AnimatedPositioned)).left!;
 
-Color _track(WidgetTester tester) => (tester
-        .widget<Container>(find
-            .descendant(of: find.byType(KToggle), matching: find.byType(Container))
-            .first)
-        .decoration as BoxDecoration)
-    .color!;
+Color _track(WidgetTester tester) =>
+    (tester
+                .widget<Container>(
+                  find
+                      .descendant(
+                        of: find.byType(KToggle),
+                        matching: find.byType(Container),
+                      )
+                      .first,
+                )
+                .decoration
+            as BoxDecoration)
+        .color!;
 
 void main() {
-  testWidgets('tapping the row flips the value; knob and track follow',
-      (tester) async {
+  testWidgets('tapping the row flips the value; knob and track follow', (
+    tester,
+  ) async {
     var on = false;
     final changes = <bool>[];
     await pumpScreen(
@@ -59,7 +67,11 @@ void main() {
       const Padding(
         padding: EdgeInsets.all(24),
         child: ToggleRow(
-            label: 'لرزش', description: 'x', value: true, onChanged: null),
+          label: 'لرزش',
+          description: 'x',
+          value: true,
+          onChanged: null,
+        ),
       ),
     );
     await tester.tap(find.byType(ToggleRow));
@@ -75,10 +87,17 @@ void main() {
         child: Align(
           alignment: Alignment.topCenter,
           child: ToggleRow(
-              label: 'a', description: 'b', value: false, onChanged: (_) {}),
+            label: 'a',
+            description: 'b',
+            value: false,
+            onChanged: (_) {},
+          ),
         ),
       ),
     );
-    expect(tester.getSize(find.byType(ToggleRow)).height, greaterThanOrEqualTo(56));
+    expect(
+      tester.getSize(find.byType(ToggleRow)).height,
+      greaterThanOrEqualTo(56),
+    );
   });
 }

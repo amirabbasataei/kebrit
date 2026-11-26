@@ -10,8 +10,11 @@ class HunterAi {
 
   /// BFS distances from [from] over floor cells. The exit cell is blocked
   /// (hunters never enter it) unless [allowExit].
-  static Map<Cell, int> distances(Grid grid, Cell from,
-      {bool allowExit = false}) {
+  static Map<Cell, int> distances(
+    Grid grid,
+    Cell from, {
+    bool allowExit = false,
+  }) {
     final dist = <Cell, int>{from: 0};
     final q = Queue<Cell>()..add(from);
     while (q.isNotEmpty) {
@@ -32,8 +35,12 @@ class HunterAi {
   /// One step for a hunter at [from] toward [target]. The first neighbour (in
   /// JS order) whose BFS distance is one less wins. Returns [from] when the
   /// target is unreachable or already reached.
-  static Cell nextStep(Grid grid, Cell from, Cell target,
-      {Map<Cell, int>? distFromTarget}) {
+  static Cell nextStep(
+    Grid grid,
+    Cell from,
+    Cell target, {
+    Map<Cell, int>? distFromTarget,
+  }) {
     final dist = distFromTarget ?? distances(grid, target);
     final d = dist[from];
     if (d == null || d == 0) return from;

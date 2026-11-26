@@ -15,8 +15,8 @@ class AppController extends ChangeNotifier {
     Progress? progress,
     AppSettings? settings,
     this._introSeen = false,
-  })  : _progress = progress ?? Progress(),
-        _settings = settings ?? const AppSettings();
+  }) : _progress = progress ?? Progress(),
+       _settings = settings ?? const AppSettings();
 
   static Future<AppController> load(ProgressRepository repository) async {
     return AppController(

@@ -31,38 +31,40 @@ class JoystickOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            left: drag.ox - 40,
-            top: drag.oy - 40,
-            width: 80,
-            height: 80,
-            child: IgnorePointer(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: rgba(255, 210, 150, .06),
-                  border: Border.all(color: rgba(255, 210, 150, .35), width: 2),
-                ),
-              ),
+    clipBehavior: Clip.none,
+    children: [
+      Positioned(
+        left: drag.ox - 40,
+        top: drag.oy - 40,
+        width: 80,
+        height: 80,
+        child: IgnorePointer(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: rgba(255, 210, 150, .06),
+              border: Border.all(color: rgba(255, 210, 150, .35), width: 2),
             ),
           ),
-          Positioned(
-            left: drag.ox + drag.kx - 18,
-            top: drag.oy + drag.ky - 18,
-            width: 36,
-            height: 36,
-            child: IgnorePointer(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: rgba(255, 210, 150, .35),
-                  boxShadow: cssBoxShadows([CssShadow(0, 0, 16, 0, rgba(255, 170, 80, .4))]),
-                ),
-              ),
+        ),
+      ),
+      Positioned(
+        left: drag.ox + drag.kx - 18,
+        top: drag.oy + drag.ky - 18,
+        width: 36,
+        height: 36,
+        child: IgnorePointer(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: rgba(255, 210, 150, .35),
+              boxShadow: cssBoxShadows([
+                CssShadow(0, 0, 16, 0, rgba(255, 170, 80, .4)),
+              ]),
             ),
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }

@@ -68,7 +68,10 @@ void main() {
 
   testWidgets('give-up link only when dark, empty and started', (tester) async {
     const link = 'کبریت تمام شد — تسلیم می‌شوی؟';
-    await pumpScreen(tester, GameScreenView(state: base().copyWith(matches: 0)));
+    await pumpScreen(
+      tester,
+      GameScreenView(state: base().copyWith(matches: 0)),
+    );
     expect(find.text(link), findsOneWidget);
 
     await pumpScreen(tester, GameScreenView(state: base()));
@@ -92,7 +95,10 @@ void main() {
     await pumpScreen(
       tester,
       GameScreenView(
-        state: base().copyWith(player: const Cell(4, 0), result: GameResult.escaped),
+        state: base().copyWith(
+          player: const Cell(4, 0),
+          result: GameResult.escaped,
+        ),
         onContinueEscaped: () => escaped++,
         onContinueCaught: () => caught++,
       ),
@@ -124,7 +130,9 @@ void main() {
     expect(find.byType(JoystickOverlay), findsOneWidget);
   });
 
-  testWidgets('pickup disappears once collected; flame follows lit', (tester) async {
+  testWidgets('pickup disappears once collected; flame follows lit', (
+    tester,
+  ) async {
     final level = Levels.byId(7);
     expect(level.pickups, isNotEmpty);
     await pumpScreen(tester, GameScreenView(state: base()));
@@ -149,9 +157,15 @@ void main() {
   test('hints per state', () {
     final s = base();
     expect(hintFor(s, started: false), contains('روی کبریت بزن'));
-    expect(hintFor(s.copyWith(lit: true), started: true), 'شعله‌ات را دیدند. از حرکت نایست.');
+    expect(
+      hintFor(s.copyWith(lit: true), started: true),
+      'شعله‌ات را دیدند. از حرکت نایست.',
+    );
     expect(hintFor(s, started: true), contains('در تاریکی'));
-    expect(hintFor(s.copyWith(matches: 0), started: true), contains('کبریتی نمانده'));
+    expect(
+      hintFor(s.copyWith(matches: 0), started: true),
+      contains('کبریتی نمانده'),
+    );
   });
 
   test('coordinate helpers match the design', () {
@@ -165,7 +179,10 @@ void main() {
     final right = tester.getTopLeft(find.byType(StrikeButton)).dx;
     await pumpScreen(
       tester,
-      GameScreenView(state: base(), settings: const AppSettings(leftHanded: true)),
+      GameScreenView(
+        state: base(),
+        settings: const AppSettings(leftHanded: true),
+      ),
     );
     final left = tester.getTopLeft(find.byType(StrikeButton)).dx;
     expect(right, greaterThan(200));

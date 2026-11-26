@@ -41,17 +41,18 @@ void main() {
                 const StoneBackground(),
                 LightOverlay.title(),
                 const WarmFlicker.title(phase: 0),
-                const Positioned(left: 186, top: 190, child: MatchStick(phase: .5)),
+                const Positioned(
+                  left: 186,
+                  top: 190,
+                  child: MatchStick(phase: .5),
+                ),
               ],
             ),
           ),
           const SizedBox(height: 2, child: ColoredBox(color: Kc.flame)),
           Expanded(
             child: Stack(
-              children: [
-                const StoneBackground(),
-                LightOverlay.pause(),
-              ],
+              children: [const StoneBackground(), LightOverlay.pause()],
             ),
           ),
         ],

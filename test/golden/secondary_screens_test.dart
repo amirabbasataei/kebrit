@@ -17,41 +17,48 @@ import '../helpers/fonts.dart';
 import '../helpers/golden_harness.dart';
 
 GameStats stats({int left = 3, int struck = 3, int? toDoor = 6}) => GameStats(
-      level: 7,
-      startMatches: 6,
-      matchesLeft: left,
-      matchesStruck: struck,
-      elapsed: const Duration(minutes: 1, seconds: 42),
-      steps: 30,
-      stepsToDoor: toDoor,
-      hunters: 2,
-    );
+  level: 7,
+  startMatches: 6,
+  matchesLeft: left,
+  matchesStruck: struck,
+  elapsed: const Duration(minutes: 1, seconds: 42),
+  steps: 30,
+  stepsToDoor: toDoor,
+  hunters: 2,
+);
 
 /// The design's preview state: lit, 72 % burn (= 6 s), 5 matches.
-GameState litState() => GameState.initial(Levels.byId(7))
-    .copyWith(lit: true, burn: 72, matches: 5, matchesStruck: 1);
+GameState litState() =>
+    GameState.initial(Levels.byId(7))
+        .copyWith(lit: true, burn: 72, matches: 5, matchesStruck: 1);
 
 void _noop() {}
 
 void main() {
   setUpAll(loadAppFonts);
 
-  Widget pause({AppSettings settings = const AppSettings(), GameState? state}) =>
-      PauseScreen(
-        level: Levels.byId(7),
-        state: state ?? litState(),
-        settings: settings,
-        onSettingsChanged: (_) {},
-        onContinue: _noop,
-        onRestart: _noop,
-        onTutorial: _noop,
-        onLevels: _noop,
-      );
+  Widget pause({
+    AppSettings settings = const AppSettings(),
+    GameState? state,
+  }) => PauseScreen(
+    level: Levels.byId(7),
+    state: state ?? litState(),
+    settings: settings,
+    onSettingsChanged: (_) {},
+    onContinue: _noop,
+    onRestart: _noop,
+    onTutorial: _noop,
+    onLevels: _noop,
+  );
 
   testWidgets('pause: lit, default settings', (tester) async {
     await pumpScreen(tester, pause());
     await expectGolden(null, 'pause');
-    await expectMatchesDesign(tester, find.byKey(goldenKey), 'design_refs/mobile/5_Pause.png');
+    await expectMatchesDesign(
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/5_Pause.png',
+    );
   });
 
   testWidgets('pause: all toggles flipped, dark', (tester) async {
@@ -59,7 +66,11 @@ void main() {
       tester,
       pause(
         settings: const AppSettings(
-            sound: false, haptics: false, reduceFlicker: true, leftHanded: true),
+          sound: false,
+          haptics: false,
+          reduceFlicker: true,
+          leftHanded: true,
+        ),
         state: GameState.initial(Levels.byId(7)),
       ),
     );
@@ -67,18 +78,22 @@ void main() {
   });
 
   Widget complete(int embers) => CompleteScreen(
-        stats: stats(),
-        embers: embers,
-        onNext: _noop,
-        onRepeat: _noop,
-        onLevels: _noop,
-        time: 0,
-      );
+    stats: stats(),
+    embers: embers,
+    onNext: _noop,
+    onRepeat: _noop,
+    onLevels: _noop,
+    time: 0,
+  );
 
   testWidgets('complete: 2 embers', (tester) async {
     await pumpScreen(tester, complete(2));
     await expectGolden(null, 'complete_2');
-    await expectMatchesDesign(tester, find.byKey(goldenKey), 'design_refs/mobile/6_Complete.png');
+    await expectMatchesDesign(
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/6_Complete.png',
+    );
   });
 
   testWidgets('complete: 0 embers', (tester) async {
@@ -112,7 +127,11 @@ void main() {
       ),
     );
     await expectGolden(null, 'caught');
-    await expectMatchesDesign(tester, find.byKey(goldenKey), 'design_refs/mobile/8_Caught.png');
+    await expectMatchesDesign(
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/8_Caught.png',
+    );
   });
 
   testWidgets('caught: mid-blink, risen', (tester) async {
@@ -140,7 +159,10 @@ void main() {
     );
     await expectGolden(null, 'no_matches');
     await expectMatchesDesign(
-        tester, find.byKey(goldenKey), 'design_refs/mobile/9_NoMatches.png');
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/9_NoMatches.png',
+    );
   });
 
   testWidgets('no matches: smoke at 3 s', (tester) async {

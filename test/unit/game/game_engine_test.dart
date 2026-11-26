@@ -85,31 +85,33 @@ void main() {
       expect(e.state.hunters, const [Cell(2, 1)]);
     });
 
-    test('hunter cadence restarts with each new flame (not a global count)',
-        () {
-      // Long corridor: the hunter starts 9 cells away, so one flame (8 moves
-      // on ticks 9..72) leaves it adjacent; the 80-tick global count would
-      // put the next move on tick 90, i.e. the 10th tick of the 2nd flame.
-      final level = Level(
-        id: 0,
-        name: 't',
-        chapter: 't',
-        startMatches: 2,
-        grid: Grid.parse(['#E##########', '#..........#', '############']),
-        playerStart: const Cell(1, 1),
-        hunterStarts: const [Cell(10, 1)],
-      );
-      final e = GameEngine(level)..strike();
-      ticks(e, 80);
-      expect(e.state.lit, isFalse);
-      expect(e.state.hunters, const [Cell(2, 1)]);
-      expect(e.state.isPlaying, isTrue);
-      e.strike();
-      ticks(e, 8);
-      expect(e.state.hunters, const [Cell(2, 1)]);
-      e.tick(); // 9th tick of the new flame
-      expect(e.state.result, GameResult.caught);
-    });
+    test(
+      'hunter cadence restarts with each new flame (not a global count)',
+      () {
+        // Long corridor: the hunter starts 9 cells away, so one flame (8 moves
+        // on ticks 9..72) leaves it adjacent; the 80-tick global count would
+        // put the next move on tick 90, i.e. the 10th tick of the 2nd flame.
+        final level = Level(
+          id: 0,
+          name: 't',
+          chapter: 't',
+          startMatches: 2,
+          grid: Grid.parse(['#E##########', '#..........#', '############']),
+          playerStart: const Cell(1, 1),
+          hunterStarts: const [Cell(10, 1)],
+        );
+        final e = GameEngine(level)..strike();
+        ticks(e, 80);
+        expect(e.state.lit, isFalse);
+        expect(e.state.hunters, const [Cell(2, 1)]);
+        expect(e.state.isPlaying, isTrue);
+        e.strike();
+        ticks(e, 8);
+        expect(e.state.hunters, const [Cell(2, 1)]);
+        e.tick(); // 9th tick of the new flame
+        expect(e.state.result, GameResult.caught);
+      },
+    );
 
     test('elapsed ticks count while dark and lit', () {
       final e = GameEngine(corridor());

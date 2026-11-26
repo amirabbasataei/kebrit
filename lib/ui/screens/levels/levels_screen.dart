@@ -78,8 +78,7 @@ class _LevelsScreenState extends State<LevelsScreen>
       _ticker = createTicker((d) {
         final p = (d.inMicroseconds / 1e6 / _pulseSeconds) % 1;
         setState(() => _phase = p);
-      })
-        ..start();
+      })..start();
     } else if (!live && _ticker != null) {
       _ticker!.dispose();
       _ticker = null;
@@ -182,7 +181,11 @@ class _Header extends StatelessWidget {
               height: 44,
               child: Center(
                 // Points right = "back" in RTL (`M5 2l5 5-5 5`).
-                child: ChevronIcon(size: 16, strokeWidth: 1.6, pointsRight: true),
+                child: ChevronIcon(
+                  size: 16,
+                  strokeWidth: 1.6,
+                  pointsRight: true,
+                ),
               ),
             ),
           ),
@@ -268,7 +271,11 @@ class _ChapterRow extends StatelessWidget {
 }
 
 class _SelectionSheet extends StatelessWidget {
-  const _SelectionSheet({required this.level, required this.progress, this.onPlay});
+  const _SelectionSheet({
+    required this.level,
+    required this.progress,
+    this.onPlay,
+  });
 
   final int level;
   final Progress progress;
@@ -286,9 +293,10 @@ class _SelectionSheet extends StatelessWidget {
     final note = switch (status) {
       LevelStatus.done =>
         'با ${fa(best)} اخگر از ۳ گریختی. کبریت بیشتری نگه دار تا همه را بگیری.',
-      LevelStatus.current => hunters > 0
-          ? 'شکارچی‌های اینجا بی‌حرکت‌اند — تا وقتی شعله‌ای چشمشان را بگیرد.'
-          : 'پیش از تمام شدن کبریت‌ها در را پیدا کن.',
+      LevelStatus.current =>
+        hunters > 0
+            ? 'شکارچی‌های اینجا بی‌حرکت‌اند — تا وقتی شعله‌ای چشمشان را بگیرد.'
+            : 'پیش از تمام شدن کبریت‌ها در را پیدا کن.',
       LevelStatus.locked => 'راه پایین هنوز بسته است.',
     };
 
@@ -342,7 +350,9 @@ class _SelectionSheet extends StatelessWidget {
               children: [
                 Expanded(child: _Stat('کبریت', fa(l.startMatches))),
                 const SizedBox(width: 8),
-                Expanded(child: _Stat('شکارچی', hunters > 0 ? fa(hunters) : 'ندارد')),
+                Expanded(
+                  child: _Stat('شکارچی', hunters > 0 ? fa(hunters) : 'ندارد'),
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: _Stat(
@@ -365,7 +375,9 @@ class _SelectionSheet extends StatelessWidget {
             const SizedBox(height: 10),
             if (!locked)
               PillButton(
-                label: status == LevelStatus.done ? 'بازی دوباره' : 'ورود به اتاق',
+                label: status == LevelStatus.done
+                    ? 'بازی دوباره'
+                    : 'ورود به اتاق',
                 height: 56,
                 onPressed: onPlay == null ? null : () => onPlay!(level),
               )

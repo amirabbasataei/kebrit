@@ -69,7 +69,8 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
 
   void _bind() {
     _owns = widget.controller == null;
-    _c = widget.controller ??
+    _c =
+        widget.controller ??
         GameController(
           widget.level!,
           haptics: widget.haptics,

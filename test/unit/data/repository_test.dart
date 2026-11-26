@@ -4,7 +4,9 @@ import 'package:kebrit/data/progress_repository.dart';
 import 'package:kebrit/data/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<PrefsProgressRepository> prefsRepo([Map<String, Object> init = const {}]) async {
+Future<PrefsProgressRepository> prefsRepo([
+  Map<String, Object> init = const {},
+]) async {
   SharedPreferences.setMockInitialValues(init);
   return PrefsProgressRepository(await SharedPreferences.getInstance());
 }

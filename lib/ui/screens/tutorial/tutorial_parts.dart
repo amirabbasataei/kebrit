@@ -20,7 +20,11 @@ const kTutorialLoop = Duration(seconds: 4);
 /// in ascending order; the value is held before the first and after the last
 /// key and eased with [curve] inside each interval (CSS applies the timing
 /// function per interval).
-double track(double p, List<(double, double)> keys, [Curve curve = Curves.easeInOut]) {
+double track(
+  double p,
+  List<(double, double)> keys, [
+  Curve curve = Curves.easeInOut,
+]) {
   if (p <= keys.first.$1) return keys.first.$2;
   for (var i = 1; i < keys.length; i++) {
     final (t1, v1) = keys[i];
@@ -65,8 +69,11 @@ class TutorialStage extends StatelessWidget {
 class _StageShadowPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    paintCssShadow(canvas, RRect.fromRectAndRadius(Offset.zero & size, Radius.zero),
-        CssShadow(0, 24, 50, 0, rgba(0, 0, 0, .6)));
+    paintCssShadow(
+      canvas,
+      RRect.fromRectAndRadius(Offset.zero & size, Radius.zero),
+      CssShadow(0, 24, 50, 0, rgba(0, 0, 0, .6)),
+    );
   }
 
   @override
@@ -125,12 +132,12 @@ class Slab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        left: left,
-        top: top,
-        width: width,
-        height: height + 12,
-        child: CustomPaint(painter: _SlabPainter(width, height, shade)),
-      );
+    left: left,
+    top: top,
+    width: width,
+    height: height + 12,
+    child: CustomPaint(painter: _SlabPainter(width, height, shade)),
+  );
 }
 
 class _SlabPainter extends CustomPainter {
@@ -154,7 +161,8 @@ class _SlabPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_SlabPainter o) => o.w != w || o.h != h || o.shade != shade;
+  bool shouldRepaint(_SlabPainter o) =>
+      o.w != w || o.h != h || o.shade != shade;
 }
 
 /// The player: 24×36 at ([left],[top]); [flame] is placed at (17,−1).
@@ -177,18 +185,18 @@ class TutorialPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        left: left + dx,
-        top: top,
-        width: 24,
-        height: 36,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Positioned.fill(child: CustomPaint(painter: _PlayerPainter(shadow))),
-            if (flame != null) Positioned(left: 17, top: -1, child: flame!),
-          ],
-        ),
-      );
+    left: left + dx,
+    top: top,
+    width: 24,
+    height: 36,
+    child: Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Positioned.fill(child: CustomPaint(painter: _PlayerPainter(shadow))),
+        if (flame != null) Positioned(left: 17, top: -1, child: flame!),
+      ],
+    ),
+  );
 }
 
 /// Player flame 8×12 (`Flame.player`), pinned to the neutral pose in goldens.
@@ -229,7 +237,10 @@ class _PlayerPainter extends CustomPainter {
     canvas.save();
     canvas.clipPath(Path()..addOval(head));
     canvas.drawRect(head, Paint()..color = const Color(0xFF3A2C20));
-    canvas.drawOval(head.shift(const Offset(0, -4)), Paint()..color = const Color(0xFF7A6550));
+    canvas.drawOval(
+      head.shift(const Offset(0, -4)),
+      Paint()..color = const Color(0xFF7A6550),
+    );
     canvas.restore();
   }
 
@@ -251,16 +262,16 @@ class TutorialHunter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        left: left + dx,
-        top: top,
-        width: 26,
-        height: 40,
-        child: CustomPaint(
-          painter: HunterPainter(eyes),
-          // Glow extends beyond the box.
-          size: const Size(26, 40),
-        ),
-      );
+    left: left + dx,
+    top: top,
+    width: 26,
+    height: 40,
+    child: CustomPaint(
+      painter: HunterPainter(eyes),
+      // Glow extends beyond the box.
+      size: const Size(26, 40),
+    ),
+  );
 }
 
 /// Hunter silhouette shared with the caught screen later.
@@ -296,9 +307,16 @@ class HunterPainter extends CustomPainter {
 
     final color = Color.lerp(Kc.eyesDormant, Kc.eyesLit, eyes)!;
     for (final x in const [7.0, 15.0]) {
-      final r = RRect.fromRectAndRadius(Rect.fromLTWH(x, 12, 4, 3), const Radius.circular(2));
+      final r = RRect.fromRectAndRadius(
+        Rect.fromLTWH(x, 12, 4, 3),
+        const Radius.circular(2),
+      );
       if (eyes > 0) {
-        paintCssShadow(canvas, r, CssShadow(0, 0, 7 * eyes, 2 * eyes, rgba(255, 80, 40, .8 * eyes)));
+        paintCssShadow(
+          canvas,
+          r,
+          CssShadow(0, 0, 7 * eyes, 2 * eyes, rgba(255, 80, 40, .8 * eyes)),
+        );
       }
       canvas.drawRRect(r, Paint()..color = color);
     }

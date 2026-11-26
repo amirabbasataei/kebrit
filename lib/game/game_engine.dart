@@ -43,12 +43,15 @@ class GameEngine {
     final burn = s.burn - GameConfig.burnPerTick;
     if (burn <= 0) {
       _state = s.copyWith(
-          ticks: s.ticks + 1, litTicks: litTicks, burn: 0, lit: false);
+        ticks: s.ticks + 1,
+        litTicks: litTicks,
+        burn: 0,
+        lit: false,
+      );
       return;
     }
     if (litTicks % GameConfig.hunterEveryTicks != 0) {
-      _state =
-          s.copyWith(ticks: s.ticks + 1, litTicks: litTicks, burn: burn);
+      _state = s.copyWith(ticks: s.ticks + 1, litTicks: litTicks, burn: burn);
       return;
     }
     final dist = HunterAi.distances(level.grid, s.player);
@@ -56,11 +59,15 @@ class GameEngine {
     final hunters = [
       for (final h in s.hunters)
         () {
-          final n = HunterAi.nextStep(level.grid, h, s.player,
-              distFromTarget: dist);
+          final n = HunterAi.nextStep(
+            level.grid,
+            h,
+            s.player,
+            distFromTarget: dist,
+          );
           if (n == s.player) caught = true;
           return n;
-        }()
+        }(),
     ];
     _state = s.copyWith(
       ticks: s.ticks + 1,
@@ -82,7 +89,10 @@ class GameEngine {
     final to = Cell(nx, ny);
     if (grid.isExit(nx, ny)) {
       _state = s.copyWith(
-          player: to, steps: s.steps + 1, result: GameResult.escaped);
+        player: to,
+        steps: s.steps + 1,
+        result: GameResult.escaped,
+      );
       return;
     }
     var matches = s.matches;

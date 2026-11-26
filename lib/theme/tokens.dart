@@ -59,10 +59,10 @@ abstract final class Kc {
   /// reaches the corners, so the ends are (∓0.317, ∓1.183) in alignment units
   /// (see `cssLinear` in `ui/kit/css.dart`).
   static LinearGradient wallTop(int shade) => LinearGradient(
-        begin: const Alignment(-0.317, -1.183),
-        end: const Alignment(0.317, 1.183),
-        colors: wallTops[shade % 3],
-      );
+    begin: const Alignment(-0.317, -1.183),
+    end: const Alignment(0.317, 1.183),
+    colors: wallTops[shade % 3],
+  );
 
   static const sheetGradient = LinearGradient(
     begin: Alignment(-0.17, -0.98),

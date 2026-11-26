@@ -8,7 +8,10 @@ void main() {
     final b = parseSvgPath('M1 2h3v4z').getBounds();
     expect(b, const Rect.fromLTRB(1, 2, 4, 6));
     // M with extra pairs = implicit lineTo.
-    expect(parseSvgPath('M0 0 10 0 10 10').getBounds(), const Rect.fromLTRB(0, 0, 10, 10));
+    expect(
+      parseSvgPath('M0 0 10 0 10 10').getBounds(),
+      const Rect.fromLTRB(0, 0, 10, 10),
+    );
   });
 
   test('compact numbers: 1.4-7 and .8', () {
@@ -31,7 +34,8 @@ void main() {
   });
 
   test('smooth curve reflects the previous control point', () {
-    final eye = parseSvgPath('M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z').getBounds();
+    final eye = parseSvgPath('M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z')
+        .getBounds();
     expect(eye.left, closeTo(2, .01));
     expect(eye.right, closeTo(22, .01));
     expect(eye.top, closeTo(5, .5));

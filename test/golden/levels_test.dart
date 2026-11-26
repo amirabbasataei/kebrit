@@ -13,17 +13,17 @@ void _noop() {}
 
 /// The design mock: current = 7, levels 1-6 done with 3,3,2,3,2,1 embers.
 Progress mockProgress() => Progress(
-      currentLevel: 7,
-      embers: const {1: 3, 2: 3, 3: 2, 4: 3, 5: 2, 6: 1},
-    );
+  currentLevel: 7,
+  embers: const {1: 3, 2: 3, 3: 2, 4: 3, 5: 2, 6: 1},
+);
 
 Widget screen({int? selected}) => LevelsScreen(
-      progress: mockProgress(),
-      initialSelected: selected,
-      onBack: _noop,
-      onPlay: (_) {},
-      pulsePhase: 0,
-    );
+  progress: mockProgress(),
+  initialSelected: selected,
+  onBack: _noop,
+  onPlay: (_) {},
+  pulsePhase: 0,
+);
 
 void main() {
   setUpAll(loadAppFonts);
@@ -31,7 +31,11 @@ void main() {
   testWidgets('levels: current level (7) selected', (tester) async {
     await pumpScreen(tester, screen());
     await expectGolden(null, 'levels');
-    await expectMatchesDesign(tester, find.byKey(goldenKey), 'design_refs/mobile/3_Levels.png');
+    await expectMatchesDesign(
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/3_Levels.png',
+    );
   });
 
   testWidgets('levels: pulse at peak, tile 3 selected (done)', (tester) async {

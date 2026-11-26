@@ -1,4 +1,4 @@
-﻿// Benefits goldens: the full 390x1960 board and a viewport-height scrolled
+// Benefits goldens: the full 390x1960 board and a viewport-height scrolled
 // frame. Goldens are generated and verified only on Windows (Windows Server
 // 2019); do not copy them between machines.
 import 'package:flutter/widgets.dart';
@@ -24,7 +24,10 @@ void main() {
     );
     await expectGolden(null, 'benefits_board');
     await expectMatchesDesign(
-        tester, find.byKey(goldenKey), 'design_refs/mobile/0b_Benefits.png');
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/0b_Benefits.png',
+    );
   });
 
   testWidgets('benefits full content', (tester) async {
@@ -41,11 +44,15 @@ void main() {
     addTearDown(c.dispose);
     await pumpScreen(
       tester,
-      BenefitsScreen(controller: c, flamePhase: .5, onPlay: _noop, onTutorial: _noop),
+      BenefitsScreen(
+        controller: c,
+        flamePhase: .5,
+        onPlay: _noop,
+        onTutorial: _noop,
+      ),
     );
     c.jumpTo(900);
     await tester.pump();
     await expectGolden(null, 'benefits_scrolled');
   });
 }
-

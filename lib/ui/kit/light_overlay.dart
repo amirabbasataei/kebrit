@@ -27,49 +27,63 @@ class LightOverlay extends StatelessWidget {
   const LightOverlay({super.key, required this.center, required this.stops});
 
   /// MGame lit: `R = 200 + 6.5·burn`; stops 0 / .3R / .72R / R.
-  factory LightOverlay.lit({Key? key, required Offset center, required double burn}) {
+  factory LightOverlay.lit({
+    Key? key,
+    required Offset center,
+    required double burn,
+  }) {
     final r = 200 + 6.5 * burn;
-    return LightOverlay(key: key, center: center, stops: [
-      CssStop(rgba(255, 170, 90, .10), 0),
-      CssStop(rgba(0, 0, 0, 0), r * .3),
-      CssStop(rgba(8, 5, 3, .55), r * .72),
-      CssStop(rgba(6, 4, 3, .95), r),
-    ]);
+    return LightOverlay(
+      key: key,
+      center: center,
+      stops: [
+        CssStop(rgba(255, 170, 90, .10), 0),
+        CssStop(rgba(0, 0, 0, 0), r * .3),
+        CssStop(rgba(8, 5, 3, .55), r * .72),
+        CssStop(rgba(6, 4, 3, .95), r),
+      ],
+    );
   }
 
   /// MGame dark: almost black beyond a 48 px radius.
-  factory LightOverlay.dark({Key? key, required Offset center}) =>
-      LightOverlay(key: key, center: center, stops: [
-        CssStop(rgba(6, 4, 3, .45), 0),
-        CssStop(rgba(6, 4, 3, .985), 48),
-      ]);
+  factory LightOverlay.dark({Key? key, required Offset center}) => LightOverlay(
+    key: key,
+    center: center,
+    stops: [CssStop(rgba(6, 4, 3, .45), 0), CssStop(rgba(6, 4, 3, .985), 48)],
+  );
 
   /// MTitle: `circle at 195px 210px, … 0, … 90px, … 280px, … 520px`.
-  factory LightOverlay.title({Key? key}) =>
-      LightOverlay(key: key, center: const Offset(195, 210), stops: [
-        CssStop(rgba(255, 170, 90, .10), 0),
-        CssStop(rgba(0, 0, 0, 0), 90),
-        CssStop(rgba(8, 5, 3, .62), 280),
-        CssStop(rgba(6, 4, 3, .97), 520),
-      ]);
+  factory LightOverlay.title({Key? key}) => LightOverlay(
+    key: key,
+    center: const Offset(195, 210),
+    stops: [
+      CssStop(rgba(255, 170, 90, .10), 0),
+      CssStop(rgba(0, 0, 0, 0), 90),
+      CssStop(rgba(8, 5, 3, .62), 280),
+      CssStop(rgba(6, 4, 3, .97), 520),
+    ],
+  );
 
   /// MPause: `circle at 75px 590px, … 0, … 300px, … 700px`.
-  factory LightOverlay.pause({Key? key}) =>
-      LightOverlay(key: key, center: const Offset(75, 590), stops: [
-        CssStop(rgba(255, 170, 90, .06), 0),
-        CssStop(rgba(8, 5, 3, .70), 300),
-        CssStop(rgba(6, 4, 3, .94), 700),
-      ]);
+  factory LightOverlay.pause({Key? key}) => LightOverlay(
+    key: key,
+    center: const Offset(75, 590),
+    stops: [
+      CssStop(rgba(255, 170, 90, .06), 0),
+      CssStop(rgba(8, 5, 3, .70), 300),
+      CssStop(rgba(6, 4, 3, .94), 700),
+    ],
+  );
 
   final Offset center;
   final List<CssStop> stops;
 
   @override
   Widget build(BuildContext context) => IgnorePointer(
-        child: SizedBox.expand(
-          child: CustomPaint(painter: _OverlayPainter(center, stops)),
-        ),
-      );
+    child: SizedBox.expand(
+      child: CustomPaint(painter: _OverlayPainter(center, stops)),
+    ),
+  );
 }
 
 class _OverlayPainter extends CustomPainter {
@@ -85,7 +99,8 @@ class _OverlayPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_OverlayPainter o) => o.center != center || o.stops != stops;
+  bool shouldRepaint(_OverlayPainter o) =>
+      o.center != center || o.stops != stops;
 }
 
 /// Warm glow around the light source, pulsing like the flame.
@@ -109,19 +124,19 @@ class WarmFlicker extends StatelessWidget {
     double? phase,
     bool? reduceFlicker,
   }) : this(
-          key: key,
-          center: center,
-          radius: 180 + 3 * burn,
-          phase: phase,
-          reduceFlicker: reduceFlicker,
-        );
+         key: key,
+         center: center,
+         radius: 180 + 3 * burn,
+         phase: phase,
+         reduceFlicker: reduceFlicker,
+       );
 
   /// MTitle: `rgba(255,150,60,.22)` to 0 at 300 px, 1.6 s flick.
   const WarmFlicker.title({super.key, this.phase, this.reduceFlicker})
-      : center = const Offset(195, 210),
-        radius = 300,
-        alpha = .22,
-        profile = FlickerProfile.title;
+    : center = const Offset(195, 210),
+      radius = 300,
+      alpha = .22,
+      profile = FlickerProfile.title;
 
   final Offset center;
   final double radius;
@@ -132,14 +147,17 @@ class WarmFlicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FlickerOpacity(
-        profile: profile,
-        phase: phase,
-        reduce: reduceFlicker,
-        child: LightOverlay(center: center, stops: [
-          CssStop(rgba(255, 150, 60, alpha), 0),
-          CssStop(rgba(255, 150, 60, 0), radius),
-        ]),
-      );
+    profile: profile,
+    phase: phase,
+    reduce: reduceFlicker,
+    child: LightOverlay(
+      center: center,
+      stops: [
+        CssStop(rgba(255, 150, 60, alpha), 0),
+        CssStop(rgba(255, 150, 60, 0), radius),
+      ],
+    ),
+  );
 }
 
 /// 100×100 halo above the exit door; [opacity] .8 when dark, .25 when lit.
@@ -151,14 +169,11 @@ class DoorGlow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => IgnorePointer(
-        child: Opacity(
-          opacity: opacity,
-          child: CustomPaint(
-            size: Size.square(size),
-            painter: _GlowPainter(),
-          ),
-        ),
-      );
+    child: Opacity(
+      opacity: opacity,
+      child: CustomPaint(size: Size.square(size), painter: _GlowPainter()),
+    ),
+  );
 }
 
 class _GlowPainter extends CustomPainter {

@@ -43,9 +43,9 @@ class DashedBorderBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        foregroundPainter: _DashedRRectPainter(color, width, radius),
-        child: Padding(padding: padding, child: child),
-      );
+    foregroundPainter: _DashedRRectPainter(color, width, radius),
+    child: Padding(padding: padding, child: child),
+  );
 }
 
 class _DashedRRectPainter extends CustomPainter {
@@ -82,12 +82,12 @@ class DashedLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        height: width,
-        child: CustomPaint(
-          size: Size.fromHeight(width),
-          painter: _DashedLinePainter(color, width),
-        ),
-      );
+    height: width,
+    child: CustomPaint(
+      size: Size.fromHeight(width),
+      painter: _DashedLinePainter(color, width),
+    ),
+  );
 }
 
 class _DashedLinePainter extends CustomPainter {
@@ -111,5 +111,6 @@ class _DashedLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_DashedLinePainter o) => o.color != color || o.width != width;
+  bool shouldRepaint(_DashedLinePainter o) =>
+      o.color != color || o.width != width;
 }

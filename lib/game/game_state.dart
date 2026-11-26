@@ -18,19 +18,19 @@ class GameState {
     this.matchesStruck = 0,
     this.steps = 0,
     this.result = GameResult.playing,
-  })  : hunters = List.unmodifiable(hunters),
-        pickedUp = Set.unmodifiable(pickedUp);
+  }) : hunters = List.unmodifiable(hunters),
+       pickedUp = Set.unmodifiable(pickedUp);
 
   /// Fresh state: dark, full matches, nothing picked up.
   factory GameState.initial(Level level) => GameState(
-        level: level,
-        player: level.playerStart,
-        hunters: level.hunterStarts,
-        matches: level.startMatches,
-        burn: 0,
-        lit: false,
-        pickedUp: const {},
-      );
+    level: level,
+    player: level.playerStart,
+    hunters: level.hunterStarts,
+    matches: level.startMatches,
+    burn: 0,
+    lit: false,
+    pickedUp: const {},
+  );
 
   final Level level;
   final Cell player;
@@ -81,19 +81,18 @@ class GameState {
     int? matchesStruck,
     int? steps,
     GameResult? result,
-  }) =>
-      GameState(
-        level: level,
-        player: player ?? this.player,
-        hunters: hunters ?? this.hunters,
-        matches: matches ?? this.matches,
-        burn: burn ?? this.burn,
-        lit: lit ?? this.lit,
-        pickedUp: pickedUp ?? this.pickedUp,
-        ticks: ticks ?? this.ticks,
-        litTicks: litTicks ?? this.litTicks,
-        matchesStruck: matchesStruck ?? this.matchesStruck,
-        steps: steps ?? this.steps,
-        result: result ?? this.result,
-      );
+  }) => GameState(
+    level: level,
+    player: player ?? this.player,
+    hunters: hunters ?? this.hunters,
+    matches: matches ?? this.matches,
+    burn: burn ?? this.burn,
+    lit: lit ?? this.lit,
+    pickedUp: pickedUp ?? this.pickedUp,
+    ticks: ticks ?? this.ticks,
+    litTicks: litTicks ?? this.litTicks,
+    matchesStruck: matchesStruck ?? this.matchesStruck,
+    steps: steps ?? this.steps,
+    result: result ?? this.result,
+  );
 }

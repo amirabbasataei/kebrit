@@ -7,13 +7,15 @@ import 'package:kebrit/ui/kit/light_overlay.dart';
 import '../../helpers/golden_harness.dart';
 
 Matrix4 _flameTransform(WidgetTester tester) => tester
-    .widget<Transform>(find.descendant(
-        of: find.byType(Flame), matching: find.byType(Transform)))
+    .widget<Transform>(
+      find.descendant(of: find.byType(Flame), matching: find.byType(Transform)),
+    )
     .transform;
 
 void main() {
-  testWidgets('flame flickers: transform changes while frames advance',
-      (tester) async {
+  testWidgets('flame flickers: transform changes while frames advance', (
+    tester,
+  ) async {
     await pumpScreen(tester, const Center(child: Flame.title()));
     final a = _flameTransform(tester).clone();
     await tester.pump(const Duration(milliseconds: 150));
@@ -28,17 +30,23 @@ void main() {
       const FlickerScope(reduce: true, child: Center(child: Flame.title())),
     );
     final a = _flameTransform(tester).clone();
-    expect(tester.binding.transientCallbackCount, 0,
-        reason: 'no ticker may run while flicker is reduced');
+    expect(
+      tester.binding.transientCallbackCount,
+      0,
+      reason: 'no ticker may run while flicker is reduced',
+    );
     await tester.pump(const Duration(milliseconds: 150));
     expect(_flameTransform(tester), a);
     expect(tester.binding.hasScheduledFrame, isFalse);
   });
 
-  testWidgets('toggling reduce flicker at runtime starts/stops the flame',
-      (tester) async {
-    Widget app(bool reduce) =>
-        FlickerScope(reduce: reduce, child: const Center(child: Flame.player()));
+  testWidgets('toggling reduce flicker at runtime starts/stops the flame', (
+    tester,
+  ) async {
+    Widget app(bool reduce) => FlickerScope(
+      reduce: reduce,
+      child: const Center(child: Flame.player()),
+    );
     await pumpScreen(tester, app(false));
     expect(tester.binding.transientCallbackCount, greaterThan(0));
 
@@ -63,20 +71,27 @@ void main() {
     await pumpScreen(
       tester,
       const FlickerScope(
-          reduce: false,
-          child: Center(child: Flame.title(reduceFlicker: true))),
+        reduce: false,
+        child: Center(child: Flame.title(reduceFlicker: true)),
+      ),
     );
     expect(tester.binding.transientCallbackCount, 0);
   });
 
   testWidgets('WarmFlicker pulses and is steady when reduced', (tester) async {
     double opacity() => tester
-        .widget<Opacity>(find.descendant(
-            of: find.byType(WarmFlicker), matching: find.byType(Opacity)))
+        .widget<Opacity>(
+          find.descendant(
+            of: find.byType(WarmFlicker),
+            matching: find.byType(Opacity),
+          ),
+        )
         .opacity;
 
     await pumpScreen(
-        tester, WarmFlicker.game(center: const Offset(100, 100), burn: 72));
+      tester,
+      WarmFlicker.game(center: const Offset(100, 100), burn: 72),
+    );
     final seen = <double>{};
     for (var i = 0; i < 8; i++) {
       await tester.pump(const Duration(milliseconds: 160));

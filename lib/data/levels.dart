@@ -81,7 +81,7 @@ class Levels {
   /// Levels whose maze is a generated placeholder.
   static final Set<int> placeholderIds = {
     for (final l in all)
-      if (l.id != 7) l.id
+      if (l.id != 7) l.id,
   };
 
   /// 1-based. Throws [RangeError] outside 1..15.
@@ -122,7 +122,7 @@ Level _placeholder(int id, String name, int matches, int hunters) {
             (c + d).y > 0 &&
             (c + d).y < rows - 1 &&
             !seen.contains(c + d))
-          d
+          d,
     ];
     if (open.isEmpty) {
       stack.removeLast();
@@ -144,13 +144,17 @@ Level _placeholder(int id, String name, int matches, int hunters) {
   const start = Cell(1, 11);
   final dist = HunterAi.distances(grid, start);
   final hunterCells = <Cell>[];
-  for (var minDist = 8; hunterCells.length < hunters && minDist >= 1; minDist--) {
+  for (
+    var minDist = 8;
+    hunterCells.length < hunters && minDist >= 1;
+    minDist--
+  ) {
     final pool = [
       for (var y = 0; y < rows; y++)
         for (var x = 0; x < cols; x++)
           if ((dist[Cell(x, y)] ?? 0) >= minDist &&
               !hunterCells.contains(Cell(x, y)))
-            Cell(x, y)
+            Cell(x, y),
     ];
     while (hunterCells.length < hunters && pool.isNotEmpty) {
       hunterCells.add(pool.removeAt(rng.next(pool.length)));

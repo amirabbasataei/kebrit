@@ -27,11 +27,20 @@ void main() {
     });
   }
 
-  testWidgets('splash design compare (skipped without reference)', (tester) async {
+  testWidgets('splash design compare (skipped without reference)', (
+    tester,
+  ) async {
     await pumpScreen(
       tester,
-      const SplashScreen(time: Duration(milliseconds: 3400), reduceFlicker: true),
+      const SplashScreen(
+        time: Duration(milliseconds: 3400),
+        reduceFlicker: true,
+      ),
     );
-    await expectMatchesDesign(tester, find.byKey(goldenKey), 'design_refs/mobile/0_Splash.png');
+    await expectMatchesDesign(
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/0_Splash.png',
+    );
   });
 }

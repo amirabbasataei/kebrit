@@ -21,15 +21,17 @@ class MatchIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const SizedBox(
-        width: 5,
-        height: 20,
-        child: Column(
-          children: [
-            SizedBox(height: 6, width: 5, child: ColoredBox(color: Kc.matchHead)),
-            Expanded(child: SizedBox(width: 5, child: ColoredBox(color: Kc.matchStick))),
-          ],
+    width: 5,
+    height: 20,
+    child: Column(
+      children: [
+        SizedBox(height: 6, width: 5, child: ColoredBox(color: Kc.matchHead)),
+        Expanded(
+          child: SizedBox(width: 5, child: ColoredBox(color: Kc.matchStick)),
         ),
-      );
+      ],
+    ),
+  );
 }
 
 class MatchStrikeIcon extends StatelessWidget {
@@ -70,7 +72,10 @@ class MatchStrikeIcon extends StatelessWidget {
             Positioned(
               left: 0,
               top: -8,
-              child: Flame.strikeButton(reduceFlicker: reduceFlicker, phase: phase),
+              child: Flame.strikeButton(
+                reduceFlicker: reduceFlicker,
+                phase: phase,
+              ),
             ),
         ],
       ),
@@ -147,7 +152,13 @@ class _HeadPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
-    final shape = pctRRect(rect, topH: .5, topV: .5, bottomH: .45, bottomV: .45);
+    final shape = pctRRect(
+      rect,
+      topH: .5,
+      topV: .5,
+      bottomH: .45,
+      bottomV: .45,
+    );
     final paint = Paint();
     if (hero) {
       paint.shader = cssRadialFarthestCorner(

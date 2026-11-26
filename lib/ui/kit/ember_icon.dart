@@ -19,8 +19,10 @@ enum EmberSize { small, large }
 class EmberIcon extends StatelessWidget {
   const EmberIcon({super.key, required this.lit, this.size = EmberSize.small});
 
-  const EmberIcon.small({super.key, required this.lit}) : size = EmberSize.small;
-  const EmberIcon.large({super.key, required this.lit}) : size = EmberSize.large;
+  const EmberIcon.small({super.key, required this.lit})
+    : size = EmberSize.small;
+  const EmberIcon.large({super.key, required this.lit})
+    : size = EmberSize.large;
 
   final bool lit;
   final EmberSize size;
@@ -75,25 +77,38 @@ class _EmberPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
-    final shape = pctRRect(rect, topH: .5, topV: .5, bottomH: .45, bottomV: .45);
+    final shape = pctRRect(
+      rect,
+      topH: .5,
+      topV: .5,
+      bottomH: .45,
+      bottomV: .45,
+    );
     if (!lit) {
       canvas.drawRRect(
-          shape, Paint()..color = rgba(239, 227, 208, large ? .16 : .18));
+        shape,
+        Paint()..color = rgba(239, 227, 208, large ? .16 : .18),
+      );
       return;
     }
     if (large) {
-      paintCssShadow(canvas, shape, CssShadow(0, 0, 16, 0, rgba(255, 140, 40, .8)));
+      paintCssShadow(
+        canvas,
+        shape,
+        CssShadow(0, 0, 16, 0, rgba(255, 140, 40, .8)),
+      );
       final g = cssRadialFarthestCorner(
         box: size,
         center: Offset(size.width * .5, size.height * .65),
-        stops: const [
-          CssStop(Color(0xFFFFF1B8), 0),
-          CssStop(Kc.flameDeep, .6),
-        ],
+        stops: const [CssStop(Color(0xFFFFF1B8), 0), CssStop(Kc.flameDeep, .6)],
       );
       canvas.drawRRect(shape, Paint()..shader = g.createShader(rect));
     } else {
-      paintCssShadow(canvas, shape, CssShadow(0, 0, 5, 0, rgba(255, 140, 40, .7)));
+      paintCssShadow(
+        canvas,
+        shape,
+        CssShadow(0, 0, 5, 0, rgba(255, 140, 40, .7)),
+      );
       canvas.drawRRect(shape, Paint()..color = Kc.flameDeep);
     }
   }

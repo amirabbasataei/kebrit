@@ -65,22 +65,22 @@ class CaughtScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget stat(String label, String value) => Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(label, style: KText.caption.copyWith(color: _statLabel)),
-            const SizedBox(height: 2),
-            Text(
-              value,
-              style: const TextStyle(
-                fontFamily: KFonts.serif,
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: _heading,
-              ),
-            ),
-          ],
-        );
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: KText.caption.copyWith(color: _statLabel)),
+        const SizedBox(height: 2),
+        Text(
+          value,
+          style: const TextStyle(
+            fontFamily: KFonts.serif,
+            fontSize: 24,
+            fontWeight: FontWeight.w600,
+            color: _heading,
+          ),
+        ),
+      ],
+    );
 
     return LoopClock(
       time: time,
@@ -172,12 +172,16 @@ class CaughtScreen extends StatelessWidget {
                   const SizedBox(height: 14),
                   Row(
                     children: [
-                      stat('کبریت‌های زده‌شده',
-                          '${fa(stats.matchesStruck)} از ${fa(stats.startMatches)}'),
+                      stat(
+                        'کبریت‌های زده‌شده',
+                        '${fa(stats.matchesStruck)} از ${fa(stats.startMatches)}',
+                      ),
                       const SizedBox(width: 32),
                       stat(
                         'فاصله تا در',
-                        stats.stepsToDoor == null ? '—' : '${fa(stats.stepsToDoor!)} قدم',
+                        stats.stepsToDoor == null
+                            ? '—'
+                            : '${fa(stats.stepsToDoor!)} قدم',
                       ),
                     ],
                   ),
@@ -223,10 +227,8 @@ class CaughtScreen extends StatelessWidget {
 /// `radial-gradient(ellipse at 50% 28%, #3a120c 0%, #160807 45%, #070404 80%)`.
 class _Backdrop extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => CustomPaint(
-        painter: _BackdropPainter(),
-        child: const SizedBox.expand(),
-      );
+  Widget build(BuildContext context) =>
+      CustomPaint(painter: _BackdropPainter(), child: const SizedBox.expand());
 }
 
 class _BackdropPainter extends CustomPainter {
@@ -264,7 +266,11 @@ class _HeadPainter extends CustomPainter {
       bottomLeft: const Radius.circular(20),
       bottomRight: const Radius.circular(20),
     );
-    paintCssShadow(canvas, shape, CssShadow(0, 0, 90, 24, rgba(120, 20, 10, .35)));
+    paintCssShadow(
+      canvas,
+      shape,
+      CssShadow(0, 0, 90, 24, rgba(120, 20, 10, .35)),
+    );
     canvas.drawRRect(shape, Paint()..color = rgba(255, 120, 90, .12));
     canvas.save();
     canvas.clipRRect(shape);
@@ -322,7 +328,11 @@ class _EyePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
     final shape = RRect.fromRectXY(rect, size.width / 2, size.height / 2);
-    paintCssShadow(canvas, shape, CssShadow(0, 0, 24, 8, rgba(255, 70, 30, .7)));
+    paintCssShadow(
+      canvas,
+      shape,
+      CssShadow(0, 0, 24, 8, rgba(255, 70, 30, .7)),
+    );
     final g = cssRadialFarthestCorner(
       box: size,
       center: size.center(Offset.zero),
@@ -346,39 +356,39 @@ class _HintBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          color: rgba(40, 12, 8, .5),
-          border: Border.all(color: rgba(255, 140, 110, .18)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 2),
-                child: SizedBox(
-                  width: 14,
-                  height: 18,
-                  child: CustomPaint(painter: _FlameIconPainter()),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  text,
-                  style: const TextStyle(
-                    fontFamily: KFonts.ui,
-                    fontSize: 14,
-                    height: 1.45,
-                    color: Color(0xFFE2C9B8),
-                  ),
-                ),
-              ),
-            ],
+    decoration: BoxDecoration(
+      color: rgba(40, 12, 8, .5),
+      border: Border.all(color: rgba(255, 140, 110, .18)),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 2),
+            child: SizedBox(
+              width: 14,
+              height: 18,
+              child: CustomPaint(painter: _FlameIconPainter()),
+            ),
           ),
-        ),
-      );
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontFamily: KFonts.ui,
+                fontSize: 14,
+                height: 1.45,
+                color: Color(0xFFE2C9B8),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 /// `viewBox 0 0 18 24`, stroke #ffb45a 1.8, round joins, shown at 14×18
@@ -388,12 +398,16 @@ class _FlameIconPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final s = size.height / 24 < size.width / 18 ? size.height / 24 : size.width / 18;
+    final s = size.height / 24 < size.width / 18
+        ? size.height / 24
+        : size.width / 18;
     canvas.save();
     canvas.translate((size.width - 18 * s) / 2, (size.height - 24 * s) / 2);
     canvas.scale(s);
     canvas.drawPath(
-      parseSvgPath('M9 2c1.5 3.5 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4.5 3-7 1 1.5 1.5 2.5 1.5 4C9.5 8 10 5 9 2z'),
+      parseSvgPath(
+        'M9 2c1.5 3.5 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4.5 3-7 1 1.5 1.5 2.5 1.5 4C9.5 8 10 5 9 2z',
+      ),
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1.8

@@ -32,9 +32,9 @@ class StoneBackground extends StatelessWidget {
 
   /// MComplete variant: `#241b15` base, `linear-gradient(#2e241c, #17110d)`.
   const StoneBackground.complete({super.key, this.child})
-      : baseColor = const Color(0xFF241B15),
-        gradientAngle = 180,
-        gradientColors = const [Color(0xFF2E241C), Color(0xFF17110D)];
+    : baseColor = const Color(0xFF241B15),
+      gradientAngle = 180,
+      gradientColors = const [Color(0xFF2E241C), Color(0xFF17110D)];
 
   final Color baseColor;
   final double gradientAngle;
@@ -43,9 +43,9 @@ class StoneBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        painter: _StonePainter(baseColor, gradientAngle, gradientColors),
-        child: child ?? const SizedBox.expand(),
-      );
+    painter: _StonePainter(baseColor, gradientAngle, gradientColors),
+    child: child ?? const SizedBox.expand(),
+  );
 }
 
 class _StonePainter extends CustomPainter {
@@ -61,8 +61,11 @@ class _StonePainter extends CustomPainter {
     canvas.drawRect(
       rect,
       Paint()
-        ..shader =
-            cssLinear(deg: angle, box: size, colors: colors).createShader(rect),
+        ..shader = cssLinear(
+          deg: angle,
+          box: size,
+          colors: colors,
+        ).createShader(rect),
     );
     final v = Paint()
       ..color = rgba(0, 0, 0, .45)
@@ -99,10 +102,10 @@ class RadialBackdrop extends StatelessWidget {
 
   /// MLevels: `ellipse at 50% 30%, #1e1611 0%, #0a0706 75%`.
   const RadialBackdrop.levels({super.key, this.child})
-      : center = const Offset(0.5, 0.3),
-        inner = Kc.radialInner,
-        outer = Kc.page,
-        stopFraction = 0.75;
+    : center = const Offset(0.5, 0.3),
+      inner = Kc.radialInner,
+      outer = Kc.page,
+      stopFraction = 0.75;
 
   final Offset center;
   final Color inner;
@@ -112,9 +115,9 @@ class RadialBackdrop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        painter: _BackdropPainter(center, inner, outer, stopFraction),
-        child: child ?? const SizedBox.expand(),
-      );
+    painter: _BackdropPainter(center, inner, outer, stopFraction),
+    child: child ?? const SizedBox.expand(),
+  );
 }
 
 class _BackdropPainter extends CustomPainter {

@@ -7,9 +7,9 @@ import '../helpers/fonts.dart';
 import '../helpers/golden_harness.dart';
 
 Progress mock() => Progress(
-      currentLevel: 7,
-      embers: const {1: 3, 2: 3, 3: 2, 4: 3, 5: 2, 6: 1},
-    );
+  currentLevel: 7,
+  embers: const {1: 3, 2: 3, 3: 2, 4: 3, 5: 2, 6: 1},
+);
 
 void main() {
   setUpAll(loadAppFonts);
@@ -22,8 +22,9 @@ void main() {
     expect(pulseShadow(.25).blur, inExclusiveRange(12, 22));
   });
 
-  testWidgets('header shows rooms and embers; default selection is current',
-      (tester) async {
+  testWidgets('header shows rooms and embers; default selection is current', (
+    tester,
+  ) async {
     await pumpScreen(tester, LevelsScreen(progress: mock(), pulsePhase: 0));
     expect(find.textContaining('۶ از ۱۵ اتاق'), findsOneWidget);
     expect(find.textContaining('۱۴ از ۴۵ اخگر'), findsOneWidget);
@@ -31,7 +32,9 @@ void main() {
     expect(find.text('سرداب زیرین'), findsOneWidget);
   });
 
-  testWidgets('tapping tiles switches the sheet: done / locked', (tester) async {
+  testWidgets('tapping tiles switches the sheet: done / locked', (
+    tester,
+  ) async {
     final played = <int>[];
     await pumpScreen(
       tester,
@@ -62,8 +65,9 @@ void main() {
     expect(back, 1);
   });
 
-  testWidgets('live pulse runs a ticker; reduced flicker does not',
-      (tester) async {
+  testWidgets('live pulse runs a ticker; reduced flicker does not', (
+    tester,
+  ) async {
     await pumpScreen(tester, LevelsScreen(progress: mock()));
     await tester.pump(const Duration(milliseconds: 900));
     expect(tester.hasRunningAnimations, isTrue);
@@ -76,11 +80,15 @@ void main() {
     expect(tester.hasRunningAnimations, isFalse);
   });
 
-  testWidgets('tile is a labelled, selected button for semantics', (tester) async {
+  testWidgets('tile is a labelled, selected button for semantics', (
+    tester,
+  ) async {
     final h = tester.ensureSemantics();
     await pumpScreen(tester, LevelsScreen(progress: mock(), pulsePhase: 0));
     expect(
-      tester.getSemantics(find.bySemanticsLabel('مرحله‌ی ۷، سرداب زیرین، مرحله‌ی فعلی')),
+      tester.getSemantics(
+        find.bySemanticsLabel('مرحله‌ی ۷، سرداب زیرین، مرحله‌ی فعلی'),
+      ),
       matchesSemantics(
         label: 'مرحله‌ی ۷، سرداب زیرین، مرحله‌ی فعلی',
         isButton: true,

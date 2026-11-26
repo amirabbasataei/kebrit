@@ -55,9 +55,10 @@ void main() {
 
   test('linear 165deg on a square reaches the corners', () {
     final g = cssLinear(
-        deg: 165,
-        box: const Size(40, 40),
-        colors: const [Color(0xFF000000), Color(0xFFFFFFFF)]);
+      deg: 165,
+      box: const Size(40, 40),
+      colors: const [Color(0xFF000000), Color(0xFFFFFFFF)],
+    );
     final b = g.begin as Alignment, e = g.end as Alignment;
     expect(b.x, closeTo(-0.317, 1e-3));
     expect(b.y, closeTo(-1.183, 1e-3));
@@ -67,9 +68,10 @@ void main() {
 
   test('linear 180deg is vertical top→bottom edge to edge', () {
     final g = cssLinear(
-        deg: 180,
-        box: const Size(100, 60),
-        colors: const [Color(0xFF000000), Color(0xFFFFFFFF)]);
+      deg: 180,
+      box: const Size(100, 60),
+      colors: const [Color(0xFF000000), Color(0xFFFFFFFF)],
+    );
     final b = g.begin as Alignment, e = g.end as Alignment;
     expect(b.x.abs(), lessThan(1e-9));
     expect(b.y, closeTo(-1, 1e-9));
@@ -78,9 +80,10 @@ void main() {
 
   test('conic ring starts at 12 o\'clock with a hard stop at deg/360', () {
     final g = cssConicProgress(
-        on: const Color(0xFFFFB45A),
-        off: const Color(0x24EFE3D0),
-        degrees: 90);
+      on: const Color(0xFFFFB45A),
+      off: const Color(0x24EFE3D0),
+      degrees: 90,
+    );
     expect(g.startAngle, -math.pi / 2);
     expect(g.endAngle, 3 * math.pi / 2);
     expect(g.stops, [0, .25, .25, 1]);
@@ -100,15 +103,21 @@ void main() {
       center: const Offset(195, 190),
       rx: 420,
       ry: 520,
-      stops: [CssStop(rgba(255, 180, 100, .18), 0), CssStop(rgba(6, 4, 3, .96), 1)],
+      stops: [
+        CssStop(rgba(255, 180, 100, .18), 0),
+        CssStop(rgba(6, 4, 3, .96), 1),
+      ],
     );
     expect(g.radius, closeTo(420 / 390, 1e-9));
     expect(g.transform, isNotNull);
   });
 
   test('pctRRect builds elliptical corners from box fractions', () {
-    final r = pctRRect(const Rect.fromLTWH(0, 0, 40, 80),
-        topV: .62, bottomV: .38);
+    final r = pctRRect(
+      const Rect.fromLTWH(0, 0, 40, 80),
+      topV: .62,
+      bottomV: .38,
+    );
     expect(r.tlRadius, const Radius.elliptical(20, 49.6));
     expect(r.brRadius.y, closeTo(30.4, 1e-9));
   });

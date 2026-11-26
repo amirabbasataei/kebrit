@@ -37,7 +37,10 @@ class StepDoor extends StatelessWidget {
         ),
         Positioned.fill(child: CustomPaint(painter: _DoorFramePainter())),
         Positioned.fill(
-          child: Opacity(opacity: breath, child: CustomPaint(painter: _DoorGlowPainter())),
+          child: Opacity(
+            opacity: breath,
+            child: CustomPaint(painter: _DoorGlowPainter()),
+          ),
         ),
         Positioned(
           left: 61,
@@ -87,7 +90,11 @@ class StepDoor extends StatelessWidget {
           top: 330,
           child: Text(
             '+۲ کبریت',
-            style: TextStyle(fontFamily: KFonts.ui, fontSize: 11, color: Color(0xFFE0C393)),
+            style: TextStyle(
+              fontFamily: KFonts.ui,
+              fontSize: 11,
+              color: Color(0xFFE0C393),
+            ),
           ),
         ),
       ],
@@ -95,23 +102,25 @@ class StepDoor extends StatelessWidget {
   }
 
   Widget _bar(double l, double t, Color c, double deg) => Positioned(
-        left: l,
-        top: t,
-        width: 26,
-        height: 3,
-        child: Transform.rotate(
-          angle: deg * math.pi / 180,
-          child: ColoredBox(color: c),
-        ),
-      );
+    left: l,
+    top: t,
+    width: 26,
+    height: 3,
+    child: Transform.rotate(
+      angle: deg * math.pi / 180,
+      child: ColoredBox(color: c),
+    ),
+  );
 
   Widget _dot(double l, double t, Color c) => Positioned(
-        left: l,
-        top: t,
-        width: 6,
-        height: 6,
-        child: DecoratedBox(decoration: BoxDecoration(shape: BoxShape.circle, color: c)),
-      );
+    left: l,
+    top: t,
+    width: 6,
+    height: 6,
+    child: DecoratedBox(
+      decoration: BoxDecoration(shape: BoxShape.circle, color: c),
+    ),
+  );
 }
 
 /// 342×200 wall: `#3a2d24`, 2 px horizontal joints every 40 px
@@ -119,7 +128,10 @@ class StepDoor extends StatelessWidget {
 class _WallPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawRect(Offset.zero & size, Paint()..color = const Color(0xFF3A2D24));
+    canvas.drawRect(
+      Offset.zero & size,
+      Paint()..color = const Color(0xFF3A2D24),
+    );
     final h = Paint()
       ..color = rgba(0, 0, 0, .5)
       ..isAntiAlias = false;
@@ -139,10 +151,10 @@ class _WallPainter extends CustomPainter {
 }
 
 RRect _arch(Rect r, double radius) => RRect.fromRectAndCorners(
-      r,
-      topLeft: Radius.circular(radius),
-      topRight: Radius.circular(radius),
-    );
+  r,
+  topLeft: Radius.circular(radius),
+  topRight: Radius.circular(radius),
+);
 
 /// Door frame: 100×140 at (121,60), top radius 50, `#120d0a` with a solid
 /// 8 px `#4d3d30` ring (`box-shadow: 0 0 0 8px`).
@@ -150,7 +162,11 @@ class _DoorFramePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final door = _arch(const Rect.fromLTWH(121, 60, 100, 140), 50);
-    paintCssShadow(canvas, door, CssShadow(0, 0, 0, 8, const Color(0xFF4D3D30)));
+    paintCssShadow(
+      canvas,
+      door,
+      CssShadow(0, 0, 0, 8, const Color(0xFF4D3D30)),
+    );
     canvas.drawRRect(door, Paint()..color = const Color(0xFF120D0A));
   }
 
@@ -166,7 +182,11 @@ class _DoorGlowPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     const rect = Rect.fromLTWH(129, 68, 84, 132);
     final shape = _arch(rect, 42);
-    paintCssShadow(canvas, shape, CssShadow(0, 0, 60, 20, rgba(255, 160, 70, .35)));
+    paintCssShadow(
+      canvas,
+      shape,
+      CssShadow(0, 0, 60, 20, rgba(255, 160, 70, .35)),
+    );
     final g = cssEllipseFarthestCorner(
       box: rect.size,
       center: Offset(rect.width * .5, rect.height * .85),

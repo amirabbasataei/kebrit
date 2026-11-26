@@ -38,9 +38,9 @@ const kTransitionSeconds = 9.0;
 
 /// One-line flavour text under the meta line (only level 8's is in the design).
 String? transitionFlavor(int levelId) => switch (levelId) {
-      8 => 'آن‌ها شنیدن را یاد گرفته‌اند.',
-      _ => null,
-    };
+  8 => 'آن‌ها شنیدن را یاد گرفته‌اند.',
+  _ => null,
+};
 
 class TransitionScreen extends StatefulWidget {
   const TransitionScreen({
@@ -64,19 +64,19 @@ class TransitionScreen extends StatefulWidget {
     double? time,
     bool? reduceFlicker,
     double? flickerPhase,
-  }) =>
-      TransitionScreen(
-        key: key,
-        chapterLabel:
-            '${chapters[chapterIndexOf(level.id)].label} · مرحله‌ی ${fa(level.id)}',
-        title: level.name,
-        meta: '${fa(level.startMatches)} کبریت · ${fa(level.hunterStarts.length)} شکارچی',
-        flavor: transitionFlavor(level.id),
-        onDone: onDone,
-        time: time,
-        reduceFlicker: reduceFlicker,
-        flickerPhase: flickerPhase,
-      );
+  }) => TransitionScreen(
+    key: key,
+    chapterLabel:
+        '${chapters[chapterIndexOf(level.id)].label} · مرحله‌ی ${fa(level.id)}',
+    title: level.name,
+    meta:
+        '${fa(level.startMatches)} کبریت · ${fa(level.hunterStarts.length)} شکارچی',
+    flavor: transitionFlavor(level.id),
+    onDone: onDone,
+    time: time,
+    reduceFlicker: reduceFlicker,
+    flickerPhase: flickerPhase,
+  );
 
   final String chapterLabel;
   final String title;
@@ -160,25 +160,78 @@ class _TransitionScreenState extends State<TransitionScreen>
     final bobU = (t % .45) / .45;
     final bob = reduce
         ? 0.0
-        : -4 * (bobU < .5
-            ? Curves.ease.transform(bobU / .5)
-            : 1 - Curves.ease.transform((bobU - .5) / .5));
+        : -4 *
+              (bobU < .5
+                  ? Curves.ease.transform(bobU / .5)
+                  : 1 - Curves.ease.transform((bobU - .5) / .5));
 
-    final flood = tr(const [(0, 0), (25, 0), (34, 1), (40, 1), (47, 0), (100, 0)]);
+    final flood = tr(const [
+      (0, 0),
+      (25, 0),
+      (34, 1),
+      (40, 1),
+      (47, 0),
+      (100, 0),
+    ]);
     final black = tr(const [(0, 0), (38, 0), (45, 1), (93, 1), (100, 0)]);
-    final glow = tr(const [(0, 0), (65, 0), (68, 1), (72, .75), (85, .75), (91, 0), (100, 0)]);
+    final glow = tr(const [
+      (0, 0),
+      (65, 0),
+      (68, 1),
+      (72, .75),
+      (85, .75),
+      (91, 0),
+      (100, 0),
+    ]);
 
-    final lvlO = tr(const [(0, 0), (46, 0), (52, 1), (84, 1), (90, 0), (100, 0)]);
+    final lvlO = tr(const [
+      (0, 0),
+      (46, 0),
+      (52, 1),
+      (84, 1),
+      (90, 0),
+      (100, 0),
+    ]);
     final lvlY = tr(const [(0, 10), (46, 10), (52, 0), (100, 0)]);
-    final ttlO = tr(const [(0, 0), (50, 0), (57, 1), (84, 1), (90, 0), (100, 0)]);
+    final ttlO = tr(const [
+      (0, 0),
+      (50, 0),
+      (57, 1),
+      (84, 1),
+      (90, 0),
+      (100, 0),
+    ]);
     final ttlY = tr(const [(0, 14), (50, 14), (57, 0), (100, 0)]);
-    final metaO = tr(const [(0, 0), (56, 0), (62, 1), (84, 1), (90, 0), (100, 0)]);
+    final metaO = tr(const [
+      (0, 0),
+      (56, 0),
+      (62, 1),
+      (84, 1),
+      (90, 0),
+      (100, 0),
+    ]);
 
-    final stickO = tr(const [(0, 0), (65, 0), (67, 1), (86, 1), (90, 0), (100, 0)]);
+    final stickO = tr(const [
+      (0, 0),
+      (65, 0),
+      (67, 1),
+      (86, 1),
+      (90, 0),
+      (100, 0),
+    ]);
     final strikeO = stickO;
-    final strikeS = tr(const [(0, .2), (65, .2), (67, 1.7), (71, 1), (86, 1), (90, .6), (100, .6)]);
+    final strikeS = tr(const [
+      (0, .2),
+      (65, .2),
+      (67, 1.7),
+      (71, 1),
+      (86, 1),
+      (90, .6),
+      (100, .6),
+    ]);
 
-    ({double o, double x, double y}) spark(double end, double dx, double dy) => (
+    ({double o, double x, double y}) spark(double end, double dx, double dy) =>
+        (
           o: tr([(0, 0), (65, 0), (66, 1), (end, 0), (100, 0)]),
           x: tr([(0, 0), (65, 0), (end, dx), (100, dx)]),
           y: tr([(0, 0), (65, 0), (end, dy), (100, dy)]),
@@ -288,7 +341,10 @@ class _TransitionScreenState extends State<TransitionScreen>
         ),
         Positioned.fill(
           child: IgnorePointer(
-            child: Opacity(opacity: black, child: const ColoredBox(color: Kc.page)),
+            child: Opacity(
+              opacity: black,
+              child: const ColoredBox(color: Kc.page),
+            ),
           ),
         ),
 
@@ -308,60 +364,68 @@ class _TransitionScreenState extends State<TransitionScreen>
           right: 24,
           top: 230,
           child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Opacity(
-                  opacity: lvlO,
-                  child: Transform.translate(
-                    offset: Offset(0, lvlY),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Opacity(
+                opacity: lvlO,
+                child: Transform.translate(
+                  offset: Offset(0, lvlY),
+                  child: Text(
+                    widget.chapterLabel,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontFamily: KFonts.ui,
+                      fontSize: 11,
+                      color: Kc.muted,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14),
+              Opacity(
+                opacity: ttlO,
+                child: Transform.translate(
+                  offset: Offset(0, ttlY),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: Text(
-                      widget.chapterLabel,
+                      widget.title,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        fontFamily: KFonts.ui,
-                        fontSize: 11,
-                        color: Kc.muted,
+                        fontFamily: KFonts.serif,
+                        fontSize: 64,
+                        fontWeight: FontWeight.w600,
+                        height: 1.5,
+                        color: Color(0xFFF6EAD6),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 14),
-                Opacity(
-                  opacity: ttlO,
-                  child: Transform.translate(
-                    offset: Offset(0, ttlY),
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        widget.title,
+              ),
+              const SizedBox(height: 14 + 8),
+              Opacity(
+                opacity: metaO,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.meta,
+                      textAlign: TextAlign.center,
+                      style: _metaStyle,
+                    ),
+                    if (widget.flavor != null) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        widget.flavor!,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontFamily: KFonts.serif,
-                          fontSize: 64,
-                          fontWeight: FontWeight.w600,
-                          height: 1.5,
-                          color: Color(0xFFF6EAD6),
-                        ),
+                        style: _metaStyle,
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 14 + 8),
-                Opacity(
-                  opacity: metaO,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(widget.meta, textAlign: TextAlign.center, style: _metaStyle),
-                      if (widget.flavor != null) ...[
-                        const SizedBox(height: 6),
-                        Text(widget.flavor!, textAlign: TextAlign.center, style: _metaStyle),
-                      ],
                     ],
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
         ),
 
         // z5: the match being struck
@@ -433,7 +497,10 @@ class _TransitionScreenState extends State<TransitionScreen>
                     top: top + s.y,
                     width: size,
                     height: size,
-                    child: Opacity(opacity: s.o, child: ColoredBox(color: color)),
+                    child: Opacity(
+                      opacity: s.o,
+                      child: ColoredBox(color: color),
+                    ),
                   ),
               ],
             ),
@@ -595,7 +662,11 @@ class _Walker extends StatelessWidget {
           top: 4 + bob,
           width: 16,
           height: 24,
-          child: Flame(style: _walkerFlame, reduceFlicker: reduce, phase: phase),
+          child: Flame(
+            style: _walkerFlame,
+            reduceFlicker: reduce,
+            phase: phase,
+          ),
         ),
       ],
     );
@@ -675,7 +746,11 @@ class _DoorGlowPainter extends CustomPainter {
       topLeft: const Radius.circular(70),
       topRight: const Radius.circular(70),
     );
-    paintCssShadow(canvas, shape, CssShadow(0, 0, 110, 36, rgba(255, 160, 70, .35)));
+    paintCssShadow(
+      canvas,
+      shape,
+      CssShadow(0, 0, 110, 36, rgba(255, 160, 70, .35)),
+    );
     final g = cssEllipseFarthestCorner(
       box: size,
       center: Offset(size.width * .5, size.height * .85),

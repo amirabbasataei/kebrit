@@ -20,7 +20,11 @@ void main() {
     for (var i = 0; i < 15; i++) {
       final l = Levels.all[i];
       expect(l.startMatches, matches[i], reason: 'level ${l.id} matches');
-      expect(l.hunterStarts.length, hunters[i], reason: 'level ${l.id} hunters');
+      expect(
+        l.hunterStarts.length,
+        hunters[i],
+        reason: 'level ${l.id} hunters',
+      );
     }
   });
 
@@ -51,8 +55,11 @@ void main() {
 
   test('every level is solvable (BFS start → exit)', () {
     for (final l in Levels.all) {
-      expect(stepsToExit(l.grid, l.playerStart), isNotNull,
-          reason: 'level ${l.id}');
+      expect(
+        stepsToExit(l.grid, l.playerStart),
+        isNotNull,
+        reason: 'level ${l.id}',
+      );
     }
   });
 
@@ -66,14 +73,18 @@ void main() {
         final p = e.state.player;
         final d = dist[p]!;
         final dir = Dir.values.firstWhere(
-            (dr) => dist[Cell(p.x + dr.dx, p.y + dr.dy)] == d - 1);
+          (dr) => dist[Cell(p.x + dr.dx, p.y + dr.dy)] == d - 1,
+        );
         e.step(dir);
         // Dark: hunters never move, so walking into one is the only risk;
         // placeholders keep hunters away from the start, so just assert.
       }
-      expect(e.state.result == GameResult.escaped || e.state.result == GameResult.caught,
-          isTrue,
-          reason: 'level ${l.id}');
+      expect(
+        e.state.result == GameResult.escaped ||
+            e.state.result == GameResult.caught,
+        isTrue,
+        reason: 'level ${l.id}',
+      );
     }
   });
 
@@ -83,13 +94,19 @@ void main() {
       expect(l.grid.rows, 13);
       expect(l.grid.exit, const Cell(4, 0));
       expect(l.grid.typeAt(l.playerStart.x, l.playerStart.y), CellType.floor);
-      expect(l.hunterStarts.toSet().length, l.hunterStarts.length,
-          reason: 'level ${l.id} distinct hunters');
+      expect(
+        l.hunterStarts.toSet().length,
+        l.hunterStarts.length,
+        reason: 'level ${l.id} distinct hunters',
+      );
       for (final h in l.hunterStarts) {
         expect(l.grid.typeAt(h.x, h.y), CellType.floor, reason: '${l.id} $h');
         expect(h, isNot(l.playerStart), reason: 'level ${l.id}');
-        expect(HunterAi.distances(l.grid, l.playerStart)[h], isNotNull,
-            reason: 'level ${l.id} hunter reachable');
+        expect(
+          HunterAi.distances(l.grid, l.playerStart)[h],
+          isNotNull,
+          reason: 'level ${l.id} hunter reachable',
+        );
       }
     }
   });

@@ -55,16 +55,20 @@ void main() {
     origin = tester.getTopLeft(find.byKey(goldenKey));
   }
 
-  Future<TestGesture> drag(WidgetTester tester, Offset by,
-      {Offset from = const Offset(200, 400)}) async {
+  Future<TestGesture> drag(
+    WidgetTester tester,
+    Offset by, {
+    Offset from = const Offset(200, 400),
+  }) async {
     final g = await tester.startGesture(origin + from);
     await g.moveBy(by);
     await tester.pump();
     return g;
   }
 
-  testWidgets('drag right moves one cell at once, then repeats every 170 ms',
-      (tester) async {
+  testWidgets('drag right moves one cell at once, then repeats every 170 ms', (
+    tester,
+  ) async {
     await start(tester, GameController(level7()));
     expect(c.state.player, const Cell(1, 11));
     final g = await drag(tester, const Offset(30, 0));
@@ -91,8 +95,9 @@ void main() {
     await g.up();
   });
 
-  testWidgets('joystick knob follows the finger, clamped to 30 px',
-      (tester) async {
+  testWidgets('joystick knob follows the finger, clamped to 30 px', (
+    tester,
+  ) async {
     await start(tester, GameController(level7()));
     final g = await drag(tester, const Offset(0, -80));
     final d = c.drag!;
@@ -118,8 +123,9 @@ void main() {
     await g.up();
   });
 
-  testWidgets('strike lights the match; a second strike is a no-op',
-      (tester) async {
+  testWidgets('strike lights the match; a second strike is a no-op', (
+    tester,
+  ) async {
     await start(tester, GameController(level7()));
     expect(c.started, isFalse);
     await tester.tapAt(origin + strikeButton);
@@ -133,8 +139,9 @@ void main() {
     expect(c.state.burn, 100);
   });
 
-  testWidgets('the flame goes out after 8 s and a new strike restarts it',
-      (tester) async {
+  testWidgets('the flame goes out after 8 s and a new strike restarts it', (
+    tester,
+  ) async {
     await start(tester, GameController(corridor()));
     await tester.tapAt(origin + strikeButton);
     await tester.pump(const Duration(seconds: 4));
@@ -154,8 +161,7 @@ void main() {
     final haptics = CountingHaptics();
     await start(
       tester,
-      GameController(corridor(hunters: const [Cell(3, 1)]),
-          haptics: haptics),
+      GameController(corridor(hunters: const [Cell(3, 1)]), haptics: haptics),
       onCaught: (s) => caught = s,
     );
     await tester.tapAt(origin + strikeButton);
@@ -174,13 +180,13 @@ void main() {
     expect(caught!.matchesLeft, 2);
   });
 
-  testWidgets('hunters stay put in the dark and haptics can be disabled',
-      (tester) async {
+  testWidgets('hunters stay put in the dark and haptics can be disabled', (
+    tester,
+  ) async {
     final haptics = CountingHaptics();
     await start(
       tester,
-      GameController(corridor(hunters: const [Cell(3, 1)]),
-          haptics: haptics),
+      GameController(corridor(hunters: const [Cell(3, 1)]), haptics: haptics),
       settings: const AppSettings(haptics: false),
     );
     await tester.tapAt(origin + const Offset(100, 300)); // begin, still dark
@@ -230,8 +236,9 @@ void main() {
     expect(c.drag, isNull, reason: 'the link swallowed the touch');
   });
 
-  testWidgets('HUD buttons swallow pointers: no joystick, no step',
-      (tester) async {
+  testWidgets('HUD buttons swallow pointers: no joystick, no step', (
+    tester,
+  ) async {
     await start(tester, GameController(level7()));
     final g = await tester.startGesture(origin + strikeButton);
     await g.moveBy(const Offset(-30, 0));
@@ -243,8 +250,9 @@ void main() {
     expect(c.started, isFalse, reason: 'a claimed pointer does not begin');
   });
 
-  testWidgets('pause freezes burn and resume continues from there',
-      (tester) async {
+  testWidgets('pause freezes burn and resume continues from there', (
+    tester,
+  ) async {
     var paused = 0;
     await start(tester, GameController(corridor()), onPause: () => paused++);
     await tester.tapAt(origin + strikeButton);
@@ -273,7 +281,9 @@ void main() {
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
   });
 
-  testWidgets('GameScreen(level:) owns its controller and plays', (tester) async {
+  testWidgets('GameScreen(level:) owns its controller and plays', (
+    tester,
+  ) async {
     await pumpScreen(tester, GameScreen(level: corridor(), animate: false));
     final o = tester.getTopLeft(find.byKey(goldenKey));
     await tester.tapAt(o + strikeButton);

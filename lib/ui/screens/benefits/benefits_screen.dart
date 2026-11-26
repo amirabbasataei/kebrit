@@ -287,13 +287,18 @@ class _StepColumn extends StatelessWidget {
                         CssStop(Kc.flameDeep, .7),
                       ],
                     ),
-                    boxShadow: cssBoxShadows([CssShadow(0, 0, 22, 0, rgba(255, 150, 50, .5))]),
+                    boxShadow: cssBoxShadows([
+                      CssShadow(0, 0, 22, 0, rgba(255, 150, 50, .5)),
+                    ]),
                   )
                 : BoxDecoration(
                     shape: BoxShape.circle,
                     color: Kc.radialInner,
                     // inset 0 0 0 2px rgba(255,180,90,.45)
-                    border: Border.all(color: rgba(255, 180, 90, .45), width: 2),
+                    border: Border.all(
+                      color: rgba(255, 180, 90, .45),
+                      width: 2,
+                    ),
                   ),
             child: SvgIcon(
               step.icon,
@@ -328,9 +333,9 @@ class _ItemsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(24, 36, 24, 6),
-        child: Text('آنچه ذهنت تمرین می‌کند', style: KText.h2Serif),
-      );
+    padding: const EdgeInsets.fromLTRB(24, 36, 24, 6),
+    child: Text('آنچه ذهنت تمرین می‌کند', style: KText.h2Serif),
+  );
 }
 
 class _BenefitCard extends StatelessWidget {
@@ -355,7 +360,12 @@ class _BenefitCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(14),
                 color: rgba(255, 170, 80, .12),
               ),
-              child: SvgIcon(item.icon, size: 24, color: Kc.flame, strokeWidth: 1.8),
+              child: SvgIcon(
+                item.icon,
+                size: 24,
+                color: Kc.flame,
+                strokeWidth: 1.8,
+              ),
             ),
             const SizedBox(width: 14),
             Expanded(

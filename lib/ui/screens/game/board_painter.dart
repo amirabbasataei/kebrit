@@ -37,8 +37,10 @@ const double kCell = 40;
 
 /// Centre of grid cell ([x],[y]) in design space (the point the light is
 /// centred on is `cellCenter(...)` shifted up 12 px: the player's torso).
-Offset cellCenter(int x, int y) =>
-    Offset(boardOrigin.dx + x * kCell + kCell / 2, boardOrigin.dy + y * kCell + kCell / 2);
+Offset cellCenter(int x, int y) => Offset(
+  boardOrigin.dx + x * kCell + kCell / 2,
+  boardOrigin.dy + y * kCell + kCell / 2,
+);
 
 /// Where the light of the player standing on ([x],[y]) is centred.
 Offset lightCenter(Cell c) {
@@ -185,12 +187,12 @@ class _Sprite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AnimatedPositioned(
-        left: left,
-        top: top,
-        duration: duration,
-        curve: curve,
-        child: child,
-      );
+    left: left,
+    top: top,
+    duration: duration,
+    curve: curve,
+    child: child,
+  );
 }
 
 /// The two match sticks and two red heads lying on the floor (24×14).
@@ -209,18 +211,35 @@ class _PickupPainter extends CustomPainter {
     canvas.save();
     canvas.translate(r.center.dx, r.center.dy);
     canvas.rotate(deg * math.pi / 180);
-    canvas.drawRect(Rect.fromCenter(center: Offset.zero, width: r.width, height: r.height),
-        Paint()..color = c);
+    canvas.drawRect(
+      Rect.fromCenter(center: Offset.zero, width: r.width, height: r.height),
+      Paint()..color = c,
+    );
     canvas.restore();
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    _stick(canvas, const Rect.fromLTWH(2, 3, 18, 3), -12, const Color(0xFFD9B98A));
-    _stick(canvas, const Rect.fromLTWH(4, 7, 18, 3), 8, const Color(0xFFCFAE7C));
-    canvas.drawOval(const Rect.fromLTWH(17, 0, 5, 5), Paint()..color = Kc.ember);
+    _stick(
+      canvas,
+      const Rect.fromLTWH(2, 3, 18, 3),
+      -12,
+      const Color(0xFFD9B98A),
+    );
+    _stick(
+      canvas,
+      const Rect.fromLTWH(4, 7, 18, 3),
+      8,
+      const Color(0xFFCFAE7C),
+    );
     canvas.drawOval(
-        const Rect.fromLTWH(19, 6, 5, 5), Paint()..color = const Color(0xFFB8392A));
+      const Rect.fromLTWH(17, 0, 5, 5),
+      Paint()..color = Kc.ember,
+    );
+    canvas.drawOval(
+      const Rect.fromLTWH(19, 6, 5, 5),
+      Paint()..color = const Color(0xFFB8392A),
+    );
   }
 
   @override
@@ -242,24 +261,24 @@ class PlayerSprite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 24,
-        height: 36,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            const Positioned.fill(child: CustomPaint(painter: _PlayerPainter())),
-            if (lit)
-              Positioned(
-                left: 17,
-                top: -1,
-                child: Flame.player(
-                  phase: flickerPhase,
-                  reduceFlicker: reduceFlicker ? true : null,
-                ),
-              ),
-          ],
-        ),
-      );
+    width: 24,
+    height: 36,
+    child: Stack(
+      clipBehavior: Clip.none,
+      children: [
+        const Positioned.fill(child: CustomPaint(painter: _PlayerPainter())),
+        if (lit)
+          Positioned(
+            left: 17,
+            top: -1,
+            child: Flame.player(
+              phase: flickerPhase,
+              reduceFlicker: reduceFlicker ? true : null,
+            ),
+          ),
+      ],
+    ),
+  );
 }
 
 class _PlayerPainter extends CustomPainter {
@@ -267,7 +286,10 @@ class _PlayerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawOval(const Rect.fromLTWH(2, 30, 20, 6), Paint()..color = rgba(0, 0, 0, .5));
+    canvas.drawOval(
+      const Rect.fromLTWH(2, 30, 20, 6),
+      Paint()..color = rgba(0, 0, 0, .5),
+    );
     const bodyRect = Rect.fromLTWH(4, 13, 16, 21);
     canvas.drawRRect(
       RRect.fromRectAndCorners(
@@ -289,14 +311,19 @@ class _PlayerPainter extends CustomPainter {
     canvas.save();
     canvas.clipPath(Path()..addOval(head));
     canvas.drawRect(head, Paint()..color = const Color(0xFF3A2C20));
-    canvas.drawOval(head.shift(const Offset(0, -4)), Paint()..color = const Color(0xFF7A6550));
+    canvas.drawOval(
+      head.shift(const Offset(0, -4)),
+      Paint()..color = const Color(0xFF7A6550),
+    );
     canvas.restore();
     // The match in the hand: 3×12 at (19,10), rotated 14° about its centre.
     canvas.save();
     canvas.translate(20.5, 16);
     canvas.rotate(14 * math.pi / 180);
     canvas.drawRect(
-        Rect.fromCenter(center: Offset.zero, width: 3, height: 12), Paint()..color = Kc.matchStick);
+      Rect.fromCenter(center: Offset.zero, width: 3, height: 12),
+      Paint()..color = Kc.matchStick,
+    );
     canvas.restore();
   }
 
@@ -313,32 +340,38 @@ class HunterSprite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 26,
-        height: 40,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            const Positioned.fill(child: CustomPaint(painter: _HunterShadowPainter())),
-            Positioned.fill(child: CustomPaint(painter: HunterPainter(alert ? 1 : 0))),
-            if (alert)
-              Positioned(
-                left: 5,
-                top: -16,
-                width: 16,
-                height: 16,
-                child: const _AlertBubble(),
-              ),
-          ],
+    width: 26,
+    height: 40,
+    child: Stack(
+      clipBehavior: Clip.none,
+      children: [
+        const Positioned.fill(
+          child: CustomPaint(painter: _HunterShadowPainter()),
         ),
-      );
+        Positioned.fill(
+          child: CustomPaint(painter: HunterPainter(alert ? 1 : 0)),
+        ),
+        if (alert)
+          Positioned(
+            left: 5,
+            top: -16,
+            width: 16,
+            height: 16,
+            child: const _AlertBubble(),
+          ),
+      ],
+    ),
+  );
 }
 
 class _HunterShadowPainter extends CustomPainter {
   const _HunterShadowPainter();
 
   @override
-  void paint(Canvas canvas, Size size) =>
-      canvas.drawOval(const Rect.fromLTWH(1, 33, 24, 7), Paint()..color = rgba(0, 0, 0, .55));
+  void paint(Canvas canvas, Size size) => canvas.drawOval(
+    const Rect.fromLTWH(1, 33, 24, 7),
+    Paint()..color = rgba(0, 0, 0, .55),
+  );
 
   @override
   bool shouldRepaint(_HunterShadowPainter o) => false;
@@ -349,19 +382,19 @@ class _AlertBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const DecoratedBox(
-        decoration: BoxDecoration(shape: BoxShape.circle, color: Kc.danger),
-        child: Center(
-          child: Text(
-            '!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Vazirmatn',
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-              height: 16 / 11,
-              color: Color(0xFF1A0B05),
-            ),
-          ),
+    decoration: BoxDecoration(shape: BoxShape.circle, color: Kc.danger),
+    child: Center(
+      child: Text(
+        '!',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontFamily: 'Vazirmatn',
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+          height: 16 / 11,
+          color: Color(0xFF1A0B05),
         ),
-      );
+      ),
+    ),
+  );
 }

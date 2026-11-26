@@ -25,7 +25,9 @@ void main() {
   });
 
   group('TitleScreen', () {
-    testWidgets('continue subtitle follows progress; buttons call back', (tester) async {
+    testWidgets('continue subtitle follows progress; buttons call back', (
+      tester,
+    ) async {
       final calls = <String>[];
       await pumpScreen(
         tester,
@@ -52,7 +54,8 @@ void main() {
   });
 
   group('TutorialScreen', () {
-    double dotWidth(WidgetTester t, int i) => t.getSize(find.byKey(ValueKey('dot-$i'))).width;
+    double dotWidth(WidgetTester t, int i) =>
+        t.getSize(find.byKey(ValueKey('dot-$i'))).width;
 
     testWidgets('next / back / dots / last-step CTA / skip', (tester) async {
       var skip = 0, done = 0;
@@ -102,7 +105,9 @@ void main() {
       expect(find.text('کبریت بزن تا ببینی'), findsOneWidget);
     });
 
-    testWidgets('reduced flicker freezes: no frames are scheduled', (tester) async {
+    testWidgets('reduced flicker freezes: no frames are scheduled', (
+      tester,
+    ) async {
       await pumpScreen(
         tester,
         const FlickerScope(reduce: true, child: TutorialScreen()),

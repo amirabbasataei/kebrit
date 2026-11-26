@@ -23,10 +23,12 @@ void main() {
           clipBehavior: Clip.none,
           children: [
             // Hero match (MTitle position 186,190 → shifted down for the sheet)
+            const Positioned(left: 80, top: 130, child: MatchStick(phase: .5)),
             const Positioned(
-                left: 80, top: 130, child: MatchStick(phase: .5)),
-            const Positioned(
-                left: 250, top: 130, child: MatchStick(lit: false)),
+              left: 250,
+              top: 130,
+              child: MatchStick(lit: false),
+            ),
 
             // HUD match icon + strike match, 1× and 4×.
             Positioned(

@@ -19,19 +19,46 @@ class StepDrag extends StatelessWidget {
   Widget build(BuildContext context) {
     final walk = track(p, const [(0, 0), (.30, 0), (.80, 120), (1, 120)]);
     // `walkr` goes back to 0 at the loop seam (CSS jumps at iteration end).
-    final ring = track(p, const [(0, 0), (.12, 0), (.18, 1), (.82, 1), (.92, 0), (1, 0)]);
-    final knob = track(p, const [(0, 0), (.18, 0), (.40, 26), (.80, 26), (.92, 0), (1, 0)]);
-    final fx = track(p, const [(0, 0), (.10, 0), (.60, 70), (.80, 70), (.92, 70), (1, 70)]);
-    final fo = track(p, const [(0, 0), (.10, 0), (.18, 1), (.60, 1), (.80, 1), (.92, 0), (1, 0)]);
+    final ring = track(p, const [
+      (0, 0),
+      (.12, 0),
+      (.18, 1),
+      (.82, 1),
+      (.92, 0),
+      (1, 0),
+    ]);
+    final knob = track(p, const [
+      (0, 0),
+      (.18, 0),
+      (.40, 26),
+      (.80, 26),
+      (.92, 0),
+      (1, 0),
+    ]);
+    final fx = track(p, const [
+      (0, 0),
+      (.10, 0),
+      (.60, 70),
+      (.80, 70),
+      (.92, 70),
+      (1, 70),
+    ]);
+    final fo = track(p, const [
+      (0, 0),
+      (.10, 0),
+      (.18, 1),
+      (.60, 1),
+      (.80, 1),
+      (.92, 0),
+      (1, 0),
+    ]);
     return TutorialStage(
       children: [
         const Slab(left: 0, top: 112, width: 342, height: 40),
         const Slab(left: 0, top: 236, width: 342, height: 40),
         TutorialPlayer(left: 90, top: 178, dx: walk, shadow: true),
         // radial-gradient(circle at 160px 200px, transparent 80px, rgba(6,4,3,.75) 220px)
-        Positioned.fill(
-          child: CustomPaint(painter: _DimPainter()),
-        ),
+        Positioned.fill(child: CustomPaint(painter: _DimPainter())),
         // Joystick ring: 64 + 2·2 border = 68 box at (110, 268).
         Positioned(
           left: 110,
@@ -87,10 +114,7 @@ class _DimPainter extends CustomPainter {
     final g = cssRadialPx(
       box: size,
       center: const Offset(160, 200),
-      stops: [
-        CssStop(rgba(0, 0, 0, 0), 80),
-        CssStop(rgba(6, 4, 3, .75), 220),
-      ],
+      stops: [CssStop(rgba(0, 0, 0, 0), 80), CssStop(rgba(6, 4, 3, .75), 220)],
     );
     canvas.drawRect(rect, Paint()..shader = g.createShader(rect));
   }

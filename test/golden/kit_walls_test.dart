@@ -15,7 +15,9 @@ import '../helpers/kit_scene.dart';
 void main() {
   setUpAll(loadAppFonts);
 
-  testWidgets('kit wall cells: shades, level tiles, flat, door', (tester) async {
+  testWidgets('kit wall cells: shades, level tiles, flat, door', (
+    tester,
+  ) async {
     await pumpScreen(
       tester,
       ColoredBox(
@@ -26,9 +28,10 @@ void main() {
             // Three maze shades, 1× and 3×.
             for (var i = 0; i < 3; i++)
               Positioned(
-                  left: 20.0 + i * 60,
-                  top: 20,
-                  child: StoneWallCell(shade: i)),
+                left: 20.0 + i * 60,
+                top: 20,
+                child: StoneWallCell(shade: i),
+              ),
             for (var i = 0; i < 3; i++)
               Positioned(
                 left: 20.0 + i * 120,
@@ -77,7 +80,9 @@ void main() {
                 width: 58,
                 topHeight: 54,
                 style: WallStyle.levelTile.copyWith(
-                    frontColor: const Color(0xFF17110D), topHighlight: .16),
+                  frontColor: const Color(0xFF17110D),
+                  topHighlight: .16,
+                ),
                 topGradient: cssLinear(
                   deg: 165,
                   box: const Size(58, 54),
@@ -96,8 +101,9 @@ void main() {
     await expectGolden(null, 'kit_wall_cells');
   });
 
-  testWidgets('kit maze board (level 7): floor, walls, door, no overlay',
-      (tester) async {
+  testWidgets('kit maze board (level 7): floor, walls, door, no overlay', (
+    tester,
+  ) async {
     await pumpScreen(tester, mazeScene(lit: true));
     await expectGolden(null, 'kit_maze');
   });

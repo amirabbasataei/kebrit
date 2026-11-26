@@ -81,5 +81,6 @@ class Grid {
 
   bool isExit(int x, int y) => inBounds(x, y) && _cells[y][x] == CellType.exit;
 
-  CellType typeAt(int x, int y) => !inBounds(x, y) ? CellType.wall : _cells[y][x];
+  CellType typeAt(int x, int y) =>
+      !inBounds(x, y) ? CellType.wall : _cells[y][x];
 }

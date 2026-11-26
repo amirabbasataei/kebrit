@@ -21,14 +21,14 @@ class DesignFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ColoredBox(
-        color: background,
-        child: FittedBox(
-          fit: BoxFit.contain,
-          child: SizedBox(
-            width: Kc.designWidth,
-            height: Kc.designHeight,
-            child: Stack(clipBehavior: Clip.hardEdge, children: children),
-          ),
-        ),
-      );
+    color: background,
+    child: FittedBox(
+      fit: BoxFit.contain,
+      child: SizedBox(
+        width: Kc.designWidth,
+        height: Kc.designHeight,
+        child: Stack(clipBehavior: Clip.hardEdge, children: children),
+      ),
+    ),
+  );
 }

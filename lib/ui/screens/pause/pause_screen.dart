@@ -61,14 +61,30 @@ class PauseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     void change(AppSettings s) => onSettingsChanged?.call(s);
     final toggles = <(String, String, bool, AppSettings Function(bool))>[
-      ('صدا', 'صدای قدم‌ها، کبریت و نفس شکارچی‌ها', settings.sound,
-          (v) => settings.copyWith(sound: v)),
-      ('لرزش گوشی', 'لرزشی کوتاه وقتی شکارچی راه می‌افتد', settings.haptics,
-          (v) => settings.copyWith(haptics: v)),
-      ('کاهش سوسو', 'نور ثابت به‌جای شعله‌ی لرزان', settings.reduceFlicker,
-          (v) => settings.copyWith(reduceFlicker: v)),
-      ('دکمه‌ی کبریت در سمت چپ', 'برای بازی با دست چپ', settings.leftHanded,
-          (v) => settings.copyWith(leftHanded: v)),
+      (
+        'صدا',
+        'صدای قدم‌ها، کبریت و نفس شکارچی‌ها',
+        settings.sound,
+        (v) => settings.copyWith(sound: v),
+      ),
+      (
+        'لرزش گوشی',
+        'لرزشی کوتاه وقتی شکارچی راه می‌افتد',
+        settings.haptics,
+        (v) => settings.copyWith(haptics: v),
+      ),
+      (
+        'کاهش سوسو',
+        'نور ثابت به‌جای شعله‌ی لرزان',
+        settings.reduceFlicker,
+        (v) => settings.copyWith(reduceFlicker: v),
+      ),
+      (
+        'دکمه‌ی کبریت در سمت چپ',
+        'برای بازی با دست چپ',
+        settings.leftHanded,
+        (v) => settings.copyWith(leftHanded: v),
+      ),
     ];
 
     return DesignFrame(
@@ -152,8 +168,9 @@ class PauseScreen extends StatelessWidget {
                     label: toggles[i].$1,
                     description: toggles[i].$2,
                     value: toggles[i].$3,
-                    onChanged:
-                        onSettingsChanged == null ? null : (v) => change(toggles[i].$4(v)),
+                    onChanged: onSettingsChanged == null
+                        ? null
+                        : (v) => change(toggles[i].$4(v)),
                   ),
                 ],
                 const SizedBox(height: 20),

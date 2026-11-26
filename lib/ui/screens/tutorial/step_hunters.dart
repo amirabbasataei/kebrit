@@ -15,7 +15,14 @@ class StepHunters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // `litc`: 0→15 % off, 20→70 % on, 80→100 % off.
-    final lit = track(p, const [(0, 0), (.15, 0), (.20, 1), (.70, 1), (.80, 0), (1, 0)]);
+    final lit = track(p, const [
+      (0, 0),
+      (.15, 0),
+      (.20, 1),
+      (.70, 1),
+      (.80, 0),
+      (1, 0),
+    ]);
     final chase = track(p, const [(0, 0), (.20, 0), (.70, -110), (1, -110)]);
     // `eyes` has the same keys as `litc`.
     return TutorialStage(
@@ -25,12 +32,18 @@ class StepHunters extends StatelessWidget {
         TutorialPlayer(
           left: 70,
           top: 196,
-          flame: Opacity(opacity: lit, child: playerFlame(pinned: pinned)),
+          flame: Opacity(
+            opacity: lit,
+            child: playerFlame(pinned: pinned),
+          ),
         ),
         TutorialHunter(left: 270, top: 192, dx: chase, eyes: lit),
         Positioned.fill(child: ColoredBox(color: rgba(6, 4, 3, .6))),
         Positioned.fill(
-          child: Opacity(opacity: lit, child: CustomPaint(painter: _GlowPainter())),
+          child: Opacity(
+            opacity: lit,
+            child: CustomPaint(painter: _GlowPainter()),
+          ),
         ),
       ],
     );

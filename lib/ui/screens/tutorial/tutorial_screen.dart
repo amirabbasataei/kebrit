@@ -93,8 +93,9 @@ class _TutorialScreenState extends State<TutorialScreen>
   void initState() {
     super.initState();
     if (widget.time == null) {
-      _ticker = createTicker((d) => setState(() => _elapsed = d.inMicroseconds / 1e6))
-        ..start();
+      _ticker = createTicker(
+        (d) => setState(() => _elapsed = d.inMicroseconds / 1e6),
+      )..start();
     }
   }
 
@@ -105,9 +106,9 @@ class _TutorialScreenState extends State<TutorialScreen>
   }
 
   void _go(int step) => setState(() {
-        _step = step.clamp(0, 3);
-        _stepStart = _elapsed;
-      });
+    _step = step.clamp(0, 3);
+    _stepStart = _elapsed;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +141,12 @@ class _TutorialScreenState extends State<TutorialScreen>
           child: Stack(
             clipBehavior: Clip.hardEdge,
             children: [
-              const Positioned.fill(child: RadialBackdrop(center: Offset(.5, .35), inner: Kc.radialInner)),
+              const Positioned.fill(
+                child: RadialBackdrop(
+                  center: Offset(.5, .35),
+                  inner: Kc.radialInner,
+                ),
+              ),
               // Header: counter on the start side, skip on the end side.
               Positioned(
                 left: 24,
@@ -149,7 +155,10 @@ class _TutorialScreenState extends State<TutorialScreen>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('راه زنده ماندن · ${fa(_step + 1)} از ${fa(4)}', style: KText.caption),
+                    Text(
+                      'راه زنده ماندن · ${fa(_step + 1)} از ${fa(4)}',
+                      style: KText.caption,
+                    ),
                     PillButton(
                       label: 'رد شدن',
                       variant: PillVariant.text,
@@ -172,7 +181,9 @@ class _TutorialScreenState extends State<TutorialScreen>
                       0 => StepDrag(p: p, pinned: pinned),
                       1 => StepMatch(p: p, pinned: pinned),
                       2 => StepHunters(p: p, pinned: pinned),
-                      _ => StepDoor(breath: reduce ? 1 : breathOpacity(seconds)),
+                      _ => StepDoor(
+                        breath: reduce ? 1 : breathOpacity(seconds),
+                      ),
                     },
                   ),
                 ),
@@ -184,7 +195,10 @@ class _TutorialScreenState extends State<TutorialScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(copy.title, style: KText.h1Serif.copyWith(fontSize: 36)),
+                    Text(
+                      copy.title,
+                      style: KText.h1Serif.copyWith(fontSize: 36),
+                    ),
                     const SizedBox(height: 12),
                     Text(copy.body, style: KText.body.copyWith(height: 1.5)),
                   ],
@@ -208,7 +222,9 @@ class _TutorialScreenState extends State<TutorialScreen>
                             height: 6,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(3),
-                              color: i == _step ? Kc.flameDeep : rgba(239, 227, 208, .22),
+                              color: i == _step
+                                  ? Kc.flameDeep
+                                  : rgba(239, 227, 208, .22),
                             ),
                           ),
                         ],
@@ -217,14 +233,19 @@ class _TutorialScreenState extends State<TutorialScreen>
                     const SizedBox(height: 22),
                     Row(
                       children: [
-                        _BackButton(enabled: _step > 0, onPressed: () => _go(_step - 1)),
+                        _BackButton(
+                          enabled: _step > 0,
+                          onPressed: () => _go(_step - 1),
+                        ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: PillButton(
                             label: last ? 'ورود به اولین اتاق' : 'بعدی',
                             height: 52,
                             fontSize: 15,
-                            onPressed: last ? widget.onDone : () => _go(_step + 1),
+                            onPressed: last
+                                ? widget.onDone
+                                : () => _go(_step + 1),
                           ),
                         ),
                       ],

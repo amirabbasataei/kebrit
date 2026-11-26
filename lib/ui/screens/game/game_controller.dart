@@ -22,7 +22,9 @@ import '../../../services/haptics.dart';
 import 'joystick.dart';
 
 typedef PeriodicTimerFactory = Timer Function(
-    Duration period, void Function(Timer) callback);
+  Duration period,
+  void Function(Timer) callback,
+);
 
 Timer _defaultTimer(Duration p, void Function(Timer) cb) =>
     Timer.periodic(p, cb);
@@ -41,15 +43,15 @@ class GameStats {
   });
 
   factory GameStats.of(GameState s) => GameStats(
-        level: s.level.id,
-        startMatches: s.level.startMatches,
-        matchesLeft: s.matches,
-        matchesStruck: s.matchesStruck,
-        elapsed: Duration(milliseconds: s.elapsedMs),
-        steps: s.steps,
-        stepsToDoor: stepsToExit(s.level.grid, s.player),
-        hunters: s.level.hunterStarts.length,
-      );
+    level: s.level.id,
+    startMatches: s.level.startMatches,
+    matchesLeft: s.matches,
+    matchesStruck: s.matchesStruck,
+    elapsed: Duration(milliseconds: s.elapsedMs),
+    steps: s.steps,
+    stepsToDoor: stepsToExit(s.level.grid, s.player),
+    hunters: s.level.hunterStarts.length,
+  );
 
   final int level;
   final int startMatches;
@@ -69,8 +71,8 @@ class GameController extends ChangeNotifier {
     this.haptics = const NoopHaptics(),
     this._settings = const AppSettings(),
     PeriodicTimerFactory? timerFactory,
-  })  : _engine = GameEngine(level),
-        _timerFactory = timerFactory ?? _defaultTimer;
+  }) : _engine = GameEngine(level),
+       _timerFactory = timerFactory ?? _defaultTimer;
 
   final GameEngine _engine;
   final Haptics haptics;
@@ -147,13 +149,12 @@ class GameController extends ChangeNotifier {
     _dir = null;
     _drag = JoystickDrag(x, y);
     _repeat?.cancel();
-    _repeat = _timerFactory(
-      const Duration(milliseconds: GameConfig.stepMs),
-      (_) {
-        final d = _dir;
-        if (d != null) _step(d);
-      },
-    );
+    _repeat = _timerFactory(const Duration(milliseconds: GameConfig.stepMs), (
+      _,
+    ) {
+      final d = _dir;
+      if (d != null) _step(d);
+    });
     notifyListeners();
   }
 
@@ -212,7 +213,9 @@ class GameController extends ChangeNotifier {
     final run = _started && !_paused && state.isPlaying && !_disposed;
     if (run && _tick == null) {
       _tick = _timerFactory(
-          const Duration(milliseconds: GameConfig.tickMs), (_) => _onTick());
+        const Duration(milliseconds: GameConfig.tickMs),
+        (_) => _onTick(),
+      );
     } else if (!run) {
       _tick?.cancel();
       _tick = null;

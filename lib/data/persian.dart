@@ -2,13 +2,10 @@
 const _digits = '۰۱۲۳۴۵۶۷۸۹';
 
 /// Replaces every ASCII digit in [s] with its Persian form.
-String faDigits(String s) => s
-    .split('')
-    .map((c) {
-      final i = c.codeUnitAt(0) - 0x30;
-      return c.length == 1 && i >= 0 && i <= 9 ? _digits[i] : c;
-    })
-    .join();
+String faDigits(String s) => s.split('').map((c) {
+  final i = c.codeUnitAt(0) - 0x30;
+  return c.length == 1 && i >= 0 && i <= 9 ? _digits[i] : c;
+}).join();
 
 String fa(int n) => faDigits(n.toString());
 

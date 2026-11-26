@@ -32,12 +32,18 @@ class ResultOverlay extends StatelessWidget {
         ? cssRadialFarthestCorner(
             box: size,
             center: const Offset(195, 150),
-            stops: [CssStop(rgba(255, 200, 130, .55), 0), CssStop(rgba(10, 7, 6, .92), .7)],
+            stops: [
+              CssStop(rgba(255, 200, 130, .55), 0),
+              CssStop(rgba(10, 7, 6, .92), .7),
+            ],
           )
         : cssRadialFarthestCorner(
             box: size,
             center: Offset(size.width * .5, size.height * .45),
-            stops: [CssStop(rgba(120, 20, 10, .6), 0), CssStop(rgba(7, 4, 4, .95), .7)],
+            stops: [
+              CssStop(rgba(120, 20, 10, .6), 0),
+              CssStop(rgba(7, 4, 4, .95), .7),
+            ],
           );
     return Positioned.fill(
       child: DecoratedBox(
@@ -68,7 +74,9 @@ class ResultOverlay extends StatelessWidget {
                     fontSize: 44,
                     fontWeight: FontWeight.w600,
                     height: 1.5,
-                    color: _escaped ? Kc.headingBright : const Color(0xFFF6E2D6),
+                    color: _escaped
+                        ? Kc.headingBright
+                        : const Color(0xFFF6E2D6),
                   ),
                 ),
                 const SizedBox(height: 18),

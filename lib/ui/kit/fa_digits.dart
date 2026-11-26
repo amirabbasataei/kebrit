@@ -16,7 +16,7 @@ class FaText extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.semanticsLabel,
-  })  : number = null;
+  }) : number = null;
 
   /// Shows the integer [n] in Persian digits.
   const FaText.number(
@@ -27,8 +27,8 @@ class FaText extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.semanticsLabel,
-  })  : number = n,
-        data = '';
+  }) : number = n,
+       data = '';
 
   final String data;
   final int? number;
@@ -40,11 +40,11 @@ class FaText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Text(
-        number != null ? fa(number!) : faDigits(data),
-        style: style,
-        textAlign: textAlign,
-        maxLines: maxLines,
-        overflow: overflow,
-        semanticsLabel: semanticsLabel,
-      );
+    number != null ? fa(number!) : faDigits(data),
+    style: style,
+    textAlign: textAlign,
+    maxLines: maxLines,
+    overflow: overflow,
+    semanticsLabel: semanticsLabel,
+  );
 }

@@ -53,8 +53,11 @@ class _SheetPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     const r = BottomSheetPanel.radius;
     final rect = Offset.zero & size;
-    final outer = RRect.fromRectAndCorners(rect,
-        topLeft: const Radius.circular(r), topRight: const Radius.circular(r));
+    final outer = RRect.fromRectAndCorners(
+      rect,
+      topLeft: const Radius.circular(r),
+      topRight: const Radius.circular(r),
+    );
     paintCssShadow(canvas, outer, BottomSheetPanel.shadow);
     canvas.drawRRect(
       outer,

@@ -12,8 +12,9 @@ import '../helpers/golden_harness.dart';
 void main() {
   setUpAll(loadAppFonts);
 
-  testWidgets('canary renders Persian glyphs with bundled fonts',
-      (tester) async {
+  testWidgets('canary renders Persian glyphs with bundled fonts', (
+    tester,
+  ) async {
     await pumpScreen(
       tester,
       const DecoratedBox(
@@ -23,7 +24,11 @@ void main() {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('کبریت', style: KText.logoTitle, textAlign: TextAlign.center),
+              Text(
+                'کبریت',
+                style: KText.logoTitle,
+                textAlign: TextAlign.center,
+              ),
               Text('هر شعله، هم راه است و هم خطر.', style: KText.tagline),
               Text('به سوی اعماق', style: KText.h1Serif),
               Text('مرحله‌ی ۷ · ۱۴ از ۴۵ اخگر · ۰۱۲۳۴۵۶۷۸۹', style: KText.body),
@@ -35,10 +40,14 @@ void main() {
     await expectGolden(null, 'canary');
   });
 
-  testWidgets('design comparison skips cleanly when reference missing',
-      (tester) async {
+  testWidgets('design comparison skips cleanly when reference missing', (
+    tester,
+  ) async {
     await pumpScreen(tester, const SizedBox());
     await expectMatchesDesign(
-        tester, find.byKey(goldenKey), 'design_refs/mobile/__none__.png');
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/__none__.png',
+    );
   });
 }

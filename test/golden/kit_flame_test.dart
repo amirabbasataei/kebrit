@@ -10,10 +10,10 @@ import '../helpers/fonts.dart';
 import '../helpers/golden_harness.dart';
 
 Widget _cell(Widget flame, {double w = 90, double h = 150}) => SizedBox(
-      width: w,
-      height: h,
-      child: Align(alignment: const Alignment(0, .6), child: flame),
-    );
+  width: w,
+  height: h,
+  child: Align(alignment: const Alignment(0, .6), child: flame),
+);
 
 void main() {
   setUpAll(loadAppFonts);
@@ -43,16 +43,18 @@ void main() {
                 _cell(const Flame.strikeButton(phase: .5), h: 120),
                 _cell(
                   Transform.scale(
-                      scale: 5,
-                      alignment: Alignment.bottomCenter,
-                      child: const Flame.player(phase: .5)),
+                    scale: 5,
+                    alignment: Alignment.bottomCenter,
+                    child: const Flame.player(phase: .5),
+                  ),
                   h: 120,
                 ),
                 _cell(
                   Transform.scale(
-                      scale: 5,
-                      alignment: Alignment.bottomCenter,
-                      child: const Flame.strikeButton(phase: .5)),
+                    scale: 5,
+                    alignment: Alignment.bottomCenter,
+                    child: const Flame.strikeButton(phase: .5),
+                  ),
                   h: 120,
                 ),
               ],
@@ -60,9 +62,7 @@ void main() {
             // Not flickering at all.
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _cell(const Flame.title(flicker: false), h: 130),
-              ],
+              children: [_cell(const Flame.title(flicker: false), h: 130)],
             ),
           ],
         ),

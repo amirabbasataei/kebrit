@@ -13,15 +13,15 @@ import '../helpers/fonts.dart';
 import '../helpers/golden_harness.dart';
 
 GameStats stats({int level = 7}) => GameStats(
-      level: level,
-      startMatches: 6,
-      matchesLeft: 3,
-      matchesStruck: 3,
-      elapsed: const Duration(minutes: 1, seconds: 42),
-      steps: 30,
-      stepsToDoor: 6,
-      hunters: 2,
-    );
+  level: level,
+  startMatches: 6,
+  matchesLeft: 3,
+  matchesStruck: 3,
+  elapsed: const Duration(minutes: 1, seconds: 42),
+  steps: 30,
+  stepsToDoor: 6,
+  hunters: 2,
+);
 
 void main() {
   setUpAll(loadAppFonts);
@@ -99,7 +99,9 @@ void main() {
   });
 
   group('complete', () {
-    testWidgets('shows stats, next-level teaser and calls back', (tester) async {
+    testWidgets('shows stats, next-level teaser and calls back', (
+      tester,
+    ) async {
       final calls = <String>[];
       await pumpScreen(
         tester,
@@ -115,7 +117,10 @@ void main() {
       expect(find.text('۳ از ۶'), findsOneWidget);
       expect(find.text('۱:۴۲'), findsOneWidget);
       expect(find.text('۲ از ۲'), findsOneWidget);
-      expect(find.text('بعدی: ${Levels.byId(8).name} — ۵ کبریت، ۳ شکارچی.'), findsOneWidget);
+      expect(
+        find.text('بعدی: ${Levels.byId(8).name} — ۵ کبریت، ۳ شکارچی.'),
+        findsOneWidget,
+      );
 
       await tester.tap(find.text('اتاق بعدی'));
       await tester.tap(find.text('تکرار برای ۳ اخگر'));
@@ -124,7 +129,10 @@ void main() {
     });
 
     testWidgets('repeat label depends on the embers earned', (tester) async {
-      await pumpScreen(tester, CompleteScreen(stats: stats(), embers: 3, time: 0));
+      await pumpScreen(
+        tester,
+        CompleteScreen(stats: stats(), embers: 3, time: 0),
+      );
       expect(find.text('بازی دوباره'), findsOneWidget);
       expect(find.text('تکرار برای ۳ اخگر'), findsNothing);
       expect(repeatLabel(0), 'تکرار برای ۳ اخگر');
@@ -141,7 +149,10 @@ void main() {
 
     testWidgets('embers semantics', (tester) async {
       final handle = tester.ensureSemantics();
-      await pumpScreen(tester, CompleteScreen(stats: stats(), embers: 2, time: 0));
+      await pumpScreen(
+        tester,
+        CompleteScreen(stats: stats(), embers: 2, time: 0),
+      );
       expect(find.bySemanticsLabel('۲ اخگر از ۳ به دست آمد'), findsOneWidget);
       handle.dispose();
     });
@@ -205,7 +216,10 @@ void main() {
           onLevels: () => calls.add('levels'),
         ),
       );
-      expect(find.text('۰ از ۶ باقی مانده · در ۹ قدم دورتر بود'), findsOneWidget);
+      expect(
+        find.text('۰ از ۶ باقی مانده · در ۹ قدم دورتر بود'),
+        findsOneWidget,
+      );
       await tester.tap(find.text('دوباره تلاش کن'));
       await tester.tap(find.text('مراحل'));
       expect(calls, ['retry', 'levels']);

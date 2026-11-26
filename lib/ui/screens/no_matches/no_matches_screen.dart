@@ -30,7 +30,8 @@ const _textTop = 430.0;
 /// Smoke blob state at [seconds] for a blob with [delay]: opacity, progress
 /// along its path (0..1).
 ({double opacity, double p}) smokeAt(double seconds, double delay) {
-  if (seconds < delay) return (opacity: 1, p: 0); // CSS: base style, no animation yet.
+  if (seconds < delay)
+    return (opacity: 1, p: 0); // CSS: base style, no animation yet.
   final u = ((seconds - delay) % 4) / 4;
   final p = Curves.easeOut.transform(u);
   final o = u < .2
@@ -69,7 +70,8 @@ class NoMatchesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final reduce = reduceFlicker ?? FlickerScope.reduceOf(context);
     final steps = stats.stepsToDoor;
-    final status = '${fa(stats.matchesLeft)} از ${fa(stats.startMatches)} باقی مانده'
+    final status =
+        '${fa(stats.matchesLeft)} از ${fa(stats.startMatches)} باقی مانده'
         '${steps == null ? '' : ' · در ${fa(steps)} قدم دورتر بود'}';
 
     return LoopClock(
@@ -94,7 +96,9 @@ class NoMatchesScreen extends StatelessWidget {
                 children: [
                   for (final b in blobs)
                     () {
-                      final s = reduce ? (opacity: .25, p: 0.0) : smokeAt(t, b.delay);
+                      final s = reduce
+                          ? (opacity: .25, p: 0.0)
+                          : smokeAt(t, b.delay);
                       return Positioned(
                         left: b.left + b.dx * s.p,
                         top: 120 - 150 * s.p,
@@ -130,7 +134,14 @@ class NoMatchesScreen extends StatelessWidget {
                               Color(0xFFC9A874),
                               Color(0xFFA98A5E),
                             ],
-                            stops: [0, 30 / 150, 30 / 150, 46 / 150, 62 / 150, 1],
+                            stops: [
+                              0,
+                              30 / 150,
+                              30 / 150,
+                              46 / 150,
+                              62 / 150,
+                              1,
+                            ],
                           ),
                         ),
                       ),
@@ -247,10 +258,8 @@ class NoMatchesScreen extends StatelessWidget {
 /// `radial-gradient(circle at 195px 280px, #17110d 0%, #070505 60%)`.
 class _Backdrop extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => CustomPaint(
-        painter: _BackdropPainter(),
-        child: const SizedBox.expand(),
-      );
+  Widget build(BuildContext context) =>
+      CustomPaint(painter: _BackdropPainter(), child: const SizedBox.expand());
 }
 
 class _BackdropPainter extends CustomPainter {
@@ -330,19 +339,19 @@ class _BurntMatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              const Color(0xFF141010),
-              const Color(0xFF141010),
-              rgba(224, 195, 147, .25),
-              rgba(224, 195, 147, .25),
-            ],
-            stops: const [0, 8 / 24, 8 / 24, 1],
-          ),
-        ),
-        child: const SizedBox(width: 5, height: 24),
-      );
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          const Color(0xFF141010),
+          const Color(0xFF141010),
+          rgba(224, 195, 147, .25),
+          rgba(224, 195, 147, .25),
+        ],
+        stops: const [0, 8 / 24, 8 / 24, 1],
+      ),
+    ),
+    child: const SizedBox(width: 5, height: 24),
+  );
 }

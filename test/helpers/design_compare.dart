@@ -30,8 +30,12 @@ Future<(int, int, Uint8List)> _decode(Uint8List png) async {
 
 Future<Uint8List> _encode(int w, int h, Uint8List rgba) async {
   final buf = await ui.ImmutableBuffer.fromUint8List(rgba);
-  final desc = ui.ImageDescriptor.raw(buf,
-      width: w, height: h, pixelFormat: ui.PixelFormat.rgba8888);
+  final desc = ui.ImageDescriptor.raw(
+    buf,
+    width: w,
+    height: h,
+    pixelFormat: ui.PixelFormat.rgba8888,
+  );
   final codec = await desc.instantiateCodec();
   final img = (await codec.getNextFrame()).image;
   final bytes = await img.toByteData(format: ui.ImageByteFormat.png);
@@ -84,7 +88,8 @@ Future<DesignDiff> compareImages(Uint8List a, Uint8List b) async {
   var bad = 0;
   for (var i = 0; i < ow * oh; i++) {
     final o = i * 4;
-    final d = ((da[o] - db[o]).abs() +
+    final d =
+        ((da[o] - db[o]).abs() +
             (da[o + 1] - db[o + 1]).abs() +
             (da[o + 2] - db[o + 2]).abs()) /
         (3 * 255);
@@ -96,7 +101,11 @@ Future<DesignDiff> compareImages(Uint8List a, Uint8List b) async {
     diff[o + 2] = v;
     diff[o + 3] = 255;
   }
-  return DesignDiff(sum / (ow * oh), bad / (ow * oh), await _encode(ow, oh, diff));
+  return DesignDiff(
+    sum / (ow * oh),
+    bad / (ow * oh),
+    await _encode(ow, oh, diff),
+  );
 }
 
 /// Renders [finder] (a RepaintBoundary, e.g. `find.byKey(goldenKey)`) and
@@ -118,8 +127,7 @@ Future<void> expectMatchesDesign(
   }
   final name = refPath.split(RegExp(r'[\\/]')).last.replaceAll('.png', '');
   final result = await tester.runAsync(() async {
-    final boundary =
-        tester.renderObject<RenderRepaintBoundary>(finder);
+    final boundary = tester.renderObject<RenderRepaintBoundary>(finder);
     final image = await boundary.toImage(pixelRatio: 1.0);
     final data = await image.toByteData(format: ui.ImageByteFormat.png);
     image.dispose();
@@ -135,8 +143,14 @@ Future<void> expectMatchesDesign(
     File('${dir.path}/${name}_design.png').writeAsBytesSync(theirs);
     File('${dir.path}/${name}_diff.png').writeAsBytesSync(d.diffPng);
   }
-  expect(d.mean, lessThanOrEqualTo(meanTol),
-      reason: 'mean diff for $name (see test/failures)');
-  expect(d.badBlocks, lessThanOrEqualTo(blockTol),
-      reason: 'bad blocks for $name (see test/failures)');
+  expect(
+    d.mean,
+    lessThanOrEqualTo(meanTol),
+    reason: 'mean diff for $name (see test/failures)',
+  );
+  expect(
+    d.badBlocks,
+    lessThanOrEqualTo(blockTol),
+    reason: 'bad blocks for $name (see test/failures)',
+  );
 }

@@ -65,8 +65,7 @@ class CssStop {
 Color _lerpPremul(Color x, Color y, double t) {
   final a = x.a + (y.a - x.a) * t;
   if (a <= 0) return Color.from(alpha: 0, red: x.r, green: x.g, blue: x.b);
-  double ch(double cx, double cy) =>
-      (cx * x.a + (cy * y.a - cx * x.a) * t) / a;
+  double ch(double cx, double cy) => (cx * x.a + (cy * y.a - cx * x.a) * t) / a;
   return Color.from(
     alpha: a,
     red: ch(x.r, y.r).clamp(0.0, 1.0),
@@ -90,8 +89,12 @@ List<CssStop> cssStops(List<CssStop> stops, {int steps = 8}) {
       if (cur.at > p.at && cur.color != p.color) {
         for (var s = 1; s < steps; s++) {
           final t = s / steps;
-          out.add(CssStop(_lerpPremul(p.color, cur.color, t),
-              p.at + (cur.at - p.at) * t));
+          out.add(
+            CssStop(
+              _lerpPremul(p.color, cur.color, t),
+              p.at + (cur.at - p.at) * t,
+            ),
+          );
         }
       }
     }
@@ -130,8 +133,10 @@ RadialGradient cssRadialFarthestCorner({
 }) {
   final r = math.max(
     math.max(center.distance, (Offset(box.width, 0) - center).distance),
-    math.max((Offset(0, box.height) - center).distance,
-        (Offset(box.width, box.height) - center).distance),
+    math.max(
+      (Offset(0, box.height) - center).distance,
+      (Offset(box.width, box.height) - center).distance,
+    ),
   );
   return cssRadialPx(
     box: box,
@@ -238,17 +243,19 @@ class CssShadow {
   final Color color;
 
   BoxShadow toBoxShadow() => BoxShadow(
-        color: color,
-        offset: Offset(dx, dy),
-        blurRadius: cssBlurToRadius(blur),
-        spreadRadius: spread,
-      );
+    color: color,
+    offset: Offset(dx, dy),
+    blurRadius: cssBlurToRadius(blur),
+    spreadRadius: spread,
+  );
 
-  CssShadow withAlpha(double a) => CssShadow(dx, dy, blur, spread, color.withValues(alpha: a));
+  CssShadow withAlpha(double a) =>
+      CssShadow(dx, dy, blur, spread, color.withValues(alpha: a));
 }
 
-List<BoxShadow> cssBoxShadows(List<CssShadow> shadows) =>
-    [for (final s in shadows) s.toBoxShadow()];
+List<BoxShadow> cssBoxShadows(List<CssShadow> shadows) => [
+  for (final s in shadows) s.toBoxShadow(),
+];
 
 /// Paints [s] under [shape] (an `RRect`), as CSS would.
 void paintCssShadow(Canvas canvas, RRect shape, CssShadow s) {
@@ -266,10 +273,13 @@ class CssBlur extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ImageFiltered(
-        imageFilter:
-            ui.ImageFilter.blur(sigmaX: px, sigmaY: px, tileMode: TileMode.decal),
-        child: child,
-      );
+    imageFilter: ui.ImageFilter.blur(
+      sigmaX: px,
+      sigmaY: px,
+      tileMode: TileMode.decal,
+    ),
+    child: child,
+  );
 }
 
 /// `clip-path: polygon(x% y%, …)`; [points] are fractions of the box.
@@ -280,7 +290,9 @@ class PolygonClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path()
-      ..addPolygon([for (final p in points) Offset(p.dx * size.width, p.dy * size.height)], true);
+      ..addPolygon([
+        for (final p in points) Offset(p.dx * size.width, p.dy * size.height),
+      ], true);
     return path;
   }
 

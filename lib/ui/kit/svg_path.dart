@@ -27,7 +27,8 @@ class _PathParser {
   bool _isCommand(String c) => 'MmLlHhVvCcSsQqTtAaZz'.contains(c);
 
   void _skipSep() {
-    while (i < s.length && (s[i] == ' ' || s[i] == ',' || s[i] == '\n' || s[i] == '\t')) {
+    while (i < s.length &&
+        (s[i] == ' ' || s[i] == ',' || s[i] == '\n' || s[i] == '\t')) {
       i++;
     }
   }
@@ -36,7 +37,10 @@ class _PathParser {
     _skipSep();
     if (i >= s.length) return false;
     final c = s[i];
-    return c == '-' || c == '+' || c == '.' || (c.codeUnitAt(0) >= 48 && c.codeUnitAt(0) <= 57);
+    return c == '-' ||
+        c == '+' ||
+        c == '.' ||
+        (c.codeUnitAt(0) >= 48 && c.codeUnitAt(0) <= 57);
   }
 
   double _number() {
@@ -51,7 +55,8 @@ class _PathParser {
   bool _flag() {
     _skipSep();
     final c = s[i++];
-    if (c != '0' && c != '1') throw FormatException('flag expected at ${i - 1} in "$s"');
+    if (c != '0' && c != '1')
+      throw FormatException('flag expected at ${i - 1} in "$s"');
     return c == '1';
   }
 
@@ -66,7 +71,8 @@ class _PathParser {
       _skipSep();
       if (i >= s.length) break;
       var cmd = s[i];
-      if (!_isCommand(cmd)) throw FormatException('command expected at $i in "$s"');
+      if (!_isCommand(cmd))
+        throw FormatException('command expected at $i in "$s"');
       i++;
       final rel = cmd == cmd.toLowerCase();
       var up = cmd.toUpperCase();
@@ -86,14 +92,16 @@ class _PathParser {
         first = false;
         switch (up) {
           case 'M':
-            final nx = _number() + (rel ? x : 0), ny = _number() + (rel ? y : 0);
+            final nx = _number() + (rel ? x : 0),
+                ny = _number() + (rel ? y : 0);
             path.moveTo(nx, ny);
             x = sx = nx;
             y = sy = ny;
             up = 'L';
             prev = 'M';
           case 'L':
-            final nx = _number() + (rel ? x : 0), ny = _number() + (rel ? y : 0);
+            final nx = _number() + (rel ? x : 0),
+                ny = _number() + (rel ? y : 0);
             path.lineTo(nx, ny);
             x = nx;
             y = ny;
@@ -109,9 +117,12 @@ class _PathParser {
             y = ny;
             prev = 'V';
           case 'C':
-            final x1 = _number() + (rel ? x : 0), y1 = _number() + (rel ? y : 0);
-            final x2 = _number() + (rel ? x : 0), y2 = _number() + (rel ? y : 0);
-            final nx = _number() + (rel ? x : 0), ny = _number() + (rel ? y : 0);
+            final x1 = _number() + (rel ? x : 0),
+                y1 = _number() + (rel ? y : 0);
+            final x2 = _number() + (rel ? x : 0),
+                y2 = _number() + (rel ? y : 0);
+            final nx = _number() + (rel ? x : 0),
+                ny = _number() + (rel ? y : 0);
             path.cubicTo(x1, y1, x2, y2, nx, ny);
             cx = x2;
             cy = y2;
@@ -119,8 +130,10 @@ class _PathParser {
             y = ny;
             prev = 'C';
           case 'S':
-            final x2 = _number() + (rel ? x : 0), y2 = _number() + (rel ? y : 0);
-            final nx = _number() + (rel ? x : 0), ny = _number() + (rel ? y : 0);
+            final x2 = _number() + (rel ? x : 0),
+                y2 = _number() + (rel ? y : 0);
+            final nx = _number() + (rel ? x : 0),
+                ny = _number() + (rel ? y : 0);
             final smooth = prev == 'C' || prev == 'S';
             final x1 = smooth ? 2 * x - cx : x, y1 = smooth ? 2 * y - cy : y;
             path.cubicTo(x1, y1, x2, y2, nx, ny);
@@ -130,8 +143,10 @@ class _PathParser {
             y = ny;
             prev = 'S';
           case 'Q':
-            final x1 = _number() + (rel ? x : 0), y1 = _number() + (rel ? y : 0);
-            final nx = _number() + (rel ? x : 0), ny = _number() + (rel ? y : 0);
+            final x1 = _number() + (rel ? x : 0),
+                y1 = _number() + (rel ? y : 0);
+            final nx = _number() + (rel ? x : 0),
+                ny = _number() + (rel ? y : 0);
             path.quadraticBezierTo(x1, y1, nx, ny);
             cx = x1;
             cy = y1;
@@ -139,7 +154,8 @@ class _PathParser {
             y = ny;
             prev = 'Q';
           case 'T':
-            final nx = _number() + (rel ? x : 0), ny = _number() + (rel ? y : 0);
+            final nx = _number() + (rel ? x : 0),
+                ny = _number() + (rel ? y : 0);
             final smooth = prev == 'Q' || prev == 'T';
             final x1 = smooth ? 2 * x - cx : x, y1 = smooth ? 2 * y - cy : y;
             path.quadraticBezierTo(x1, y1, nx, ny);
@@ -151,7 +167,8 @@ class _PathParser {
           case 'A':
             final rx = _number(), ry = _number(), rot = _number();
             final large = _flag(), sweep = _flag();
-            final nx = _number() + (rel ? x : 0), ny = _number() + (rel ? y : 0);
+            final nx = _number() + (rel ? x : 0),
+                ny = _number() + (rel ? y : 0);
             if (rx == 0 || ry == 0) {
               path.lineTo(nx, ny);
             } else {
@@ -213,16 +230,16 @@ class SvgIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
-        child: CustomPaint(
-          size: Size.square(size),
-          painter: _SvgIconPainter(data, color, strokeWidth, viewBox),
-        ),
-      );
+    child: CustomPaint(
+      size: Size.square(size),
+      painter: _SvgIconPainter(data, color, strokeWidth, viewBox),
+    ),
+  );
 }
 
 class _SvgIconPainter extends CustomPainter {
   _SvgIconPainter(this.data, this.color, this.stroke, this.viewBox)
-      : path = data.toPath();
+    : path = data.toPath();
   final SvgIconData data;
   final Color color;
   final double stroke, viewBox;
@@ -247,5 +264,8 @@ class _SvgIconPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_SvgIconPainter o) =>
-      o.data != data || o.color != color || o.stroke != stroke || o.viewBox != viewBox;
+      o.data != data ||
+      o.color != color ||
+      o.stroke != stroke ||
+      o.viewBox != viewBox;
 }

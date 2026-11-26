@@ -64,7 +64,9 @@ class _KebritAppState extends State<KebritApp> {
       supportedLocales: const [kFaLocale],
       localizationsDelegates: const [GlobalWidgetsLocalizations.delegate],
       pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
-          settings: settings, pageBuilder: (c, _, _) => builder(c)),
+        settings: settings,
+        pageBuilder: (c, _, _) => builder(c),
+      ),
       builder: (context, child) => ColoredBox(
         color: Kc.page,
         child: app == null

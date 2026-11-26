@@ -144,19 +144,31 @@ class SplashScene extends StatelessWidget {
     return Curves.easeInOut.transform(half);
   }
 
-  Widget _spark(double left, double top, double size, Color color, double delay,
-      double dur, double dx, double dy) {
+  Widget _spark(
+    double left,
+    double top,
+    double size,
+    Color color,
+    double delay,
+    double dur,
+    double dx,
+    double dy,
+  ) {
     final f = _frac(t, delay, dur);
     if (t < delay || f >= 1) return const SizedBox.shrink();
-    final opacity =
-        f < .1 ? _ease(Curves.easeOut, f / .1) : 1 - _ease(Curves.easeOut, (f - .1) / .9);
+    final opacity = f < .1
+        ? _ease(Curves.easeOut, f / .1)
+        : 1 - _ease(Curves.easeOut, (f - .1) / .9);
     final move = _ease(Curves.easeOut, f);
     return Positioned(
       left: left + dx * move,
       top: top + dy * move,
       width: size,
       height: size,
-      child: Opacity(opacity: opacity, child: ColoredBox(color: color)),
+      child: Opacity(
+        opacity: opacity,
+        child: ColoredBox(color: color),
+      ),
     );
   }
 
@@ -188,10 +200,7 @@ class SplashScene extends StatelessWidget {
       children: [
         // Stone wall + vignette fade in together (two `.glow` layers).
         Positioned.fill(
-          child: Opacity(
-            opacity: glow,
-            child: const StoneBackground(),
-          ),
+          child: Opacity(opacity: glow, child: const StoneBackground()),
         ),
         Positioned.fill(
           child: Opacity(
@@ -265,7 +274,11 @@ class SplashScene extends StatelessWidget {
               _rise(
                 1.2,
                 .7,
-                const Text('کبریت', style: KText.logoSplash, textAlign: TextAlign.center),
+                const Text(
+                  'کبریت',
+                  style: KText.logoSplash,
+                  textAlign: TextAlign.center,
+                ),
               ),
               const SizedBox(height: 6),
               _rise(
@@ -292,7 +305,9 @@ class SplashScene extends StatelessWidget {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                const Positioned.fill(child: ColoredBox(color: Color(0x1AEFE3D0))),
+                const Positioned.fill(
+                  child: ColoredBox(color: Color(0x1AEFE3D0)),
+                ),
                 Positioned(
                   right: 0,
                   top: 0,
@@ -305,7 +320,9 @@ class SplashScene extends StatelessWidget {
                         end: Alignment.centerLeft,
                         colors: [Kc.flameLight, Kc.flameHot],
                       ),
-                      boxShadow: cssBoxShadows([CssShadow(0, 0, 8, 0, rgba(255, 150, 50, .8))]),
+                      boxShadow: cssBoxShadows([
+                        CssShadow(0, 0, 8, 0, rgba(255, 150, 50, .8)),
+                      ]),
                     ),
                   ),
                 ),
@@ -344,7 +361,11 @@ class SplashScene extends StatelessWidget {
           child: Text(
             '[نام استودیو]',
             textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: KFonts.ui, fontSize: 12, color: Color(0xFF8C7864)),
+            style: TextStyle(
+              fontFamily: KFonts.ui,
+              fontSize: 12,
+              color: Color(0xFF8C7864),
+            ),
           ),
         ),
       ],

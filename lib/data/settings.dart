@@ -1,4 +1,4 @@
-﻿/// The four toggles on the Pause screen (design keys: sound, haptics,
+/// The four toggles on the Pause screen (design keys: sound, haptics,
 /// flicker, lefty).
 class AppSettings {
   const AppSettings({
@@ -18,20 +18,19 @@ class AppSettings {
     bool? haptics,
     bool? reduceFlicker,
     bool? leftHanded,
-  }) =>
-      AppSettings(
-        sound: sound ?? this.sound,
-        haptics: haptics ?? this.haptics,
-        reduceFlicker: reduceFlicker ?? this.reduceFlicker,
-        leftHanded: leftHanded ?? this.leftHanded,
-      );
+  }) => AppSettings(
+    sound: sound ?? this.sound,
+    haptics: haptics ?? this.haptics,
+    reduceFlicker: reduceFlicker ?? this.reduceFlicker,
+    leftHanded: leftHanded ?? this.leftHanded,
+  );
 
   Map<String, Object> toJson() => {
-        'sound': sound,
-        'haptics': haptics,
-        'reduceFlicker': reduceFlicker,
-        'leftHanded': leftHanded,
-      };
+    'sound': sound,
+    'haptics': haptics,
+    'reduceFlicker': reduceFlicker,
+    'leftHanded': leftHanded,
+  };
 
   /// Missing or wrongly-typed keys fall back to the defaults.
   factory AppSettings.fromJson(Map<String, Object?> j) {

@@ -29,9 +29,6 @@ class PointerClaim extends StatelessWidget {
   Widget build(BuildContext context) {
     final claimed = PointerClaims.maybeOf(context);
     if (claimed == null) return child;
-    return Listener(
-      onPointerDown: (e) => claimed.add(e.pointer),
-      child: child,
-    );
+    return Listener(onPointerDown: (e) => claimed.add(e.pointer), child: child);
   }
 }

@@ -26,6 +26,10 @@ void main() {
       ),
     );
     await expectGolden(null, 'title');
-    await expectMatchesDesign(tester, find.byKey(goldenKey), 'design_refs/mobile/1_Title.png');
+    await expectMatchesDesign(
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/1_Title.png',
+    );
   });
 }

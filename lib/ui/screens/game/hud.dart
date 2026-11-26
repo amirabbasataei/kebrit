@@ -15,7 +15,8 @@ import 'pointer_claim.dart';
 
 /// Hint under the board, by state (MGame `hint`).
 String hintFor(GameState s, {required bool started}) {
-  if (!started) return 'روی کبریت بزن تا اتاق روشن شود. شکارچی‌ها هم نورش را می‌بینند.';
+  if (!started)
+    return 'روی کبریت بزن تا اتاق روشن شود. شکارچی‌ها هم نورش را می‌بینند.';
   if (s.lit) return 'شعله‌ات را دیدند. از حرکت نایست.';
   if (s.matches > 0) return 'در تاریکی راهت را پیدا کن، یا کبریت دیگری بزن.';
   return 'کبریتی نمانده. به حافظه‌ات اعتماد کن.';
@@ -43,20 +44,25 @@ class GameTopBar extends StatelessWidget {
             label: 'توقف',
             excludeSemantics: true,
             onTap: onPause,
-            child: PointerClaim(child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: onPause,
-              child: Container(
-                width: 44,
-                height: 44,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(22),
-                  border: Border.all(color: rgba(239, 227, 208, .22)),
+            child: PointerClaim(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onPause,
+                child: Container(
+                  width: 44,
+                  height: 44,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(22),
+                    border: Border.all(color: rgba(239, 227, 208, .22)),
+                  ),
+                  child: const CustomPaint(
+                    size: Size(14, 16),
+                    painter: _PausePainter(),
+                  ),
                 ),
-                child: const CustomPaint(size: Size(14, 16), painter: _PausePainter()),
               ),
-            )),
+            ),
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -108,7 +114,12 @@ class _PausePainter extends CustomPainter {
     final p = Paint()..color = Kc.text;
     for (final x in const [1.0, 9.0]) {
       canvas.drawRRect(
-          RRect.fromRectAndRadius(Rect.fromLTWH(x, 1, 4, 14), const Radius.circular(1)), p);
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(x, 1, 4, 14),
+          const Radius.circular(1),
+        ),
+        p,
+      );
     }
   }
 
@@ -125,12 +136,12 @@ class BurnBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        left: Kc.gutter,
-        right: Kc.gutter,
-        top: 112,
-        height: 3,
-        child: CustomPaint(painter: _BurnPainter(burn.clamp(0, 100) / 100)),
-      );
+    left: Kc.gutter,
+    right: Kc.gutter,
+    top: 112,
+    height: 3,
+    child: CustomPaint(painter: _BurnPainter(burn.clamp(0, 100) / 100)),
+  );
 }
 
 class _BurnPainter extends CustomPainter {
@@ -139,7 +150,10 @@ class _BurnPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final track = RRect.fromRectAndRadius(Offset.zero & size, const Radius.circular(2));
+    final track = RRect.fromRectAndRadius(
+      Offset.zero & size,
+      const Radius.circular(2),
+    );
     canvas.save();
     canvas.clipRRect(track);
     canvas.drawRRect(track, Paint()..color = rgba(255, 230, 200, .1));
@@ -148,7 +162,10 @@ class _BurnPainter extends CustomPainter {
       // Anchored at the right edge: a block with a width in an RTL box.
       final fill = Rect.fromLTWH(size.width - w, 0, w, size.height);
       paintCssShadow(
-          canvas, RRect.fromRectXY(fill, 0, 0), CssShadow(0, 0, 10, 0, rgba(255, 150, 50, .7)));
+        canvas,
+        RRect.fromRectXY(fill, 0, 0),
+        CssShadow(0, 0, 10, 0, rgba(255, 150, 50, .7)),
+      );
       canvas.drawRect(
         fill,
         Paint()
@@ -179,36 +196,36 @@ class GameHint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        left: mirrored ? null : 24,
-        right: mirrored ? 24 : null,
-        bottom: 52,
-        width: 210,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+    left: mirrored ? null : 24,
+    right: mirrored ? 24 : null,
+    bottom: 52,
+    width: 210,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
           children: [
-            Row(
-              children: [
-                const CustomPaint(size: Size(16, 20), painter: _FingerPainter()),
-                const SizedBox(width: 10),
-                const Expanded(
-                  child: Text('هر جای صفحه را بکش تا حرکت کنی', style: KText.small),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Text(
-              text,
-              style: const TextStyle(
-                fontFamily: KFonts.serif,
-                fontSize: 18,
-                height: 1.3,
-                color: Kc.serifSub,
-              ),
+            const CustomPaint(size: Size(16, 20), painter: _FingerPainter()),
+            const SizedBox(width: 10),
+            const Expanded(
+              child: Text('هر جای صفحه را بکش تا حرکت کنی', style: KText.small),
             ),
           ],
         ),
-      );
+        const SizedBox(height: 10),
+        Text(
+          text,
+          style: const TextStyle(
+            fontFamily: KFonts.serif,
+            fontSize: 18,
+            height: 1.3,
+            color: Kc.serifSub,
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
 class _FingerPainter extends CustomPainter {
@@ -244,31 +261,33 @@ class GiveUpLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        right: Kc.gutter,
-        // 44 px tap target around the 13 px text line (text top stays at 128).
-        top: 128 - 14,
-        child: Semantics(
-          button: true,
-          excludeSemantics: true,
-          label: 'کبریت تمام شد — تسلیم می‌شوی؟',
+    right: Kc.gutter,
+    // 44 px tap target around the 13 px text line (text top stays at 128).
+    top: 128 - 14,
+    child: Semantics(
+      button: true,
+      excludeSemantics: true,
+      label: 'کبریت تمام شد — تسلیم می‌شوی؟',
+      onTap: onTap,
+      child: PointerClaim(
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: onTap,
-          child: PointerClaim(child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onTap,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 14),
-              child: Text(
-                'کبریت تمام شد — تسلیم می‌شوی؟',
-                style: TextStyle(
-                  fontFamily: KFonts.ui,
-                  fontSize: 13,
-                  color: Kc.flame,
-                  decoration: TextDecoration.underline,
-                  decorationColor: Kc.flame,
-                ),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 14),
+            child: Text(
+              'کبریت تمام شد — تسلیم می‌شوی؟',
+              style: TextStyle(
+                fontFamily: KFonts.ui,
+                fontSize: 13,
+                color: Kc.flame,
+                decoration: TextDecoration.underline,
+                decorationColor: Kc.flame,
               ),
             ),
-          )),
+          ),
         ),
-      );
+      ),
+    ),
+  );
 }

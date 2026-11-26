@@ -48,7 +48,10 @@ class KToggle extends StatelessWidget {
             width: 22,
             height: 22,
             child: const DecoratedBox(
-              decoration: BoxDecoration(color: knobColor, shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                color: knobColor,
+                shape: BoxShape.circle,
+              ),
             ),
           ),
         ],

@@ -41,8 +41,9 @@ class _LoopClockState extends State<LoopClock>
   void _sync() {
     final live = widget.time == null && !_reduce;
     if (live && _ticker == null) {
-      _ticker = createTicker((d) => setState(() => _seconds = d.inMicroseconds / 1e6))
-        ..start();
+      _ticker = createTicker(
+        (d) => setState(() => _seconds = d.inMicroseconds / 1e6),
+      )..start();
     } else if (!live && _ticker != null) {
       _ticker!.dispose();
       _ticker = null;

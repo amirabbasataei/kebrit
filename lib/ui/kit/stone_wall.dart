@@ -91,18 +91,21 @@ class WallStyle {
     topHighlight: .16,
   );
 
-  WallStyle copyWith({Color? frontColor, double? topHighlight, double? bottomEdge}) =>
-      WallStyle(
-        frontColor: frontColor ?? this.frontColor,
-        frontHeight: frontHeight,
-        frontHighlight: frontHighlight,
-        jointPeriod: jointPeriod,
-        jointStart: jointStart,
-        jointAlpha: jointAlpha,
-        frontShadow: frontShadow,
-        topHighlight: topHighlight ?? this.topHighlight,
-        bottomEdge: bottomEdge ?? this.bottomEdge,
-      );
+  WallStyle copyWith({
+    Color? frontColor,
+    double? topHighlight,
+    double? bottomEdge,
+  }) => WallStyle(
+    frontColor: frontColor ?? this.frontColor,
+    frontHeight: frontHeight,
+    frontHighlight: frontHighlight,
+    jointPeriod: jointPeriod,
+    jointStart: jointStart,
+    jointAlpha: jointAlpha,
+    frontShadow: frontShadow,
+    topHighlight: topHighlight ?? this.topHighlight,
+    bottomEdge: bottomEdge ?? this.bottomEdge,
+  );
 }
 
 /// `(r*7 + c*3) % 3` – the design's shade pick (`Kc.wallTops` index).
@@ -116,8 +119,12 @@ void paintStoneWall(
   WallStyle style,
   Gradient topGradient,
 ) {
-  final front =
-      Rect.fromLTWH(top.left, top.bottom, top.width, style.frontHeight);
+  final front = Rect.fromLTWH(
+    top.left,
+    top.bottom,
+    top.width,
+    style.frontHeight,
+  );
 
   if (style.frontShadow != null) {
     paintCssShadow(canvas, RRect.fromRectXY(front, 0, 0), style.frontShadow!);
@@ -125,25 +132,33 @@ void paintStoneWall(
   canvas.drawRect(front, Paint()..color = style.frontColor);
   final crisp = Paint()..isAntiAlias = false;
   if (style.frontHighlight > 0) {
-    canvas.drawRect(Rect.fromLTWH(front.left, front.top, front.width, 1),
-        crisp..color = rgba(255, 210, 160, style.frontHighlight));
+    canvas.drawRect(
+      Rect.fromLTWH(front.left, front.top, front.width, 1),
+      crisp..color = rgba(255, 210, 160, style.frontHighlight),
+    );
   }
   if (style.jointPeriod > 0) {
     crisp.color = rgba(0, 0, 0, style.jointAlpha);
     for (var x = style.jointStart; x < front.width; x += style.jointPeriod) {
       canvas.drawRect(
-          Rect.fromLTWH(front.left + x, front.top, 1, front.height), crisp);
+        Rect.fromLTWH(front.left + x, front.top, 1, front.height),
+        crisp,
+      );
     }
   }
 
   canvas.drawRect(top, Paint()..shader = topGradient.createShader(top));
   if (style.topHighlight > 0) {
-    canvas.drawRect(Rect.fromLTWH(top.left, top.top, top.width, 1),
-        crisp..color = rgba(255, 225, 190, style.topHighlight));
+    canvas.drawRect(
+      Rect.fromLTWH(top.left, top.top, top.width, 1),
+      crisp..color = rgba(255, 225, 190, style.topHighlight),
+    );
   }
   if (style.bottomEdge > 0) {
-    canvas.drawRect(Rect.fromLTWH(top.left, top.bottom - 2, top.width, 2),
-        crisp..color = rgba(0, 0, 0, style.bottomEdge));
+    canvas.drawRect(
+      Rect.fromLTWH(top.left, top.bottom - 2, top.width, 2),
+      crisp..color = rgba(0, 0, 0, style.bottomEdge),
+    );
   }
 }
 
@@ -173,7 +188,12 @@ class MazeWallsPainter extends CustomPainter {
     for (var r = fromRow; r <= last; r++) {
       for (var c = 0; c < grid.cols; c++) {
         if (grid.typeAt(c, r) == CellType.floor) continue;
-        final top = Rect.fromLTWH(c * cell, r * cell - st.frontHeight, cell, cell);
+        final top = Rect.fromLTWH(
+          c * cell,
+          r * cell - st.frontHeight,
+          cell,
+          cell,
+        );
         paintStoneWall(canvas, top, st, Kc.wallTop(wallShade(r, c)));
       }
     }
@@ -207,10 +227,15 @@ class MazeWalls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        size: Size(grid.cols * cell, grid.rows * cell),
-        painter: MazeWallsPainter(grid,
-            style: style, fromRow: fromRow, toRow: toRow, cell: cell),
-      );
+    size: Size(grid.cols * cell, grid.rows * cell),
+    painter: MazeWallsPainter(
+      grid,
+      style: style,
+      fromRow: fromRow,
+      toRow: toRow,
+      cell: cell,
+    ),
+  );
 }
 
 /// A single wall cell on its own (kit sheet, level tiles). The box is
@@ -283,9 +308,9 @@ class MazeFloor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-        size: Size(cols * cell, rows * cell),
-        painter: _FloorPainter(shadow),
-      );
+    size: Size(cols * cell, rows * cell),
+    painter: _FloorPainter(shadow),
+  );
 }
 
 class _FloorPainter extends CustomPainter {
@@ -296,8 +321,11 @@ class _FloorPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
     if (shadow) {
-      paintCssShadow(canvas, RRect.fromRectXY(rect, 0, 0),
-          CssShadow(0, 30, 60, 0, rgba(0, 0, 0, .7)));
+      paintCssShadow(
+        canvas,
+        RRect.fromRectXY(rect, 0, 0),
+        CssShadow(0, 30, 60, 0, rgba(0, 0, 0, .7)),
+      );
     }
     canvas.drawRect(rect, Paint()..color = Kc.floor);
     final line = Paint()
@@ -340,8 +368,16 @@ class _DoorPainter extends CustomPainter {
       bottomLeft: const Radius.circular(2),
       bottomRight: const Radius.circular(2),
     );
-    paintCssShadow(canvas, shape, CssShadow(0, 0, 22, 0, rgba(255, 160, 70, .7)));
-    paintCssShadow(canvas, shape, CssShadow(0, 0, 0, 3, const Color(0xFF3B2C21)));
+    paintCssShadow(
+      canvas,
+      shape,
+      CssShadow(0, 0, 22, 0, rgba(255, 160, 70, .7)),
+    );
+    paintCssShadow(
+      canvas,
+      shape,
+      CssShadow(0, 0, 0, 3, const Color(0xFF3B2C21)),
+    );
     canvas.drawRRect(
       shape,
       Paint()

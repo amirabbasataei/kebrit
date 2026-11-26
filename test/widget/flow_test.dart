@@ -71,7 +71,8 @@ void main() {
       final c = queue.removeAt(0);
       for (final d in Dir.values) {
         final n = Cell(c.x + d.dx, c.y + d.dy);
-        if (seen.contains(n) || g.isWall(n.x, n.y) && !g.isExit(n.x, n.y)) continue;
+        if (seen.contains(n) || g.isWall(n.x, n.y) && !g.isExit(n.x, n.y))
+          continue;
         if (blocked.contains(n)) continue;
         seen.add(n);
         prev[n] = (c, d);
@@ -87,29 +88,31 @@ void main() {
     }
   }
 
-  testWidgets('fresh install: Splash → Benefits → Title; later launches skip Benefits',
-      (tester) async {
-    final repo = InMemoryProgressRepository();
-    await launch(tester, repo);
-    expect(find.byType(SplashScreen), findsOneWidget);
-    await tester.tap(find.byType(SplashScreen));
-    await tester.pump(_fade);
-    await tester.pump(_fade);
-    expect(find.byType(BenefitsScreen), findsOneWidget);
+  testWidgets(
+    'fresh install: Splash → Benefits → Title; later launches skip Benefits',
+    (tester) async {
+      final repo = InMemoryProgressRepository();
+      await launch(tester, repo);
+      expect(find.byType(SplashScreen), findsOneWidget);
+      await tester.tap(find.byType(SplashScreen));
+      await tester.pump(_fade);
+      await tester.pump(_fade);
+      expect(find.byType(BenefitsScreen), findsOneWidget);
 
-    await tapText(tester, 'کبریت را روشن کن');
-    expect(find.byType(TitleScreen), findsOneWidget);
-    expect(await repo.loadIntroSeen(), isTrue);
+      await tapText(tester, 'کبریت را روشن کن');
+      expect(find.byType(TitleScreen), findsOneWidget);
+      expect(await repo.loadIntroSeen(), isTrue);
 
-    // New launch with the same repository.
-    await tester.pumpWidget(const SizedBox());
-    await launch(tester, repo);
-    await tester.tap(find.byType(SplashScreen));
-    await tester.pump(_fade);
-    await tester.pump(_fade);
-    expect(find.byType(TitleScreen), findsOneWidget);
-    expect(find.byType(BenefitsScreen), findsNothing);
-  });
+      // New launch with the same repository.
+      await tester.pumpWidget(const SizedBox());
+      await launch(tester, repo);
+      await tester.tap(find.byType(SplashScreen));
+      await tester.pump(_fade);
+      await tester.pump(_fade);
+      expect(find.byType(TitleScreen), findsOneWidget);
+      expect(find.byType(BenefitsScreen), findsNothing);
+    },
+  );
 
   testWidgets('Benefits tutorial link opens the tutorial', (tester) async {
     await launch(tester, InMemoryProgressRepository());
@@ -138,38 +141,42 @@ void main() {
     expect(find.byType(TitleScreen), findsOneWidget);
   });
 
-  testWidgets('win level 7 → progress saved → level 8 unlocked → transition → game 8',
-      (tester) async {
-    final repo = InMemoryProgressRepository(progress: Progress(currentLevel: 7))
-      ..saveIntroSeen(true);
-    await launch(tester, repo);
-    await tester.tap(find.byType(SplashScreen));
-    await tester.pump(_fade);
-    await tester.pump(_fade);
+  testWidgets(
+    'win level 7 → progress saved → level 8 unlocked → transition → game 8',
+    (tester) async {
+      final repo = InMemoryProgressRepository(
+        progress: Progress(currentLevel: 7),
+      )..saveIntroSeen(true);
+      await launch(tester, repo);
+      await tester.tap(find.byType(SplashScreen));
+      await tester.pump(_fade);
+      await tester.pump(_fade);
 
-    await tapText(tester, 'ادامه'); // Continue → level 7
-    expect(find.byType(GameScreen), findsOneWidget);
-    await walkToExit(tester);
-    expect(find.byType(ResultOverlay), findsOneWidget);
+      await tapText(tester, 'ادامه'); // Continue → level 7
+      expect(find.byType(GameScreen), findsOneWidget);
+      await walkToExit(tester);
+      expect(find.byType(ResultOverlay), findsOneWidget);
 
-    await tapText(tester, 'ادامه');
-    expect(find.byType(CompleteScreen), findsOneWidget);
-    final saved = await repo.loadProgress();
-    expect(saved.currentLevel, 8);
-    expect(saved.bestEmbers(7), 3, reason: 'no matches struck → best rating');
+      await tapText(tester, 'ادامه');
+      expect(find.byType(CompleteScreen), findsOneWidget);
+      final saved = await repo.loadProgress();
+      expect(saved.currentLevel, 8);
+      expect(saved.bestEmbers(7), 3, reason: 'no matches struck → best rating');
 
-    await tapText(tester, 'اتاق بعدی');
-    expect(find.byType(TransitionScreen), findsOneWidget);
-    await tester.pump(const Duration(seconds: 9));
-    await tester.pump(_fade);
-    await tester.pump(_fade);
-    expect(find.byType(TransitionScreen), findsNothing);
-    final game = tester.widget<GameScreen>(find.byType(GameScreen));
-    expect(game.controller!.state.level.id, 8);
-  });
+      await tapText(tester, 'اتاق بعدی');
+      expect(find.byType(TransitionScreen), findsOneWidget);
+      await tester.pump(const Duration(seconds: 9));
+      await tester.pump(_fade);
+      await tester.pump(_fade);
+      expect(find.byType(TransitionScreen), findsNothing);
+      final game = tester.widget<GameScreen>(find.byType(GameScreen));
+      expect(game.controller!.state.level.id, 8);
+    },
+  );
 
-  testWidgets('caught → retry starts the same level fresh; Levels works',
-      (tester) async {
+  testWidgets('caught → retry starts the same level fresh; Levels works', (
+    tester,
+  ) async {
     final repo = InMemoryProgressRepository(progress: Progress(currentLevel: 7))
       ..saveIntroSeen(true);
     await launch(tester, repo);
@@ -179,9 +186,17 @@ void main() {
     await tapText(tester, 'ادامه');
 
     // Light the match, then wait for a hunter to arrive (re-strike as needed).
-    for (var i = 0; i < 6 && find.byType(ResultOverlay).evaluate().isEmpty; i++) {
+    for (
+      var i = 0;
+      i < 6 && find.byType(ResultOverlay).evaluate().isEmpty;
+      i++
+    ) {
       await tester.tapAt(const Offset(322, 758));
-      for (var t = 0; t < 90 && find.byType(ResultOverlay).evaluate().isEmpty; t++) {
+      for (
+        var t = 0;
+        t < 90 && find.byType(ResultOverlay).evaluate().isEmpty;
+        t++
+      ) {
         await tester.pump(const Duration(milliseconds: 100));
       }
     }
@@ -203,7 +218,9 @@ void main() {
     expect(find.byType(LevelsScreen), findsOneWidget);
   });
 
-  testWidgets('pause: back resumes, restart gives a fresh game', (tester) async {
+  testWidgets('pause: back resumes, restart gives a fresh game', (
+    tester,
+  ) async {
     final repo = InMemoryProgressRepository(progress: Progress(currentLevel: 7))
       ..saveIntroSeen(true);
     await launch(tester, repo);
@@ -232,8 +249,9 @@ void main() {
     expect(c.state.steps, 0, reason: 'restart = fresh engine');
   });
 
-  testWidgets('settings from Title are persisted across a rebuilt app',
-      (tester) async {
+  testWidgets('settings from Title are persisted across a rebuilt app', (
+    tester,
+  ) async {
     final repo = InMemoryProgressRepository()..saveIntroSeen(true);
     await launch(tester, repo);
     await tester.tap(find.byType(SplashScreen));

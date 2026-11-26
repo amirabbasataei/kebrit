@@ -15,7 +15,8 @@ class FlickerScope extends InheritedWidget {
   final bool reduce;
 
   static bool reduceOf(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<FlickerScope>()?.reduce ?? false;
+      context.dependOnInheritedWidgetOfExactType<FlickerScope>()?.reduce ??
+      false;
 
   @override
   bool updateShouldNotify(FlickerScope old) => old.reduce != reduce;
@@ -58,8 +59,10 @@ class FlickerBuilder extends StatefulWidget {
 
 class _FlickerBuilderState extends State<FlickerBuilder>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _c =
-      AnimationController(vsync: this, duration: widget.duration);
+  late final AnimationController _c = AnimationController(
+    vsync: this,
+    duration: widget.duration,
+  );
   bool _live = false;
 
   @override
@@ -116,12 +119,22 @@ class FlickerProfile {
 
   /// MGame: `flick 1.3s` – 1, .72 @18 %, .95 @40 %, .68 @63 %, .9 @82 %, 1.
   static const game = FlickerProfile(Duration(milliseconds: 1300), [
-    (0, 1), (.18, .72), (.40, .95), (.63, .68), (.82, .9), (1, 1),
+    (0, 1),
+    (.18, .72),
+    (.40, .95),
+    (.63, .68),
+    (.82, .9),
+    (1, 1),
   ]);
 
   /// MTitle: `flick 1.6s` – 1, .8, .96, .74, .92, 1.
   static const title = FlickerProfile(Duration(milliseconds: 1600), [
-    (0, 1), (.18, .8), (.40, .96), (.63, .74), (.82, .92), (1, 1),
+    (0, 1),
+    (.18, .8),
+    (.40, .96),
+    (.63, .74),
+    (.82, .92),
+    (1, 1),
   ]);
 
   double at(double t) {
@@ -156,11 +169,11 @@ class FlickerOpacity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FlickerBuilder(
-        duration: profile.duration,
-        phase: phase,
-        reduce: reduce,
-        restPhase: 0, // profile.at(0) == 1: steady full light
-        builder: (context, t, live) =>
-            Opacity(opacity: profile.at(t), child: child),
-      );
+    duration: profile.duration,
+    phase: phase,
+    reduce: reduce,
+    restPhase: 0, // profile.at(0) == 1: steady full light
+    builder: (context, t, live) =>
+        Opacity(opacity: profile.at(t), child: child),
+  );
 }

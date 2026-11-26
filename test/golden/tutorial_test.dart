@@ -32,8 +32,11 @@ void main() {
       );
       await expectGolden(null, name);
       if (ms == 1500 && step != 1) {
-        await expectMatchesDesign(tester, find.byKey(goldenKey),
-            'design_refs/mobile/2_Tutorial_${step + 1}.png');
+        await expectMatchesDesign(
+          tester,
+          find.byKey(goldenKey),
+          'design_refs/mobile/2_Tutorial_${step + 1}.png',
+        );
       }
     });
   }

@@ -16,27 +16,27 @@ import '../helpers/golden_harness.dart';
 GameState base() => GameState.initial(Levels.byId(7));
 
 /// The design's preview mock: lit, 72 % burn, 5 matches.
-GameState lit() => base().copyWith(lit: true, burn: 72, matches: 5, matchesStruck: 1);
+GameState lit() =>
+    base().copyWith(lit: true, burn: 72, matches: 5, matchesStruck: 1);
 
 Widget view(
   GameState s, {
   bool started = true,
   JoystickDrag? drag,
   AppSettings settings = const AppSettings(),
-}) =>
-    GameScreenView(
-      state: s,
-      started: started,
-      drag: drag,
-      settings: settings,
-      flickerPhase: .5,
-      animate: false,
-      onPause: () {},
-      onStrike: () {},
-      onContinueEscaped: () {},
-      onContinueCaught: () {},
-      onGiveUp: () {},
-    );
+}) => GameScreenView(
+  state: s,
+  started: started,
+  drag: drag,
+  settings: settings,
+  flickerPhase: .5,
+  animate: false,
+  onPause: () {},
+  onStrike: () {},
+  onContinueEscaped: () {},
+  onContinueCaught: () {},
+  onGiveUp: () {},
+);
 
 void main() {
   setUpAll(loadAppFonts);
@@ -44,33 +44,43 @@ void main() {
   testWidgets('game: lit 72 % / 5 matches', (tester) async {
     await pumpScreen(tester, view(lit()));
     await expectGolden(null, 'game_lit');
-    await expectMatchesDesign(tester, find.byKey(goldenKey), 'design_refs/mobile/4_Game_lit.png');
+    await expectMatchesDesign(
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/4_Game_lit.png',
+    );
   });
 
   testWidgets('game: dark / 6 matches, before first touch', (tester) async {
     await pumpScreen(tester, view(base(), started: false));
     await expectGolden(null, 'game_dark');
-    await expectMatchesDesign(tester, find.byKey(goldenKey), 'design_refs/mobile/4_Game_dark.png');
+    await expectMatchesDesign(
+      tester,
+      find.byKey(goldenKey),
+      'design_refs/mobile/4_Game_dark.png',
+    );
   });
 
   testWidgets('game: dark / 0 matches shows the give-up link', (tester) async {
-    await pumpScreen(tester, view(base().copyWith(matches: 0, matchesStruck: 6)));
+    await pumpScreen(
+      tester,
+      view(base().copyWith(matches: 0, matchesStruck: 6)),
+    );
     await expectGolden(null, 'game_no_matches');
   });
 
   testWidgets('game: escaped overlay', (tester) async {
     await pumpScreen(
       tester,
-      view(base().copyWith(player: const Cell(4, 0), result: GameResult.escaped)),
+      view(
+        base().copyWith(player: const Cell(4, 0), result: GameResult.escaped),
+      ),
     );
     await expectGolden(null, 'game_escaped');
   });
 
   testWidgets('game: caught overlay', (tester) async {
-    await pumpScreen(
-      tester,
-      view(lit().copyWith(result: GameResult.caught)),
-    );
+    await pumpScreen(tester, view(lit().copyWith(result: GameResult.caught)));
     await expectGolden(null, 'game_caught');
   });
 

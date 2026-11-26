@@ -46,8 +46,7 @@ Widget mazeScene({
             ? LightOverlay.lit(center: const Offset(cx, cy), burn: burn)
             : LightOverlay.dark(center: const Offset(cx, cy)),
         if (lit)
-          WarmFlicker.game(
-              center: const Offset(cx, cy), burn: burn, phase: 0),
+          WarmFlicker.game(center: const Offset(cx, cy), burn: burn, phase: 0),
         Positioned(
           left: 145,
           top: 100,

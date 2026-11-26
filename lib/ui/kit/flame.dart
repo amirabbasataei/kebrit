@@ -106,16 +106,16 @@ class FlameStyle {
   );
 
   FlameStyle sized(double w, double h) => FlameStyle(
-        width: w,
-        height: h,
-        center: center,
-        stops: stops,
-        glow: glow,
-        rotateDeg: rotateDeg,
-        scaleX: scaleX,
-        scaleY: scaleY,
-        duration: duration,
-      );
+    width: w,
+    height: h,
+    center: center,
+    stops: stops,
+    glow: glow,
+    rotateDeg: rotateDeg,
+    scaleX: scaleX,
+    scaleY: scaleY,
+    duration: duration,
+  );
 }
 
 class Flame extends StatelessWidget {
@@ -128,16 +128,27 @@ class Flame extends StatelessWidget {
     this.phase,
   }) : _preset = 0;
 
-  const Flame.title({super.key, this.flicker = true, this.reduceFlicker, this.phase})
-      : style = null,
-        _preset = 0;
-  const Flame.player({super.key, this.flicker = true, this.reduceFlicker, this.phase})
-      : style = null,
-        _preset = 1;
-  const Flame.strikeButton(
-      {super.key, this.flicker = true, this.reduceFlicker, this.phase})
-      : style = null,
-        _preset = 2;
+  const Flame.title({
+    super.key,
+    this.flicker = true,
+    this.reduceFlicker,
+    this.phase,
+  }) : style = null,
+       _preset = 0;
+  const Flame.player({
+    super.key,
+    this.flicker = true,
+    this.reduceFlicker,
+    this.phase,
+  }) : style = null,
+       _preset = 1;
+  const Flame.strikeButton({
+    super.key,
+    this.flicker = true,
+    this.reduceFlicker,
+    this.phase,
+  }) : style = null,
+       _preset = 2;
 
   final FlameStyle? style;
   final int _preset;
@@ -152,7 +163,8 @@ class Flame extends StatelessWidget {
   final double? phase;
 
   FlameStyle get _style =>
-      style ?? [FlameStyle.title, FlameStyle.player, FlameStyle.strikeButton][_preset];
+      style ??
+      [FlameStyle.title, FlameStyle.player, FlameStyle.strikeButton][_preset];
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +205,13 @@ class _FlamePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
-    final shape = pctRRect(rect, topH: .5, topV: .62, bottomH: .5, bottomV: .38);
+    final shape = pctRRect(
+      rect,
+      topH: .5,
+      topV: .62,
+      bottomH: .5,
+      bottomV: .38,
+    );
     paintCssShadow(canvas, shape, s.glow);
     final g = cssRadialFarthestCorner(
       box: size,

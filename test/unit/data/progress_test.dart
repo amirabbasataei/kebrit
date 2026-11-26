@@ -30,7 +30,10 @@ void main() {
     });
 
     test('replaying keeps the best embers and does not move current', () {
-      var p = Progress(currentLevel: 7, embers: {for (var i = 1; i < 7; i++) i: 2});
+      var p = Progress(
+        currentLevel: 7,
+        embers: {for (var i = 1; i < 7; i++) i: 2},
+      );
       p = p.complete(3, 3);
       expect(p.bestEmbers(3), 3);
       expect(p.currentLevel, 7);
@@ -97,7 +100,10 @@ void main() {
     test('small and zero-strike cases', () {
       expect(r(2, 0), 3);
       expect(r(2, 1), 3); // ⌈2/3⌉ = 1
-      expect(r(2, 2), 2); // ⌈4/3⌉ = 2 (level 15 can't score 1 without strikes > start)
+      expect(
+        r(2, 2),
+        2,
+      ); // ⌈4/3⌉ = 2 (level 15 can't score 1 without strikes > start)
       expect(r(12, 4), 3);
       expect(r(12, 8), 2);
       expect(r(12, 9), 1);
@@ -121,8 +127,10 @@ void main() {
     });
 
     test('fromJson falls back to defaults on bad types', () {
-      expect(AppSettings.fromJson({'sound': 1, 'leftHanded': 'yes'}),
-          const AppSettings());
+      expect(
+        AppSettings.fromJson({'sound': 1, 'leftHanded': 'yes'}),
+        const AppSettings(),
+      );
     });
   });
 }

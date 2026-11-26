@@ -24,7 +24,9 @@ void main() {
       await pumpScreen(tester, const SplashScreen());
       double opacityOf(String text) {
         final o = tester.widget<Opacity>(
-          find.ancestor(of: find.text(text), matching: find.byType(Opacity)).first,
+          find
+              .ancestor(of: find.text(text), matching: find.byType(Opacity))
+              .first,
         );
         return o.opacity;
       }
